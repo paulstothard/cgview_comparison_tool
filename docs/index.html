@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles/stylesheet.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="scripts/jquery.ad-gallery/jquery.ad-gallery.css"
+    />
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script
+      type="text/javascript"
+      src="scripts/jquery.ad-gallery/jquery.ad-gallery.js"
+    ></script>
+    <script type="text/javascript" src="scripts/docs.js"></script>
+    <title>CCT: Overview</title>
+  </head>
+
+  <body>
+    <div id="banner">
+      <p id="banner-title">
+        <span class="acronym">C</span>GView
+        <span class="acronym">C</span>omparison
+        <span class="acronym">T</span>ool
+      </p>
+      <p id="banner-sub-title">
+        <a href="https://sites.ualberta.ca/~stothard/"
+          >Stothard Research Group</a
+        >
+      </p>
+    </div>
+
+    <ul id="menu">
+      <li>
+        <a href="index.html" id="selected">Overview</a>
+      </li>
+      <li>
+        <a href="installation.html">Installation</a>
+      </li>
+      <li>
+        <a href="creating_maps.html">Creating Maps</a>
+      </li>
+      <li>
+        <a href="commands.html">Commands</a>
+      </li>
+      <li>
+        <a href="tutorials.html">Tutorials</a>
+      </li>
+      <li>
+        <a href="customization_keys.html">Customization Keys</a>
+      </li>
+    </ul>
+
+    <div id="main">
+      <h1>Overview</h1>
+
+      <fieldset id="contents">
+        <legend>Contents</legend>
+        <ul>
+          <li><a href="#description">Description</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#citation">Citation</a></li>
+          <li><a href="#questions">Questions or Suggestions?</a></li>
+        </ul>
+      </fieldset>
+
+      <h2 id="description">Description</h2>
+      <p>
+        The CGView Comparison Tool was developed by Paul Stothard
+        (stothard@ualberta.ca), Jason Grant (jason.grant@ualberta.ca), and
+        Adriano Arantes (arantes@ualberta.ca).
+      </p>
+
+      <p>
+        The CGView Comparison Tool (CCT) is a package for visually comparing
+        bacterial, plasmid, chloroplast, or mitochondrial sequences of interest
+        to existing genomes or sequence collections. The comparisons are
+        conducted using BLAST, and the BLAST results are presented in the form
+        of graphical maps that can also show sequence features, gene and protein
+        names, COG category assignments, and sequence composition
+        characteristics. CCT can generate maps in a variety of sizes, including
+        400 Megapixel maps suitable for posters. Comparisons can be conducted
+        within a particular species or genus, or all available genomes can be
+        used. The entire map creation process, from downloading sequences to
+        redrawing zoomed maps, can be completed easily using scripts included
+        with the CCT. User-defined features or analysis results can be included
+        on maps, and maps can be extensively customized. To simplify program
+        setup, a CCT virtual machine that includes all dependencies preinstalled
+        is available. Detailed tutorials illustrating the use of CCT are
+        included with the CCT documentation.
+      </p>
+
+      <p>
+        Instructions for installing and configuring CCT are provided
+        <a href="installation.html">here</a>. CCT is also available as a
+        <a href="installation.html#vm">virtual machine</a>. The virtual machine
+        can be used on Windows, Mac OS X, and Linux systems. The advantage of
+        using the virtual machine is that CCT and all the dependencies are
+        already installed.
+      </p>
+
+      <h2 id="gallery">Gallery</h2>
+      <div id="cct-gallery">
+        <div class="ad-gallery">
+          <div class="ad-image-wrapper"></div>
+          <div id="gallery-descriptions"></div>
+          <div class="ad-nav">
+            <div class="ad-thumbs">
+              <ul class="ad-thumb-list">
+                <li>
+                  <a href="images/gallery/1000_ecoli_dna.png">
+                    <img
+                      src="images/gallery/thumbs/100_ecoli_dna.png"
+                      title="E. coli comparison (DNA)"
+                      longdesc="images/tut2/DNA_vs_DNA_medium.png"
+                      alt="DNA comparison of E. coli NRG857c (O83:H1) to all other E. coli genomes.
+                    &lt;br />&lt;br />Details can be found in &lt;a href='tutorials.html#tutorial-2'>Tutorial 2&lt;/a>."
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="images/gallery/1000_ecoli_cds.png">
+                    <img
+                      src="images/gallery/thumbs/100_ecoli_cds.png"
+                      title="E. coli comparison (CDS)"
+                      longdesc="images/tut2/CDS_vs_CDS_medium.png"
+                      alt="Coding sequence comparison of E. coli NRG857c (O83:H1) to all other E. coli genomes.
+                    &lt;br />&lt;br />Details can be found in &lt;a href='tutorials.html#tutorial-2'>Tutorial 2&lt;/a>."
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="images/gallery/1000_ecoli_zoomed.png">
+                    <img
+                      src="images/gallery/thumbs/100_ecoli_zoomed.png"
+                      title="E. coli comparison zoomed (CDS)"
+                      longdesc="images/tut2/CDS_vs_CDS_medium_4450000_15.png"
+                      alt="Image is zoomed in 15X and centered on basepair 445,000. 
+                    &lt;br />&lt;br />Details can be found in &lt;a href='tutorials.html#tutorial-2'>Tutorial 2&lt;/a>."
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="images/gallery/1000_rat_mito_modified.png">
+                    <img
+                      src="images/gallery/thumbs/100_rat_mito_modified.png"
+                      title="Rat mitochondial genome"
+                      longdesc="images/tut4/DNA_vs_DNA_x-large_altered.png"
+                      alt="Comparison of the Rattus norvegicus mitochondrial genome to all RefSeq mitochondrial genomes.
+                    &lt;br />&lt;br />Details can be found in &lt;a href='tutorials.html#tutorial-4'>Tutorial 4&lt;/a>."
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="images/gallery/1000_advanced.png">
+                    <img
+                      src="images/gallery/thumbs/100_advanced.png"
+                      title="Creating custom maps"
+                      longdesc="images/tut7/medium.png"
+                      alt="This map shows the addition of custom labels and analysis results.
+                    &lt;br />&lt;br />Details can be found in &lt;a href='tutorials.html#tutorial-7'>Tutorial 7&lt;/a>."
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="images/gallery/1000_montage_example.png">
+                    <img
+                      src="images/gallery/thumbs/100_montage_example.png"
+                      title="Montage of maps"
+                      longdesc="images/gallery/full_montage_example.png"
+                      alt="A montage of maps comparing the translation of CDS features for several Rickettsia sequences.
+                    &lt;br />&lt;br />&lt;a href='tutorials.html#tutorial-5'>Tutorial 5&lt;/a> describes how to make a montage of maps."
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="images/gallery/1000_400_megapixel.png">
+                    <img
+                      src="images/gallery/thumbs/100_400_megapixel.png"
+                      title="400 Megapixel Map"
+                      alt="CCT can be used to create very large maps with thousands of comparisons. Here is a 400 Megapixel
+                    map comparing the human mitochondrial sequence to ~2000 other mitochondrial genome sequences.
+                    &lt;br />&lt;br />Details can be found in &lt;a href='tutorials.html#tutorial-6'>Tutorial 6&lt;/a>."
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 id="citation">Citation</h2>
+      <p>
+        Grant JR, Arantes AS, Stothard P (2012) Comparing thousands of circular
+        genomes using the CGView Comparison Tool. BMC Genomics 13:202.
+      </p>
+
+      <h2 id="questions">Questions or Suggestions?</h2>
+      <p>Email Paul Stothard at stothard@ualberta.ca.</p>
+    </div>
+  </body>
+</html>

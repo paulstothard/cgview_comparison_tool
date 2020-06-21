@@ -1,0 +1,1194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles/stylesheet.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="scripts/jquery.ad-gallery/jquery.ad-gallery.css"
+    />
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script
+      type="text/javascript"
+      src="scripts/jquery.ad-gallery/jquery.ad-gallery.js"
+    ></script>
+    <script type="text/javascript" src="scripts/docs.js"></script>
+    <title>CCT: Commands</title>
+  </head>
+
+  <body>
+    <div id="banner">
+      <p id="banner-title">
+        <span class="acronym">C</span>GView
+        <span class="acronym">C</span>omparison
+        <span class="acronym">T</span>ool
+      </p>
+      <p id="banner-sub-title">
+        <a href="https://sites.ualberta.ca/~stothard/"
+          >Stothard Research Group</a
+        >
+      </p>
+    </div>
+
+    <ul id="menu">
+      <li>
+        <a href="index.html">Overview</a>
+      </li>
+      <li>
+        <a href="installation.html">Installation</a>
+      </li>
+      <li>
+        <a href="creating_maps.html">Creating Maps</a>
+      </li>
+      <li>
+        <a href="commands.html" id="selected">Commands</a>
+      </li>
+      <li>
+        <a href="tutorials.html">Tutorials</a>
+      </li>
+      <li>
+        <a href="customization_keys.html">Customization Keys</a>
+      </li>
+    </ul>
+
+    <div id="main">
+      <h1>Commands</h1>
+      <p>
+        CCT includes several scripts that can be used to download sequences and
+        prepare maps.
+      </p>
+      <fieldset id="contents">
+        <legend>Contents</legend>
+        <ul>
+          <li>
+            <a href="#cgview_comparison_tool">cgview_comparison_tool.pl</a>
+          </li>
+          <li><a href="#build_blast_atlas">build_blast_atlas.sh</a></li>
+          <li>
+            <a href="#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >
+          </li>
+          <li>
+            <a href="#convert_vcf_to_features">convert_vcf_to_features.pl</a>
+          </li>
+          <li><a href="#create_zoomed_maps">create_zoomed_maps.sh</a></li>
+          <li>
+            <a href="#fetch_all_refseq_bacterial_genomes"
+              >fetch_all_refseq_bacterial_genomes.sh</a
+            >
+          </li>
+          <li>
+            <a href="#fetch_all_refseq_chloroplast_genomes"
+              >fetch_all_refseq_chloroplast_genomes.sh</a
+            >
+          </li>
+          <li>
+            <a href="#fetch_all_refseq_mitochondrial_genomes"
+              >fetch_all_refseq_mitochondrial_genomes.sh</a
+            >
+          </li>
+          <li>
+            <a href="#fetch_genome_by_accession"
+              >fetch_genome_by_accession.sh</a
+            >
+          </li>
+          <li>
+            <a href="#fetch_refseq_bacterial_genomes_by_name"
+              >fetch_refseq_bacterial_genomes_by_name.sh</a
+            >
+          </li>
+          <li><a href="#ncbi_search">ncbi_search.pl</a></li>
+          <li><a href="#redraw_maps">redraw_maps.sh</a></li>
+          <li><a href="#remove_long_seqs">remove_long_seqs.sh</a></li>
+          <li><a href="#remove_short_seqs">remove_short_seqs.sh</a></li>
+        </ul>
+      </fieldset>
+
+      <h2 id="cgview_comparison_tool">cgview_comparison_tool.pl</h2>
+      <p>
+        Map creation with the
+        <a class="command" href="#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >
+        script and it's wrappers
+        <a class="command" href="#build_blast_atlas">build_blast_atlas.sh</a>
+        and
+        <a class="command" href="#build_blast_atlas_all_vs_all"
+          >build_blast_atlas_all_vs_all.sh</a
+        >
+        is a two step process: creating the project and building the maps.
+      </p>
+
+      <h3 id="cct_new_project_tree">Creating a New CCT Project</h3>
+      <p>
+        A new CCT project is created with the '-p' option and the name of the
+        project:
+      </p>
+      <pre class="code">
+<a class='command' href='#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project</pre>
+
+      <p>
+        This will create a new CCT project directory with the following
+        structure:
+      </p>
+
+      <p class="file-tree-title">CCT New Project Directory Tree</p>
+      <pre class="file-tree">
+<strong>my_project/</strong>
+├── <strong>reference_genome</strong>              # Place reference genome here
+├── <strong>comparison_genomes</strong>            # Place comparison genomes here
+├── <strong>analysis</strong>                      # Place <a href="creating_maps.html#additional-features">analysis GFF files</a> here
+├── <strong>features</strong>                      # Place <a href="creating_maps.html#additional-features">feature GFF files</a> here
+├── <strong>blast</strong>                         # BLAST results are created here
+├── <strong>maps</strong>                          # Maps will be created here
+├── project_settings.conf         # Alter to modify project
+├── cgview_xml_builder.pl         # Script that generates CGview XML file
+└── log.txt                       # Log of project progress</pre>
+
+      <h3>Generating Maps</h3>
+      <p>
+        After adding reference and comparison genomes and editing the
+        <em class="file">project_settings.conf</em> file (see
+        <a href="creating_maps.html#customizing-maps">Customizing CCT maps</a>),
+        simply rerun the command to generate maps.
+      </p>
+
+      <pre class="code">
+<a class='command' href='#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project</pre>
+
+      <p>
+        Map creation proceeds with the following steps (depending on the number
+        and size of sequences to compare, this can take minutes or hours to
+        complete):
+      </p>
+      <ul>
+        <li>
+          <p>
+            BLAST comparisons are performed between the reference and comparison
+            genomes, according to the BLAST settings in the
+            <em class="file">project_settings.conf</em> file.
+          </p>
+        </li>
+        <li>
+          <p>
+            A
+            <a href="http://www.bioinformatics.org/cgview/xml_overview.html"
+              >CGView XML</a
+            >
+            file is created in
+            <em class="file">my_project/maps/cgview_xml/</em> for each map.
+          </p>
+        </li>
+        <li>
+          <p>
+            Maps are drawn based on the XML files and placed in the
+            <em class="file">my_project/maps</em> directory.
+          </p>
+        </li>
+      </ul>
+
+      <h3 id="rerunning_cct">Rerunning CCT</h3>
+      <p>
+        After maps have been created, CCT can be run again to make changes.
+        There are several ways to rerun CCT:
+      </p>
+
+      <ul>
+        <li>
+          <p>
+            Use same settings as before:
+          </p>
+          <pre class="code">
+<a class='command' href='#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project</pre>
+          <p>
+            This will rerun the project completely. This is the slowest method
+            but is required if changes have been made to the BLAST options in
+            the <em class="file">project_settings.conf</em> file.
+          </p>
+        </li>
+        <li>
+          <p>
+            Use the '--start_at_xml' option:
+          </p>
+          <pre class="code">
+<a class='command' href='#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project --start_at_xml</pre>
+          <p>
+            This will rerun the project starting at XML generation. The previous
+            BLAST results will be used. This method is much faster and is used
+            when changes have been made to the non-BLAST sections of the
+            <em class="file">project_settings.conf</em> file.
+          </p>
+        </li>
+        <li>
+          <p>
+            Use the '--start_at_map' option:
+          </p>
+          <pre class="code">
+<a class='command' href='#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project --start_at_map</pre>
+          <p>
+            This will rerun the project starting at map creation. The previous
+            BLAST results and XML file will be used. This method is the fastest
+            and is used when the
+            <a href="http://bioinformatics.org/cgview/xml_overview.html"
+              >CGView XML files</a
+            >
+            have been edited directly.
+          </p>
+        </li>
+        <li>
+          <p>
+            Another option is to use the
+            <a class="command" href="#create_zoomed_maps"
+              >create_zoomed_maps.sh</a
+            >
+            and
+            <a class="command" href="#redraw_maps">redraw_maps.sh</a> scripts.
+          </p>
+        </li>
+      </ul>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   cgview_comparison_tool.pl -p DIR [options]
+
+DESCRIPTION:
+   Run this command once to generate a project directory. After the project is
+   created place a reference genome in the reference_genome directory and any
+   genomes to compare with the reference in the comparison_genomes directory.
+
+   [Optional] Make changes to the project_settings.conf file to configure how
+   the maps will be drawn. Add additional GFF files to the features and
+   analysis directories.
+
+   Draw maps by running this command again with the '-p' option pointing to
+   the project directory.
+
+REQUIRED ARGUMENTS:
+   -p, --project DIR
+      If no project exists yet, a blank project directory will be created.
+      If the project exists, maps will be created.
+
+OPTIONAL ARGUMENTS:
+
+   -s, --settings FILE
+      The settings file. If none is provided, the default settings file will be
+      copied from \$CCT_HOME/conf/project_settings.conf to the project
+      directory.
+   -g, --config FILE
+      The configuration file. The default is to use the
+      \$CCT_HOME/conf/global_settings.conf file.
+   -z, --map_size STRING
+      Size of custom maps to create. For quickly generating new map sizes, use
+      this option with the --start_at_xml option. Possible sizes include
+      small/medium/large/x-large or a combination separated by commas (e.g.
+      small,large). The size(s) provided will override the size(s) in the
+      configuration files.
+   -x, --start_at_xml
+      Jump to XML generation. Skips performing BLAST, which can
+      speed map generation if BLAST has already been done. This option is for
+      creating new maps after making changes to the .conf files. Note that
+      any changes in the .conf files related to BLAST will be ignored.
+   -r, --start_at_map
+      Start at map generation. Skips performing BLAST and
+      generating XML. Useful if manual changes to the XML files have 
+      been made or if creating new map sizes (see --map_size).
+   -f, --map_prefix STRING
+      Prefix to be appended to map names (Default is to add no additional
+      prefix).
+   -b, --max_blast_comparisons INTEGER
+      The maximum number of BLAST results sets to be passed to the XML
+      creation phase (Default is 100).
+   -t, --sort_blast_tracks
+      Sort BLAST results such that genomes with highest similarity are plotted
+      first.
+   --cct
+      Colour BLAST results based on percent identity of hit instead of by
+      source genome, and ignore 'use_opacity' setting in configuration file.
+   -m, --memory STRING
+      Memory string to pass to Java's '-Xmx' option (Default is 1500m).
+   -c, --custom STRINGS
+      Settings used to customize the appearance of the map.
+   -h, --help
+      Provide list of arguments and exit.
+
+EXAMPLE: 
+   perl cgview_comparison_tool.pl -p my_project -b 50 -t \
+     --custom tickLength=20 labelFontSize=15 --map_size medium,x-large</pre
+      >
+
+      <h2 id="build_blast_atlas">build_blast_atlas.sh</h2>
+      <p></p>
+
+      <p>
+        The
+        <a class="command" href="#build_blast_atlas">build_blast_atlas.sh</a>
+        script is a wrapper for
+        <a class="command" href="#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >
+        that automatically creates maps for nucleotide (blastn) comparisons and
+        translated coding sequence (blastp) comparisons. It also generates
+        multiple maps for each comparison type, differing in terms of size and
+        detail. Like
+        <a class="command" href="#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >, it involves two steps: creating the project and building the maps.
+      </p>
+
+      <h3 id="blast_atlas_project_tree">Creating a New BLAST Atlas Project</h3>
+      <p>
+        There are several ways to create a new project:
+      </p>
+      <ul>
+        <li>
+          <p>
+            A blank project can be created with the '-p' option and the name of
+            the project
+          </p>
+          <pre class="code">
+<a class='command' href='#build_blast_atlas'>build_blast_atlas.sh</a> -p my_project</pre>
+          <p>
+            This will create a new BLAST Atlas project directory with the
+            following structure:
+          </p>
+
+          <p class="file-tree-title">BLAST Atlas New Project Directory Tree</p>
+          <pre class="file-tree">
+<strong>my_project/</strong>
+├── <strong>reference_genome</strong>                      # Place reference genome here
+├── <strong>comparison_genomes</strong>                    # Place comparison genomes here
+├── <strong>maps_for_cds_vs_cds</strong>                   # CDS maps will be created here
+├── <strong>maps_for_dna_vs_dna</strong>                   # DNA maps will be created here
+├── <strong>analysis</strong>                              # Place <a href="creating_maps.html#additional-features">analysis GFF files</a> here
+├── <strong>features</strong>                              # Place <a href="creating_maps.html#additional-features">feature GFF files</a> here
+├── <strong>cct_projects</strong>                          # Contains CCT sub projects for DNA and CDS
+│   ├── <strong>cds_vs_cds</strong>                        # DNA CCT sub project
+│   └── <strong>dna_vs_dna</strong>                        # CDS CCT sub project
+├── project_settings_cds_vs_cds.conf      # Alter to modify CDS project
+└── project_settings_dna_vs_dna.conf      # Alter to modify DNA project</pre>
+
+          <p>
+            Note that the <em class="file">cds_vs_cds</em> and
+            <em class="file">dna_vs_dna</em> directory contain full sub
+            directory trees as created by
+            <a class="command" href="#cgview_comparison_tool"
+              >cgview_comparison_tool.pl</a
+            >. The <em class="file">cct_projects</em> sub directories can be
+            safely ignored for the most part as the important files and
+            directories are symbolically linked to the files and directories in
+            the main <em class="file">my_project</em> directory. One exception
+            is the log files.
+          </p>
+        </li>
+        <li>
+          <p>
+            A project can be created with the '-i' option and the path to a
+            '.gbk' file:
+          </p>
+          <pre class="code">
+<a class='command' href='#build_blast_atlas'>build_blast_atlas.sh</a> -i NC_007719.gbk</pre>
+          <p>
+            This will create a project called
+            <em class="file">NC_007719</em> and copy the
+            <em class="file">NC_007719.gbk</em> file into the
+            <em class="file">NC_007719/reference_genome</em> directory.
+          </p>
+        </li>
+        <li>
+          <p>
+            Lastly, a project can be created with the '-i' and '-p' options:
+          </p>
+          <pre class="code">
+<a class='command' href='#build_blast_atlas'>build_blast_atlas.sh</a> -i NC_007719.gbk -p my_project</pre>
+          <p>
+            This will create a project called
+            <em class="file">my_project</em> and copy the
+            <em class="file">NC_007719.gbk</em> file into the
+            <em class="file">my_project/reference_genome</em> directory.
+          </p>
+        </li>
+      </ul>
+
+      <h3>Generating Maps</h3>
+      <p>
+        After adding reference and comparison genomes and editing the
+        <em class="file">project_settings_cds_vs_cds.conf</em> and
+        <em class="file">project_settings_dna_vs_dna.conf</em> files (see
+        <a href="creating_maps.html#customizing-maps">Customizing CCT maps</a>),
+        simple rerun the command, providing the '-p' option and the path to the
+        project directory:
+      </p>
+
+      <pre class="code">
+<a class='command' href='#build_blast_atlas'>build_blast_atlas.sh</a> -p my_project</pre>
+
+      <p>
+        Map creation proceeds with the following steps (depending on the number
+        and size of sequences to compare, this can take minutes or hours to
+        complete):
+      </p>
+      <ul>
+        <li>
+          <p>
+            For dna_vs_dna, blastn comparisons are performed between the
+            reference and comparisons genomes, while for cds_vs_vds, blastp
+            comparisons are done.
+          </p>
+        </li>
+        <li>
+          <p>
+            A
+            <a href="http://www.bioinformatics.org/cgview/xml_overview.html"
+              >CGView XML</a
+            >
+            file is created in
+            <em class="file">my_project/maps_for_dna_vd_dna/cgview_xml/</em> and
+            <em class="file">my_project/maps_for_cds_vs_cds/cgview_xml/</em> for
+            each map size. The default sizes created by
+            <a class="command" href="#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            are medium, large, and x-large.
+          </p>
+        </li>
+        <li>
+          <p>
+            Maps are drawn based on the XML files and placed in the
+            <em class="file">my_project/maps_for_dna_vs_dna</em> and
+            <em class="file">my_project/maps_for_dna_vs_dna</em> directories.
+          </p>
+        </li>
+      </ul>
+
+      <h3>Rerunning build_blast_atlas.sh</h3>
+      <p>
+        After maps have been created,
+        <a class="command" href="#build_blast_atlas">build_blast_atlas.sh</a>
+        can be run again to make changes. There are several ways to do this and
+        they are the same as outlined for <a href="#rerunning_cct">CCT</a>.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   build_blast_atlas.sh -i FILE [-p DIR] [Options]
+   build_blast_atlas.sh -p DIR [Options]
+
+DESCRIPTION:
+   This command is used to first create a BLAST atlas project directory and
+   then again to generate maps.  Run this command with the '-i' option and a
+   GenBank file to create a new project using the GenBank file as the reference
+   genome. Alternatively, a blank project can be created using the '-p'
+   option, in which case a reference GenBank file will have to be placed in the
+   reference_genomes directory. After the project has been created, place the
+   genomes to compare with the reference in the comparison_genomes directory.
+
+   [Optional] Make changes to the *.conf files to configure how the maps will
+   be drawn. Add additional GFF files to the features and analysis directories.
+
+   Draw maps by running this command again with the '-p' option pointing to the
+   project directory.
+
+REQUIRED ARGUMENTS:
+   -i, --input FILE
+      Sequence file in GenBank format, with a .gbk extension. This option is
+      only required when first creating a BLAST atlas project. The project
+      directory will be named after this file unless the '-p' option is
+      provided.
+   -p, --project DIR
+      Initiates map creation for the project. If no project exists yet, a blank
+      project will be created. When used with the '-i' option, this will be
+      where the project is created. This option is only required when creating
+      the BLAST atlas maps.
+
+OPTIONAL ARGUMENTS:
+   -m, --memory STRING
+      Memory value for Java's -Xmx option (Default: 1500m).
+   -c, --custom STRING
+      Custom settings for map creation.
+   -b, --max_blast_comparisons INTEGER
+      Maximum number of comparison genomes to display (Default: 100).
+   -z, --map_size STRING
+      Size of custom maps to create. For quickly regenerating new map sizes,
+      use this option with the --start_at_xml option. Possible sizes include
+      small/medium/large/x-large or a combination separated by commas (e.g.
+      small,large). The size(s) provided will override the size(s) in the
+      configuration files.
+   -x, --start_at_xml
+      Jump to XML generation. Skips performing BLAST, which can speed map
+      generation if BLAST has already been done. This option is for creating
+      new maps after making changes to the .conf files.  Note that any changes
+      in the .conf files related to BLAST will be ignored. This option will be
+      ignored if the --start_at_map option is also provided.  
+   -r, --start_at_map
+      Start at map generation. Skips performing BLAST and
+      generating XML. Useful if manual changes to the XML files have 
+      been made or if creating new map sizes (see --map_size).
+   -h, --help
+      Show this message.
+
+NOTE:
+   This script will likely not work if there are spaces in the path to the
+   project directory because the NCBI tool 'formatdb' cannot handle such
+   paths.</pre
+      >
+
+      <h2 id="build_blast_atlas_all_vs_all">build_blast_atlas_all_vs_all.sh</h2>
+      <p>
+        The
+        <a class="command" href="#build_blast_atlas_all_vs_all"
+          >build_blast_atlas_all_vs_all.sh</a
+        >
+        wrapper script generates several CCT projects automatically, and then
+        combines the results into a single montage map. The montage consists of
+        a separate map for each sequence of interest, allowing each sequence in
+        a group of sequences to be visualized as the reference sequence. Like
+        <a class="command" href="#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >, using this script involves two steps: creating the project and
+        building the maps.
+      </p>
+      <p>
+        Note that this script requires
+        <a href="installation.html#requirements">ImageMagick</a> to be
+        installed.
+      </p>
+
+      <h3 id="blast_atlas_all_vs_all_project_tree">
+        Creating a New BLAST Atlas All vs All Project
+      </h3>
+      <p>
+        A new project is created with the '-p' option and the name of the
+        project:
+      </p>
+
+      <pre class="code">
+<a class='command' href='#build_blast_atlas_all_vs_all'>build_blast_atlas_all_vs_all.sh</a> -p my_project</pre>
+
+      <p>
+        This will create a new project directory with the following structure:
+      </p>
+
+      <p class="file-tree-title">
+        BLAST Atlas All vs All New Project Directory Tree
+      </p>
+      <pre class="file-tree">
+<strong>my_project/</strong>
+├── <strong>comparison_genomes</strong>                  # Place comparison genomes here
+├── <strong>cct_projects</strong>                        # Will contain CCT sub project for each comparison
+└── project_settings_multi.conf         # Alter to modify project
+</pre>
+
+      <h3>Generating Maps</h3>
+      <p>
+        After adding comparison genomes and editing the
+        <em class="file">project_settings_multi.conf</em> file (see
+        <a href="creating_maps.html#customizing-maps">Customizing CCT maps</a>),
+        simply rerun the command, providing the '-p' option and the path to the
+        project directory:
+      </p>
+
+      <pre class="code">
+<a class='command' href='#build_blast_atlas_all_vs_all'>build_blast_atlas_all_vs_all.sh</a> -p my_project</pre>
+
+      <p>
+        The creation of a montage map is very time consuming, as a separate CCT
+        map is first created for each sequence.
+      </p>
+      <p>
+        Map creation proceeds with the following steps:
+      </p>
+      <ul>
+        <li>
+          <p>
+            For each genome in the
+            <em class="file">my_project/comparison_genomes</em>
+            directory, a separate CCT project is created in the
+            <em class="file">my_project/cct_projects</em> directory. Each
+            genome, in turn, becomes the reference genome while the others
+            become the comparison genomes and a map for each CCT project is
+            created in the various project directories located inside the
+            <em class="file">my_project/cct_projects</em>.
+          </p>
+        </li>
+        <li>
+          <p>
+            The final montage image is called 'montage.png' and is created in
+            the <em class="file">my_project</em> directory.
+          </p>
+        </li>
+      </ul>
+
+      <h3>Rerunning build_blast_atlas_all_vs_all.sh</h3>
+      <p>
+        After maps have been created,
+        <a class="command" href="#build_blast_atlas_all_vs_all"
+          >build_blast_atlas_all_vs_all.sh</a
+        >
+        can be run again to make changes.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   build_blast_atlas_all_vs_all.sh -p DIR [Options]
+
+DESCRIPTION:
+   This script generates several CCT projects automatically, and then it
+   combines the results into a single montage map. The montage consists
+   of a separate map for each sequence of interest. This allows each sequence
+   in a group of sequences to be visualized as the reference sequence.
+
+   This command is used to first create a BLAST atlas all vs all project
+   directory and then again to generate the montage. After the project has
+   been created, place the genomes to compare in the comparison_genomes
+   directory.
+
+   [Optional] Make changes to the project_settings_multi.conf file to
+   configure how the maps will be drawn. Add additional GFF files to the
+   features and analysis directories.
+
+   Draw maps by running this command again with the '-p' option pointing to the
+   project directory.
+
+REQUIRED ARGUMENTS:
+   -p, --project DIR
+      If no project exists yet, creates a new project directory. Otherwise,
+      initiates map creation for the project.
+
+OPTIONAL ARGUMENTS:
+   -m, --memory STRING
+      Memory value for Java's -Xmx option (Default: 1500m).
+   -c, --custom STRING
+      Custom settings for map creation.
+   -b, --max_blast_comparisons INTEGER
+      Maximum number of comparison genomes to display (Default: 100).
+   -z, --map_size STRING
+      Size of custom maps to create. For quickly regenerating new map sizes,
+      use this option with the --start_at_xml option. Possible sizes include
+      small/medium/large/x-large or a combination separated by commas (e.g.
+      small,large). The size(s) provided will override the size(s) in the
+      configuration files.
+   -x, --start_at_xml
+      Jump to XML generation. Skips performing blast, which can
+      speed map generation if blast has already been done. This option is for
+      creating new maps after making changes to the .conf files or if creating
+      new map sizes (see --map_size). Note that any changes in the .conf files
+      related to blast will be ignored. This option will be ignored if
+      the --start_at_map or --start_at_montage option is also provided.  
+   -r, --start_at_map
+      Start at map generation. Skips performing blast and
+      generating XML. Useful if manual changes to the XML files have 
+      been made. This option will be ignored if the --start_at_montage
+      option is also provided.
+   -g, --start_at_montage
+      Start at montage generation. Skips creating the individual maps.
+      Useful if changing how many columns the montage should have.
+   -y, --columns INTEGER
+      The number of columns to use in the montage image (Default: 4). If the
+      maps have already been drawn once, it is best to use this option with
+      the --start_at_montage option.
+   -h, --help
+      Show this message.
+
+NOTES:
+   This script will likely not work if there are spaces in the path to the
+   project directory because the NCBI tool 'formatdb' cannot handle such
+   paths.</pre
+      >
+
+      <h2 id="convert_vcf_to_features">convert_vcf_to_features.pl</h2>
+      <p>
+        To visualize the positions of SNPs or other variants described in a
+        <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> file
+        use the
+        <a class="command" href="#convert_vcf_to_features"
+          >convert_vcf_to_features.pl</a
+        >
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+perl convert_vcf_to_features.pl -i variants.vcf -o variants.gff</pre
+      >
+
+      <p>
+        Where 'variants.vcf' is the name of the VCF file. The resulting .gff
+        file can be placed in the 'features' directory inside a CCT project
+        directory.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   perl convert_vcf_to_features.pl -i INFILE -o OUTFILE
+
+DESCRIPTION:
+   This script converts a VCF (Variant Call Format) file into a feature file
+   (GFF). The resulting GFF file can be used by the CGView Comparison tool.
+   Simply place the GFF file in the 'features' directory of a CCT project. 
+
+REQUIRED ARGUMENTS:
+   -i, --input FILE
+      Input VCF file (tab-delimited)
+   -o, --output FILE
+      Name to call the output file
+
+EXAMPLE: 
+   perl convert_vcf_to_features.pl -i input.vcf -o output.gff</pre
+      >
+
+      <h2 id="create_zoomed_maps">create_zoomed_maps.sh</h2>
+      <p>
+        To add zoomed versions of maps to a completed CCT project, use the
+        <a class="command" href="#create_zoomed_maps">create_zoomed_maps.sh</a>
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+create_zoomed_maps.sh -p my_project -c 10000 -z 10 -format svg</pre
+      >
+
+      <p>
+        Where 'my_project' is the name of the CCT project directory, '10000' is
+        the nucleotide position to center the map on, '10' is the zoom
+        multiplier to use when generating the map, and 'svg' is the desired
+        image format.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   create_zoomed_maps.sh -p DIR -c INTEGER -z INTEGER [Options]
+
+DESCRIPTION:
+   Creates a zoomed map for completed CCT project.
+
+REQUIRED ARGUMENTS:
+   -p, --project DIR
+      Path to a completed CCT project.
+   -c, --center INTEGER
+      Nucleotide position to center the zoomed map on.
+   -z, --zoom INTEGER
+      Zoom multiplier.
+
+OPTIONAL ARGUMENTS:
+   -f, --format
+      Image format for output map. Options are png, jpg, svg, svgz. 
+      (Default: png)
+   -m, --memory
+      Memory value for Java's -Xmx option (Default: 1500m).
+   -h, --help
+      Show this message
+
+EXAMPLE:
+   create_zoomed_maps.sh -p my_project -c 10000 -z 10 -f svg</pre
+      >
+
+      <h2 id="fetch_all_refseq_bacterial_genomes">
+        fetch_all_refseq_bacterial_genomes.sh
+      </h2>
+      <p>
+        To download all RefSeq records (in GenBank format) for bacterial
+        species, use the
+        <a class="command" href="#fetch_all_refseq_bacterial_genomes"
+          >fetch_all_refseq_bacterial_genomes.sh</a
+        >
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+fetch_all_refseq_bacterial_genomes.sh -o db/comparison_genomes</pre
+      >
+
+      <p>
+        Where 'db/comparison_genomes' is the directory to contain the downloaded
+        GenBank files.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   fetch_all_refseq_bacterial_genomes.sh -o DIR 
+
+DESCRIPTION:
+   Downloads all bacterial RefSeq sequences form NCBI in GenBank format.
+   The --min and --max options can be used to restrict the size of the 
+   returned sequences.
+
+REQUIRED ARGUMENTS:
+   -o, --output DIR
+      The output directory to contain the downloaded GenBank files.
+
+OPTIONAL ARGUMENTS:
+   -m, --min INTEGER
+      Records with a sequence length shorter than this value will be ignored.
+   -x, --max INTEGER
+      Records with a sequence length longer than this value will be ignored.
+   -h, --help
+      Show this message.
+
+EXAMPLE:
+   fetch_all_refseq_bacterial_genomes.sh -o my_project/comparison_genomes</pre
+      >
+
+      <h2 id="fetch_all_refseq_chloroplast_genomes">
+        fetch_all_refseq_chloroplast_genomes.sh
+      </h2>
+      <p>
+        To download all RefSeq records (in GenBank format) for chloroplast
+        genomes, use the
+        <a class="command" href="#fetch_all_refseq_chloroplast_genomes"
+          >fetch_all_refseq_chloroplast_genomes.sh</a
+        >
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+fetch_all_refseq_chloroplast_genomes.sh -o db/comparison_genomes</pre
+      >
+
+      <p>
+        Where 'db/comparison_genomes' is the directory to contain the downloaded
+        GenBank files.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   fetch_all_refseq_chloroplast_genomes.sh -o DIR 
+
+DESCRIPTION:
+   Downloads all chloroplast RefSeq sequences form NCBI in GenBank format.
+
+REQUIRED ARGUMENTS:
+   -o, --output DIR
+      The output directory to contain the downloaded GenBank files.
+
+OPTIONAL ARGUMENTS:
+   -h, --help
+      Show this message.
+
+EXAMPLE:
+   fetch_all_refseq_chloroplast_genomes.sh -o my_project/comparison_genomes </pre
+      >
+
+      <h2 id="fetch_all_refseq_mitochondrial_genomes">
+        fetch_all_refseq_mitochondrial_genomes.sh
+      </h2>
+      <p>
+        To download all RefSeq records (in GenBank format) for mitochondrial
+        genomes, use the
+        <a class="command" href="#fetch_all_refseq_chloroplast_genomes"
+          >fetch_all_refseq_chloroplast_genomes.sh</a
+        >
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+fetch_all_refseq_mitochondrial_genomes.sh -o db/comparison_genomes</pre
+      >
+
+      <p>
+        Where 'db/comparison_genomes' is the directory to contain the downloaded
+        GenBank files.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   fetch_all_refseq_mitochondrial_genomes.sh -o DIR 
+
+DESCRIPTION:
+   Downloads all bacterial RefSeq sequences form NCBI in GenBank format.
+
+REQUIRED ARGUMENTS:
+   -o, --output DIR
+      The output directory to contain the downloaded GenBank files.
+
+OPTIONAL ARGUMENTS:
+   -h, --help
+      Show this message.
+
+EXAMPLE:
+   fetch_all_refseq_mitochondrial_genomes.sh -o my_project/comparison_genomes </pre
+      >
+
+      <h2 id="fetch_genome_by_accession">fetch_genome_by_accession.sh</h2>
+      <p>
+        To download a GenBank record using an accession number use the
+        <a class="command" href="#fetch_genome_by_accession"
+          >fetch_genome_by_accession.sh</a
+        >
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+fetch_genome_by_accession.sh -a NC_007719 -o my_project/reference_genome</pre
+      >
+
+      <p>
+        Where 'NC_007719' is the accession of the record to download and
+        'my_project/reference_genome' is the directory to contain the downloaded
+        GenBank file.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   fetch_genome_by_accession.sh -a STRING -o DIR 
+
+DESCRIPTION:
+   Downloads a GenBank record using the accession number.
+
+REQUIRED ARGUMENTS:
+   -a, --accession STRING
+      Accession number of the sequence to download.
+   -o, --output DIR
+      The output directory to download the GenBank file into.
+
+OPTIONAL ARGUMENTS:
+   -h, --help
+      Show this message.
+
+EXAMPLE:
+   fetch_genome_by_accession.sh -a NC_007719 -o my_project/reference_genome</pre
+      >
+
+      <h2 id="fetch_refseq_bacterial_genomes_by_name">
+        fetch_refseq_bacterial_genomes_by_name.sh
+      </h2>
+      <p>
+        To download RefSeq records (in GenBank format) using a partial or
+        complete bacterial species name, use the
+        <a class="command" href="#fetch_refseq_bacterial_genomes_by_name"
+          >fetch_refseq_bacterial_genomes_by_name.sh</a
+        >
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+fetch_refseq_bacterial_genomes_by_name.sh -n 'Escherichia*' -o db/comparison_genomes</pre
+      >
+
+      <p>
+        Where 'Escherichia*' refers to all RefSeq records from organisms with a
+        name beginning with 'Escherichia' and 'db/comparison_genomes' is the
+        directory to contain the downloaded GenBank files.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   fetch_refseq_bacterial_genomes_by_name.sh -n STRING -o DIR 
+
+DESCRIPTION:
+   Downloads a GenBank record using a partial or complete bacterial species name.
+   The --min and --max options can be used to restrict the size of the 
+   returned sequences.
+
+REQUIRED ARGUMENTS:
+   -n, --name STRING
+      Complete or partial name of the bacterial species.
+   -m, --min INTEGER
+      Records with a sequence length shorter than this value will be ignored.
+   -x, --max INTEGER
+      Records with a sequence length longer than this value will be ignored.
+   -o, --output DIR
+      The output directory to download the GenBank file into.
+
+OPTIONAL ARGUMENTS:
+   -h, --help
+      Show this message.
+
+EXAMPLE:
+   fetch_refseq_bacterial_genomes_by_name.sh -n 'Escherichia*' -o my_project/comparison_genomes</pre
+      >
+
+      <h2 id="ncbi_search">ncbi_search.pl</h2>
+      <p>
+        To download collections of sequences for use as custom BLAST databases
+        use the
+        <a class="command" href="#ncbi_search">ncbi_search.pl</a> script, as in
+        the following example:
+      </p>
+
+      <pre class="code">
+  perl ncbi_search.pl -q 'bacteriophage AND Escherichia coli M863[ORGANISM]' \
+  -o bacteriophage.faa -d protein -r fasta -v</pre
+      >
+
+      <p>
+        Where 'bacteriophage AND Escherichia coli M863[ORGANISM]' is the Entrez
+        query to use, 'bacteriophage.faa' is the name of output file to create,
+        'protein' is the NCBI database to search, and 'fasta' is the desired
+        output format. The '-v' option causes the script to provide progress
+        information.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   perl ncbi_search.pl -q STRING -o FILE -d STRING -r STRING [Options]
+
+DESCRIPTION:
+   Uses NCBI's eSearch to download collections of sequences.
+
+REQUIRED ARGUMENTS:
+   -q, --query [STRING]
+      Raw query text.
+   -o, --output [FILE]
+      Output file to create. If the split option is given, this should be a
+      directory, where the returned records will be written. If the directory
+      does not exist it will be created. 
+   -d, --database [STRING]
+      Name of the NCBI database to search, such as 'nucleotide', 'protein',
+      or 'gene'.
+   -r, --return_type [STRING]
+      The type of information requested. For sequences 'fasta' is often used.
+      The accepted formats vary depending on the database being queried.
+   -s, --split
+      Return each record as a separate file where the file name will will be
+      the accesssion id of the record. This option only works if the
+      return_type is 'gb' or 'gbwithparts'.
+   -m, --max_records [INTEGER]
+      The maximum number of records to return (default is to return all matches
+      satisfying the query).
+   -v, --verbose
+      Provide progress messages.
+   -h, --help
+      Show this message.
+
+EXAMPLE:
+   perl ncbi_search.pl -q 'dysphagia AND homo sapiens[ORGN]' \\
+     -o results.txt -d pubmed -r uilist -m 100</pre
+      >
+
+      <h2 id="redraw_maps">redraw_maps.sh</h2>
+      <p>
+        To redraw maps in a completed project (after editing the CGView XML
+        files for example), use the
+        <a class="command" href="#redraw_maps">redraw_maps.sh</a> script, as in
+        the following example:
+      </p>
+
+      <pre class="code">redraw_maps.sh -p my_project -format svgz</pre>
+
+      <p>
+        Where 'my_project' is the name of the CCT project directory and SVGZ is
+        the desired image format.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   redraw_maps.sh -p DIR [Options]
+
+DESCRIPTION:
+   Used to redraw the maps. This can be used after editing the CGView XML file
+   or to change the output image formats.
+
+REQUIRED ARGUMENTS:
+   -p, --project DIR
+      Path to a completed CCT project.
+
+OPTIONAL ARGUMENTS:
+   -f, --format STRING
+      Image format for output map. Options are png, jpg, svg, svgz. 
+      (Default: png)
+   -m, --memory STRING
+      Memory value for Java's -Xmx option (Default: 1500m).
+   -h, --help
+      Show this message
+
+EXAMPLE:
+   redraw_maps.sh -p my_project -f svg</pre
+      >
+
+      <h2 id="remove_long_seqs">remove_long_seqs.sh</h2>
+      <p>
+        To remove GenBank sequences that are longer than a specific length from
+        a directory use the
+        <a class="command" href="#remove_long_seqs">remove_long_seqs.sh</a>
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+remove_long_seqs.sh -i db/comparison_genomes/ -l 1000000</pre
+      >
+
+      <p>
+        Where 'db/comparison_genomes' is the name of the directory containing
+        the GenBank files to filter and 1000000 is the maximum desired sequence
+        length.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   remove_long_seqs.sh -i DIR -l INTEGER
+
+DESCRIPTION:
+   Removes GenBank files that are longer than the specified length from the
+   provided directory.
+
+REQUIRED ARGUMENTS:
+   -i, --input DIR
+      Input directory of GenBank files with .gbk extensions.
+   -l, --length INTEGER
+      Remove GenBank files that describe sequences longer than this length.
+
+OPTIONAL ARGUMENTS:
+   -h, --help
+      Show this message
+
+EXAMPLE:
+   remove_long_seqs.sh -i my_project/comparison_genomes -l 100000</pre
+      >
+
+      <h2 id="remove_short_seqs">remove_short_seqs.sh</h2>
+      <p>
+        To remove GenBank sequences that are shorter than a specific length from
+        a directory use the
+        <a class="command" href="#remove_short_seqs">remove_short_seqs.sh</a>
+        script, as in the following example:
+      </p>
+
+      <pre class="code">
+remove_short_seqs.sh -i db/comparison_genomes/ -l 1000000</pre
+      >
+
+      <p>
+        Where 'db/comparison_genomes' is the name of the directory containing
+        the GenBank files to filter and 1000000 is the minimum desired sequence
+        length.
+      </p>
+
+      <h3>Documentation</h3>
+      <pre class="documentation">
+USAGE:
+   remove_short_seqs.sh -i DIR -l INTEGER
+
+DESCRIPTION:
+   Removes GenBank files that are shorter than the specified length from the
+   provided directory.
+
+REQUIRED ARGUMENTS:
+   -i, --input DIR
+      Input directory of GenBank files with .gbk extensions.
+   -l, --length INTEGER
+      Remove GenBank files that describe sequences shorter than this length.
+
+OPTIONAL ARGUMENTS:
+   -h, --help
+      Show this message
+
+EXAMPLE:
+   remove_short_seqs.sh -i my_project/comparison_genomes -l 100000</pre
+      >
+    </div>
+  </body>
+</html>

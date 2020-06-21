@@ -1,0 +1,1427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="scripts/jquery.ad-gallery/jquery.ad-gallery.css"
+    />
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script
+      type="text/javascript"
+      src="scripts/jquery.ad-gallery/jquery.ad-gallery.js"
+    ></script>
+    <script type="text/javascript" src="scripts/docs.js"></script>
+    <link rel="stylesheet" href="styles/stylesheet.css" type="text/css" />
+    <title>CCT: Creating Maps</title>
+  </head>
+
+  <body>
+    <div id="banner">
+      <p id="banner-title">
+        <span class="acronym">C</span>GView
+        <span class="acronym">C</span>omparison
+        <span class="acronym">T</span>ool
+      </p>
+      <p id="banner-sub-title">
+        <a href="https://sites.ualberta.ca/~stothard/"
+          >Stothard Research Group</a
+        >
+      </p>
+    </div>
+
+    <ul id="menu">
+      <li>
+        <a href="index.html">Overview</a>
+      </li>
+      <li>
+        <a href="installation.html">Installation</a>
+      </li>
+      <li>
+        <a href="creating_maps.html" id="selected">Creating Maps</a>
+      </li>
+      <li>
+        <a href="commands.html">Commands</a>
+      </li>
+      <li>
+        <a href="tutorials.html">Tutorials</a>
+      </li>
+      <li>
+        <a href="customization_keys.html">Customization Keys</a>
+      </li>
+    </ul>
+
+    <div id="main">
+      <h1>Creating Maps</h1>
+      <fieldset id="contents">
+        <legend>Contents</legend>
+        <ul>
+          <li><a href="#simple-maps">Creating a simple map using CCT</a></li>
+          <li><a href="#blast-atlas">Creating a BLAST atlas using CCT</a></li>
+          <li>
+            <a href="#all-vs-all"
+              >Creating an all vs. all BLAST atlas using CCT</a
+            >
+          </li>
+          <li>
+            <a href="#controlling-content"
+              >Editing the <em class="file">project_settings.conf</em> file</a
+            >
+          </li>
+          <li>
+            <a href="#project-setting-options"
+              ><em class="file">project_settings.conf</em> file options</a
+            >
+          </li>
+          <li>
+            <a href="#blast-comparisons"
+              >BLAST comparison types and the 'query_source' and
+              'database_source' settings</a
+            >
+          </li>
+          <li><a href="#customizing-maps">Customizing CCT maps</a></li>
+          <li><a href="#label-subset">Labelling a subset of genes</a></li>
+          <li><a href="#additional-features">Adding additional features</a></li>
+          <li>
+            <a href="#additional-analysis-results"
+              >Adding additional analysis results</a
+            >
+          </li>
+          <li><a href="#cog-categories">COG categories and colours</a></li>
+        </ul>
+      </fieldset>
+
+      <h2 id="simple-maps">Creating a simple map using CCT</h2>
+      <ol>
+        <li>
+          <p>
+            To use CCT to create a simple map with no comparisons, first create
+            a new analysis project. In the following example, a new project
+            directory called <em class="file">my_project</em> is created:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project</pre>
+
+          <p>
+            For details on the CCT project directory structure see
+            <a href="commands.html#cct_new_project_tree"
+              >Creating a New CCT Project</a
+            >.
+          </p>
+        </li>
+        <li>
+          <p>
+            Place the genome sequence you wish to analyze in the
+            <em class="file">reference_genome</em> directory, which is located
+            in the newly created <em class="file">my_project</em> directory. The
+            sequence file can be in GenBank format (with a '.gbk' file
+            extension) or FASTA format (with a '.fasta' extension). In this
+            example the genome sequence should be placed in the
+            <em class="file">my_project/reference_genome</em> directory:
+          </p>
+
+          <pre class="code">
+cp $CCT_HOME/sample_projects/sample_project_5/reference_genome/NC_001823.gbk \
+   my_project/reference_genome</pre
+          >
+        </li>
+
+        <li>
+          <p>
+            Run CCT again:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project</pre>
+
+          <p>
+            The final step will create a .png map in the
+            <em class="file">my_project/maps</em>
+            directory.
+          </p>
+        </li>
+      </ol>
+
+      <p>
+        Note: to create a comparison map directly with
+        <a class="command" href="commands.html#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >
+        the <em class="file">project_settings.conf</em> has to be edited. See
+        the section
+        <a href="#controlling-content"
+          >Editing the <em class="file">project_settings.conf</em> file</a
+        >
+        for an example. An easier method is to use the
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >
+        script as described next.
+      </p>
+
+      <h2 id="blast-atlas">Creating a BLAST atlas using CCT</h2>
+      <p>
+        CCT can be used to build "BLAST atlases" which compare a reference
+        genome of interest to one or more other genomes or sequence collections.
+        To simplify the creation of BLAST atlases CCT includes a wrapper script
+        called
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >. This script automatically creates maps for nucleotide (blastn)
+        comparisons and translated coding sequence (blastp) comparisons. It also
+        generates multiple maps for each comparison type, differing in terms of
+        size and detail.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Run the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            script, passing it the file describing the reference genome:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -i $CCT_HOME/sample_projects/sample_project_1/reference_genome/NC_007719.gbk</pre>
+
+          <p>
+            This will produce a project directory called
+            <em class="file">NC_007719</em>. For details on the directory
+            structure see
+            <a href="commands.html#blast_atlas_project_tree"
+              >Creating a New BLAST Atlas Project</a
+            >.
+          </p>
+
+          <p>
+            The configuration files
+            <em class="file">project_settings_cds_vs_cds.conf</em> and
+            <em class="file">project_settings_dna_vs_dna.conf</em>
+            can be edited prior to completion of the map drawing process (see
+            <a href="#customizing-maps">Customizing CCT maps</a>)
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Place the genomes you want compared to the reference genome into the
+            <em class="file">NC_007719/comparison_genomes</em> directory. These
+            files must end with a '.gbk' extension.
+          </p>
+
+          <pre class="code">
+cp $CCT_HOME/sample_projects/sample_project_1/comparison_genomes/*.gbk \
+   NC_007719/comparison_genomes</pre
+          >
+        </li>
+
+        <li>
+          <p>
+            Begin the map drawing process by running the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            script again, pointing at the project directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p NC_007719</pre>
+
+          <p>
+            The above command will generate several maps of different sizes
+            showing nucleotide or protein-based BLAST comparisons. The resulting
+            maps can be accessed within the following directories, once the
+            entire process is complete:
+          </p>
+
+          <pre class="file-tree">
+<strong>NC_007719/maps_for_dna_vs_dna</strong>
+<strong>NC_007719/maps_for_cds_vs_cds</strong></pre>
+
+          <p>
+            The DNA_vs_DNA maps show the results of blastn comparisons between
+            the reference genome and each comparison genome, while the
+            CDS_vs_CDS maps show the results of blastp comparisons between the
+            CDS translations extracted from the GenBank files. In these maps
+            color is used to indicate the percent identify of BLAST hits. The
+            BLAST hit rings are sorted such that the most similar genomes are
+            presented first (closest to the outside of the circle).
+          </p>
+        </li>
+      </ol>
+
+      <h2 id="all-vs-all">Creating an all vs. all BLAST atlas using CCT</h2>
+      <p>
+        A wrapper script called
+        <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+          >build_blast_atlas_all_vs_all.sh</a
+        >
+        is included with CCT. This script generates several CCT projects
+        automatically, and then it combines the results into a single montage
+        map. The montage consists of a separate map for each sequence of
+        interest. This allows each sequence in a group of sequences to be
+        visualized as the reference sequence.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            To generate a separate BLAST atlas for each genome in a collection
+            of genomes, first create a new project:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas_all_vs_all'>build_blast_atlas_all_vs_all.sh</a> -p montage_project</pre>
+
+          <p>
+            This will produce a project directory called
+            <em class="file">montage_project</em>. For details on the project
+            directory structure see
+            <a href="commands.html#blast_atlas_all_vs_all_project_tree"
+              >Creating a New BLAST Atlas All vs All Project</a
+            >.
+          </p>
+
+          <p>
+            The configuration files
+            <em class="file">project_settings_multi.conf</em>
+            can be edited prior to completion of the map drawing process (see
+            <a href="#customizing-maps">Customizing CCT maps</a>)
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Place the GenBank files for the genomes in the
+            <em class="file">montage_project/comparison_genomes</em> directory.
+            The files must end with a '.gbk' extension. In this example we are
+            fetching all the available Escherichia genomes:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_refseq_bacterial_genomes_by_name'>fetch_refseq_bacterial_genomes_by_name.sh</a> \
+  -n "Bordetella*" -o montage_project/comparison_genomes/</pre>
+        </li>
+
+        <li>
+          <p>
+            Run the
+            <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >
+            command again:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas_all_vs_all'>build_blast_atlas_all_vs_all.sh</a> -p montage_project</pre>
+
+          <p>
+            This will start the map creation process. Within the
+            <em class="file">montage_project</em> directory a separate directory
+            for each map is created (one for each sequence). After all the maps
+            are created a single montage of the maps is generated called
+            <em class="file">montage.png</em> in the
+            <em class="file">montage_project</em>
+            directory.
+          </p>
+
+          <p>
+            The maps created using the
+            <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >
+            script show the results of blastn comparisons by default.
+          </p>
+        </li>
+      </ol>
+
+      <h2 id="controlling-content">
+        Editing the <em class="file">project_settings.conf</em> file
+      </h2>
+      <p>
+        To adjust which types of analyses are performed for your sequence, you
+        can edit the <em class="file">project_settings.conf</em> file in your
+        projects directory. Try the following:
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Create a new project:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project_2</pre>
+        </li>
+
+        <li>
+          <p>
+            Place a genome sequence in
+            <em class="file">my_project_2/reference_genome</em>:
+          </p>
+
+          <pre class="code">
+cp \
+$CCT_HOME/sample_projects/sample_project_2/reference_genome/Methanobacterium_thermoautotrophicum.gbk \
+my_project_2/reference_genome</pre
+          >
+        </li>
+
+        <li>
+          <p>
+            In this example we will compare the reference genome to a second
+            genome, by placing a genome sequence in the
+            <em class="file">my_project_2/comparison_genomes</em> directory:
+          </p>
+
+          <pre class="code">
+cp \
+$CCT_HOME/sample_projects/sample_project_2/comparison_genomes/Methanosarcina_acetivorans.gbk \
+my_project_2/comparison_genomes</pre
+          >
+        </li>
+
+        <li>
+          <p>
+            Edit the
+            <em class="file">my_project_2/project_settings.conf</em> file. This
+            file controls how CCT processes your project. For example, to
+            perform a BLAST using the reference genome coding regions as
+            queries, find the section called 'BLAST query source settings', and
+            change:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>query_source = none</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>query_source = cds</pre>
+            </div>
+            <div class="clear"></div>
+          </div>
+
+          <p>
+            Similarly, to specify how the comparison genomes are used in the
+            BLAST comparison, find the section called 'BLAST database source
+            settings' and change:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>database_source = none</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>database_source = trans</pre>
+            </div>
+            <div class="clear"></div>
+          </div>
+
+          <p>
+            The settings in this example tell CCT to extract the coding sequence
+            translations from the reference genome GenBank file, and BLAST them
+            against the 6-frame translation of the genome sequences in the
+            project's <em class="file">comparison_genomes</em> directory.
+          </p>
+        </li>
+        <li>
+          <p>
+            You can also control how the results are presented using the
+            'Graphical map settings' section. For example, to draw feature
+            labels, make the following change:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>draw_feature_labels = F</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>draw_feature_labels = T</pre>
+            </div>
+            <div class="clear"></div>
+          </div>
+
+          <p>
+            To draw a larger map (this will allow the feature labels to fit on
+            the canvas), make this change:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>map_size = medium</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>map_size = large</pre>
+            </div>
+            <div class="clear"></div>
+          </div>
+
+          <p>
+            The various other settings are described in the
+            <em class="file">project_settings.conf</em> file.
+          </p>
+        </li>
+        <li>
+          <p>
+            Now that you have edited
+            <em class="file">project_settings.conf</em>, run CCT:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p my_project_2</pre>
+
+          <p>
+            This command will perform a BLAST analysis and create a map in
+            <em class="file">my_project_2/maps</em>. Whenever you make changes
+            to the <em class="file">project_settings.conf</em> file you can
+            update the map using this command.
+          </p>
+        </li>
+      </ol>
+
+      <h2 id="project-setting-options">
+        <em class="file">project_settings.conf</em> file options
+      </h2>
+      <p></p>
+      <table class="colored-rows">
+        <tr>
+          <th>Attribute</th>
+          <th>Value</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>minimum_orf_length</td>
+          <td>Integer</td>
+          <td>
+            The minimum ORF length used (in codons) when ORFs are extracted from
+            genomic sequences.
+          </td>
+        </tr>
+        <tr>
+          <td>genetic_code</td>
+          <td>Integer</td>
+          <td>
+            The genetic code to use for translated BLAST searches and for ORF
+            translation. The default is the bacterial genetic code (genetic code
+            11). See https://bioinformatics.org/sms2/genetic_code.html for
+            descriptions of the different genetic codes.
+          </td>
+        </tr>
+        <tr>
+          <td>start_codons</td>
+          <td>Codons separated by '|'</td>
+          <td>
+            The start codons to be used when finding ORFs. The default set
+            (ttg|ctg|att|atc|ata|atg|gtg) contains the starts for bacterial
+            sequences.
+          </td>
+        </tr>
+        <tr>
+          <td>stop_codons</td>
+          <td>Codons separated by '|'</td>
+          <td>
+            The stop codons to use when finding ORFs.
+          </td>
+        </tr>
+        <tr>
+          <td>query_size</td>
+          <td>Integer</td>
+          <td>
+            The query size for BLAST searches, i.e. how much of the reference
+            genome is used in each BLAST search. This setting only applies to
+            'trans' and 'nucleotide' comparisons (see the query_source option
+            below).
+          </td>
+        </tr>
+        <tr>
+          <td>expect</td>
+          <td>Real</td>
+          <td>
+            The BLAST expect value to use.
+          </td>
+        </tr>
+        <tr>
+          <td>score</td>
+          <td>Integer</td>
+          <td>
+            The minimum score required for BLAST hits.
+          </td>
+        </tr>
+        <tr>
+          <td>hits</td>
+          <td>Integer</td>
+          <td>
+            The number of BLAST hits to keep for each query.
+          </td>
+        </tr>
+        <tr>
+          <td>minimum_hit_proportion</td>
+          <td>Real</td>
+          <td>
+            The minimum acceptable hit length for BLAST results, expressed as a
+            proportion of the length of the query.
+          </td>
+        </tr>
+        <tr>
+          <td>query_source</td>
+          <td>nucleotide / trans / cds / orfs / none</td>
+          <td>
+            The source of the BLAST query sequences. These sequences are
+            extracted from the reference genome sequence, located in the
+            reference_genome directory. Details on the different types can be
+            found in the
+            <a href="#blast-comparisons">Blast Comparisons</a> section.
+          </td>
+        </tr>
+        <tr>
+          <td>database_source</td>
+          <td>nucleotide / dna / trans / cds / orfs / proteins / none</td>
+          <td>
+            The sources of the BLAST databases. The databases are built using
+            the sequences in the comparison_genomes directory. Details on the
+            different types can be found in the
+            <a href="#blast-comparisons">Blast Comparisons</a> section.
+          </td>
+        </tr>
+        <tr>
+          <td>cog_source</td>
+          <td>orfs / cds / none</td>
+          <td>
+            The proteins from the reference sequence to be assigned COG
+            functional categories. Three options are available:
+            <ul>
+              <li>
+                orfs - translated ORFs from a GenBank (.gbk), FASTA (.fasta), or
+                RAW (.raw) file.
+              </li>
+              <li>
+                cds - CDS protein sequences extracted from a GenBank (.gbk)
+                file.
+              </li>
+              <li>none - do not assign COG functional categories.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>cog_top_hit</td>
+          <td>T / F</td>
+          <td>
+            Whether to use only the top BLAST hit for COG functional assignment.
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>T / F</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>draw_divider</td>
+          <td>T / F</td>
+          <td>
+            Whether a divider should be drawn between the start and end of the
+            sequence to indicate that the sequence is linear.
+          </td>
+        </tr>
+        <tr>
+          <td>draw_orfs</td>
+          <td>T / F</td>
+          <td>
+            Whether open reading frames (ORFs) in the reference genome should be
+            drawn.
+          </td>
+        </tr>
+        <tr>
+          <td>draw_gc_skew</td>
+          <td>T / F</td>
+          <td>
+            Whether GC content in the reference genome should be drawn.
+          </td>
+        </tr>
+        <tr>
+          <td>draw_legend</td>
+          <td>T / F</td>
+          <td>
+            Whether a feature legend should be drawn.
+          </td>
+        </tr>
+        <tr>
+          <td>draw_feature_labels</td>
+          <td>T / F</td>
+          <td>
+            Whether features should be labeled. It is recommended that this
+            option be set to 'T' only when 'large', 'x-large' or 'navigable'
+            maps are drawn (see map_size).
+          </td>
+        </tr>
+        <tr>
+          <td>draw_hit_labels</td>
+          <td>T / F</td>
+          <td>
+            Whether BLAST hits should be labeled. It is recommended that this
+            option be set to 'T' only when 'large', 'x-large' or 'navigable'
+            maps are drawn (see map_size).
+          </td>
+        </tr>
+        <tr>
+          <td>draw_orf_labels</td>
+          <td>T / F</td>
+          <td>
+            Whether ORFs should be labeled. It is recommended that this option
+            be set to 'T' only when 'large', 'x-large' or 'navigable' maps are
+            drawn (see map_size).
+          </td>
+        </tr>
+        <tr>
+          <td>draw_condensed</td>
+          <td>T / F</td>
+          <td>
+            Whether thin feature rings should be used. This option is useful for
+            maps that are to be used for analysis purposes rather than as a
+            figure for publication.
+          </td>
+        </tr>
+        <tr>
+          <td>draw_divider_rings</td>
+          <td>T / F</td>
+          <td>
+            Whether divider rings should be drawn between feature rings.
+          </td>
+        </tr>
+        <tr>
+          <td>draw_hits_by_reading_frame</td>
+          <td>T / F</td>
+          <td>
+            Whether each set of BLAST results should be divided into six slots,
+            based on the reading frame and strand of the query gene or ORF that
+            produced the hit. This option only applies to comparisons done when
+            the 'query_source' option is set to 'orfs' or 'cds'.
+          </td>
+        </tr>
+        <tr>
+          <td>use_opacity</td>
+          <td>T / F</td>
+          <td>
+            Whether BLAST hits should be drawn with partial opacity so that
+            overlapping hits can be seen.
+          </td>
+        </tr>
+        <tr>
+          <td>scale_blast</td>
+          <td>T / F</td>
+          <td>
+            Whether BLAST hits should be drawn with height proportional to
+            percent identity of hit.
+          </td>
+        </tr>
+        <tr>
+          <td>gene_decoration</td>
+          <td>arc / arrow</td>
+          <td>
+            Whether genes should be drawn as an arc or as an arrow.
+          </td>
+        </tr>
+        <tr>
+          <td>highlight_query</td>
+          <td>T / F</td>
+          <td>
+            Whether the position of the queries should be faintly highlighted on
+            the map. By showing the query positions it is easier to see if a hit
+            was obtained for specific ORFs or features.
+          </td>
+        </tr>
+        <tr>
+          <td>map_size</td>
+          <td>
+            small / medium / large / x-large or combination separated by commas
+          </td>
+          <td>
+            The size of the maps to draw. Multiple options can be separated by
+            commas (e.g. small,large).
+            <ul>
+              <li>small - 1000 x 1000</li>
+              <li>medium - 3000 x 3000</li>
+              <li>large - 9000 x 9000</li>
+              <li>x-large - 12000 x 12000</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+
+      <h2 id="blast-comparisons">
+        BLAST comparison types and the 'query_source' and 'database_source'
+        settings
+      </h2>
+      <p>
+        There are several types of BLAST comparisons that can be performed by
+        CCT. The table below shows the compatible values for 'query_source' and
+        'database_source', lists the required reference and comparison sequence
+        file types and file extensions, and describes the comparisons that are
+        performed. Note that multiple comma-separated values can be given for
+        'query_source' and 'database_source'--CCT will perform all the
+        compatible comparisons. Many different files can be included in the
+        'comparison_genomes' directory. CCT examines file extensions when
+        deciding which files to include in each BLAST comparison. When there are
+        multiple files with the same extension, a separate BLAST comparison is
+        conducted for each, and the results are shown in separate rings on the
+        resulting map.
+      </p>
+
+      <table class="colored-rows">
+        <tr>
+          <th>query_source value</th>
+          <th>database_source value</th>
+          <th>reference_genome file types and file extensions required</th>
+          <th>comparison_genomes file types and file extensions required</th>
+          <th>
+            description of BLAST comparison in the form 'reference vs comparison
+            (BLAST type)'
+          </th>
+        </tr>
+
+        <tr>
+          <td>nucleotide</td>
+          <td>nucleotide</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>DNA vs DNA (blastn)</td>
+        </tr>
+
+        <tr>
+          <td>nucleotide</td>
+          <td>dna</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>One or more DNA sequences in FASTA format (.fna)</td>
+          <td>DNA vs DNA sequences (blastn)</td>
+        </tr>
+
+        <tr>
+          <td>trans</td>
+          <td>trans</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>6-frame translated DNA vs 6-frame translated DNA (tblastx)</td>
+        </tr>
+
+        <tr>
+          <td>trans</td>
+          <td>cds</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>GenBank (.gbk)</td>
+          <td>
+            6-frame translated DNA vs CDS protein sequences extracted from
+            GenBank files (blastx)
+          </td>
+        </tr>
+
+        <tr>
+          <td>trans</td>
+          <td>orfs</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>6-frame translated reference DNA vs translated ORFs (blastx)</td>
+        </tr>
+
+        <tr>
+          <td>trans</td>
+          <td>proteins</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>One or more protein sequences in FASTA format (.faa)</td>
+          <td>
+            6-frame translated reference DNA vs protein sequences (blastx)
+          </td>
+        </tr>
+
+        <tr>
+          <td>trans</td>
+          <td>dna</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>One or more DNA sequences in FASTA format (.fna)</td>
+          <td>
+            6-frame translated reference DNA vs 6-frame translated DNA sequences
+            (tblastx)
+          </td>
+        </tr>
+
+        <tr>
+          <td>cds</td>
+          <td>trans</td>
+          <td>GenBank (.gbk)</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>
+            CDS protein sequences extracted from GenBank file vs 6-frame
+            translated DNA (tblastn)
+          </td>
+        </tr>
+
+        <tr>
+          <td>cds</td>
+          <td>cds</td>
+          <td>GenBank (.gbk)</td>
+          <td>GenBank (.gbk)</td>
+          <td>
+            CDS protein sequences extracted from GenBank file vs CDS protein
+            sequences extracted from GenBank files (blastp)
+          </td>
+        </tr>
+
+        <tr>
+          <td>cds</td>
+          <td>orfs</td>
+          <td>GenBank (.gbk)</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>
+            CDS protein sequences extracted from GenBank file vs translated ORFs
+            (blastp)
+          </td>
+        </tr>
+
+        <tr>
+          <td>cds</td>
+          <td>proteins</td>
+          <td>GenBank (.gbk)</td>
+          <td>One or more protein sequences in FASTA format (.faa)</td>
+          <td>
+            CDS protein sequences extracted from GenBank file vs protein
+            sequences (blastp)
+          </td>
+        </tr>
+
+        <tr>
+          <td>cds</td>
+          <td>dna</td>
+          <td>GenBank (.gbk)</td>
+          <td>One or more DNA sequences in FASTA format (.fna)</td>
+          <td>
+            CDS protein sequences extracted from GenBank file vs 6-frame
+            translated DNA sequences (tblastn)
+          </td>
+        </tr>
+
+        <tr>
+          <td>orfs</td>
+          <td>trans</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>Translated ORFs vs 6-frame translated DNA (tblastn)</td>
+        </tr>
+
+        <tr>
+          <td>orfs</td>
+          <td>cds</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>GenBank (.gbk)</td>
+          <td>
+            Translated ORFs vs CDS protein sequences extracted from GenBank
+            files (blastp)
+          </td>
+        </tr>
+
+        <tr>
+          <td>orfs</td>
+          <td>orfs</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>Translated ORFs vs translated ORFs (blastp)</td>
+        </tr>
+
+        <tr>
+          <td>orfs</td>
+          <td>proteins</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>One or more protein sequences in FASTA format (.faa)</td>
+          <td>Translated ORFs vs protein sequences (blastp)</td>
+        </tr>
+
+        <tr>
+          <td>orfs</td>
+          <td>dna</td>
+          <td>GenBank (.gbk), FASTA (.fasta), RAW (.raw)</td>
+          <td>One or more DNA sequences in FASTA format (.fna)</td>
+          <td>Translated ORFs vs 6-frame translated DNA sequences (tblastn)</td>
+        </tr>
+      </table>
+
+      <h2 id="customizing-maps">Customizing CCT maps</h2>
+      <p>
+        There are many ways to modify the contents and appearance of CCT maps.
+        See the <a href="tutorials.html">Tutorials</a> section for examples. The
+        general approaches are described below.
+      </p>
+
+      <ul>
+        <li>
+          <p>
+            Edit the <em class="file">project_settings.conf</em> file or files
+            that are created in the project directory. These files are used to
+            control the
+            <a href="#blast-comparisons">types of BLAST searches</a> that are
+            performed, the types of graphs that are displayed, and a variety of
+            other map characteristics.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Use the '--cct' option with the
+            <a class="command" href="commands.html#cgview_comparison_tool"
+              >cgview_comparison_tool.pl</a
+            >
+            script. This causes the BLAST results rings to take up more space,
+            and causes them to be coloured according to the percent identity of
+            each hit. This option is always used when the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            and
+            <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >
+            wrapper scripts are used.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Use the '-t' option with the
+            <a class="command" href="commands.html#cgview_comparison_tool"
+              >cgview_comparison_tool.pl</a
+            >
+            script. This causes the BLAST results rings to be ordered so that
+            the ones containing more hits of high percent identity are drawn
+            closest to the outer edge of the figure. This option is always used
+            when the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            and 'build_blast_atlas_all_vs_all.sh' wrapper scripts are used.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Use the '-b' option to control the number of BLAST rings shown. This
+            option works with the
+            <a class="command" href="commands.html#cgview_comparison_tool"
+              >cgview_comparison_tool.pl</a
+            >
+            script and with the wrapper scripts
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            and
+            <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >. The default value for this option is 100, which means that up to
+            100 BLAST results rings will be shown. When the map is created using
+            more than 100 comparison genomes or sequence collections, the top
+            100 rings (i.e. those producing the most high-identity hits) are
+            shown.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            After the maps have been drawn, edit the CGView XML files (in
+            <em class="file">maps/cgview_xml</em>) and then redraw the maps
+            using the
+            <a class="command" href="commands.html#redraw_maps"
+              >redraw_maps.sh</a
+            >
+            script:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#redraw_maps'>redraw_maps.sh</a> -p my_project</pre>
+
+          <p>
+            In the example above, the
+            <a class="command" href="commands.html#redraw_maps"
+              >redraw_maps.sh</a
+            >
+            script is used to draw maps from the CGView XML files located in the
+            <em class="file">my_project</em> CCT project. More information on
+            the
+            <a href="https://www.bioinformatics.org/cgview/xml_overview.html">
+              CGView XML format</a
+            >
+            is available on the
+            <a href="https://www.bioinformatics.org/cgview/">CGView website</a>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Use the '--custom' option to fine-tune the appearance of the map.
+            This option works with the
+            <a class="command" href="commands.html#cgview_comparison_tool"
+              >cgview_comparison_tool.pl</a
+            >
+            script and with the wrapper scripts
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            and
+            <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >. This option is used to supply key-value pairs, as in the
+            following example:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p NC_012920 -m 2500m -b 2500 \
+  --map_size x-large --custom 'width=20000 height=20000 backboneRadius=8000 \
+  featureThickness=120 rulerFontSize=100 rulerPadding=200 \
+  tickThickness=15 tickLength=40 draw_divider_rings=F \
+  _cct_blast_thickness=2.0'</pre>
+
+          <p>
+            Typically the '--custom' option is used after a map has been
+            created, to adjust the appearance of the map. To see what key-value
+            pairs are available see the
+            <a href="customization_keys.html">Customization keys table</a>. To
+            see what values were used for each key when a map was created,
+            examine the '.log' files located in the
+            <em class="file">maps/cgview_xml</em> directory. Once you've
+            determined the keys you would like to change, you can rerun the
+            script using the '--custom' option with the keys and their new
+            values. However, if a lot of BLAST searches were performed to build
+            the first map you can reuse these BLAST results by starting the
+            BLAST atlas at CGView XML creation. For example, suppose that after
+            examining maps already created with the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            script, you decide that you prefer the x-large map, but that you
+            want the make the backbone circle larger. You examine the
+            <em class="file">x-large.log</em> file and find a section showing
+            the key-value attributes for the map, and you see that the
+            'backboneRadius' key was assigned a value of '4000'. To redraw the
+            x-large maps for the DNA vs DNA and the CDS vs CDS comparisons,
+            without having the BLAST searches repeated, the following commands
+            could be used:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p NC_012920 --start_at_xml --custom 'backboneRadius=4500' --map_size x-large</pre>
+
+          <p>
+            The '--start_at_xml' option causes the script to rebuild the XML and
+            the '--map_size x-large' option only redraws the x-large maps.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Draw zoomed maps that show regions of interest in more detail. For
+            example, suppose that the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            script was run as follows:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -i NC_012920.gbk</pre>
+
+          <p>
+            If after examining some of the maps you find that the 400000 bp
+            region of the reference genome looks interesting you can generate a
+            zoomed version of all the maps showing this region in more detail
+            using the following command:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#create_zoomed_maps'>create_zoomed_maps.sh</a> -p my_project -c 400000 -z 10 --format svgz</pre>
+
+          <p>
+            This will create new maps in the same directories as the existing
+            maps, showing the 400000 bp region expanded by a factor of 10.
+            Instead of the default PNG format the maps will be generated in SVGZ
+            format.
+          </p>
+        </li>
+      </ul>
+
+      <h2 id="label-subset">
+        Labelling a subset of genes (labels_to_show.txt)
+      </h2>
+      <p>
+        To label a subset of genes in the reference genome, place a file called
+        <em class="file">labels_to_show.txt</em> in the project directory. This
+        file should be a tab-delimited or comma-delimited text file specifying
+        which genes should be labeled. Each row must consist of a gene
+        identifier followed by the text that is to be used for the label. When
+        using a GenBank or EMBL file as the reference genome the gene identifier
+        should match the value of the '/gene' qualifier (or the value of the
+        '/locus_tag' qualifier if there isn't a '/gene' qualifier given for a
+        particular gene). When describing genes using the 'features' directory
+        and .gff files, the gene identifier should match the 'seqname' value.
+        Note that providing a <em class="file">labels_to_show.txt</em> file will
+        cause the 'draw_feature_labels' setting in the 'project_settings.conf'
+        file to be ignored.
+      </p>
+
+      <h2 id="additional-features">
+        Adding additional features (feature GFF files)
+      </h2>
+
+      <p>
+        To add features to the map, place one or more files with a '.gff'
+        extension in the <em class="file">features</em> directory, which is
+        located in the CCT project directory. The files should be tab-delimited
+        or comma-delimited and should have the following column titles, in the
+        following order: 'seqname', 'source', 'feature', 'start', 'end',
+        'score', 'strand', 'frame'. The first line in the file must be the
+        column titles. For a given entry, 'seqname' should be the name of the
+        gene, 'feature' should be the type of gene (CDS, rRNA, tRNA, other) or
+        the single letter COG category (J for example). 'start' and 'end' should
+        be integers between 1 and the length of the sequence, and the 'start'
+        value should be less than or equal to the 'end' regardless of the
+        'strand' value. The 'strand' value should be '+' for the forward strand
+        and '-' for the reverse strand. All other values can be given as '.' or
+        left blank, since they are ignored. These column titles are based on the
+        specification of the GFF file format. If 'start' and 'end' values are
+        not supplied, but a 'seqname' is given, this script will attempt to get
+        the 'start' and 'end' values from the sequence file.
+      </p>
+
+      <h2 id="additional-analysis-results">
+        Adding additional analysis results (analysis GFF files)
+      </h2>
+
+      <p>
+        To add analysis results to the map, place one or more files with a
+        '.gff' extension in the <em class="file">analysis</em> directory, which
+        is located in the CCT project directory. The files should be
+        tab-delimited or comma-delimited and should have the following column
+        titles, in the following order: 'seqname', 'source', 'feature', 'start',
+        'end', 'score', 'strand', 'frame'. The first line in the file must be
+        the column titles. For a given entry, only the 'start', 'end', 'strand',
+        and 'score' values are required. 'start' and 'end' should be integers
+        between 1 and the length of the sequence, and the 'start' value should
+        be less than or equal to the 'end' regardless of the 'strand' value. The
+        'strand' value should be '+' for the forward strand and '-' for the
+        reverse strand. The 'score' value should be a real number, positive or
+        negative. The other values can be given as '.' or left blank. These
+        column titles are based on the specification of the GFF file format. If
+        'start' and 'end' values are not supplied, but a 'seqname' is given,
+        this script will attempt to get the 'start' and 'end' values from the
+        sequence file.
+      </p>
+
+      <h2 id="cog-categories">COG categories and colours</h2>
+
+      <table>
+        <tr>
+          <th>Category</th>
+          <th colspan="2">Colour</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td colspan="4" style="padding-left: 30px;">
+            <em>Information storage and processing [oranges/reds]</em>
+          </td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td style="background-color: rgb(255, 0, 0);"></td>
+          <td>Red</td>
+          <td>RNA processing and modification</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td style="background-color: rgb(255, 99, 71);"></td>
+          <td>Tomato</td>
+          <td>Chromatin structure and dynamics</td>
+        </tr>
+        <tr>
+          <td>J</td>
+          <td style="background-color: rgb(240, 128, 128);"></td>
+          <td>Light coral</td>
+          <td>Translation, ribosomal structure and biogenesis</td>
+        </tr>
+        <tr>
+          <td>K</td>
+          <td style="background-color: rgb(255, 140, 0);"></td>
+          <td>Dark orange</td>
+          <td>Transcription</td>
+        </tr>
+        <tr>
+          <td>L</td>
+          <td style="background-color: rgb(255, 20, 147);"></td>
+          <td>Deep pink</td>
+          <td>Replication, recombination and repair</td>
+        </tr>
+        <tr>
+          <td colspan="4" style="padding-left: 30px;">
+            <em>Cellular processes and signaling [greens/yellows]</em>
+          </td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td style="background-color: rgb(240, 230, 140);"></td>
+          <td>Khaki</td>
+          <td>Cell cycle control, cell division, chromosome partitioning</td>
+        </tr>
+        <tr>
+          <td>O</td>
+          <td style="background-color: rgb(189, 183, 107);"></td>
+          <td>Dark khaki</td>
+          <td>
+            Post-translational modification, protein turnover, and chaperones
+          </td>
+        </tr>
+        <tr>
+          <td>M</td>
+          <td style="background-color: rgb(107, 142, 35);"></td>
+          <td>Olive drab</td>
+          <td>Cell wall/membrane/envelope biogenesis</td>
+        </tr>
+        <tr>
+          <td>N</td>
+          <td style="background-color: rgb(34, 139, 34);"></td>
+          <td>Forest green</td>
+          <td>Cell motility</td>
+        </tr>
+        <tr>
+          <td>P</td>
+          <td style="background-color: rgb(154, 205, 50);"></td>
+          <td>Yellow green</td>
+          <td>Inorganic ion transport and metabolism</td>
+        </tr>
+        <tr>
+          <td>T</td>
+          <td style="background-color: rgb(50, 205, 50);"></td>
+          <td>Lime green</td>
+          <td>Signal transduction mechanisms</td>
+        </tr>
+        <tr>
+          <td>U</td>
+          <td style="background-color: rgb(173, 255, 47);"></td>
+          <td>Green yellow</td>
+          <td>Intracellular trafficking, secretion, and vesicular transport</td>
+        </tr>
+        <tr>
+          <td>V</td>
+          <td style="background-color: rgb(0, 250, 154);"></td>
+          <td>Medium spring green</td>
+          <td>Defense mechanisms</td>
+        </tr>
+        <tr>
+          <td>W</td>
+          <td style="background-color: rgb(143, 188, 143);"></td>
+          <td>Dark sea green</td>
+          <td>
+            Extracellular structures (this doesn't appear in reference database)
+          </td>
+        </tr>
+        <tr>
+          <td>Y</td>
+          <td style="background-color: rgb(60, 179, 113);"></td>
+          <td>Medium sea green</td>
+          <td>Nuclear structure (this appears once in reference database)</td>
+        </tr>
+        <tr>
+          <td>Z</td>
+          <td style="background-color: rgb(255, 255, 0);"></td>
+          <td>Yellow</td>
+          <td>Cytoskeleton</td>
+        </tr>
+        <tr>
+          <td colspan="4" style="padding-left: 30px;">
+            <em>Metabolism [blues/purples]</em>
+          </td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td style="background-color: rgb(0, 255, 255);"></td>
+          <td>Cyan</td>
+          <td>Energy production and conversion</td>
+        </tr>
+        <tr>
+          <td>G</td>
+          <td style="background-color: rgb(0, 206, 209);"></td>
+          <td>Dark turquoise</td>
+          <td>Carbohydrate transport and metabolism</td>
+        </tr>
+        <tr>
+          <td>E</td>
+          <td style="background-color: rgb(70, 130, 180);"></td>
+          <td>Steel blue</td>
+          <td>Amino acid transport and metabolism</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td style="background-color: rgb(0, 191, 255);"></td>
+          <td>Deep sky blue</td>
+          <td>Nucleotide transport and metabolism</td>
+        </tr>
+        <tr>
+          <td>H</td>
+          <td style="background-color: rgb(0, 0, 255);"></td>
+          <td>Blue</td>
+          <td>Coenzyme transport and metabolism</td>
+        </tr>
+        <tr>
+          <td>I</td>
+          <td style="background-color: rgb(106, 90, 205);"></td>
+          <td>Slate blue</td>
+          <td>Lipid transport and metabolism</td>
+        </tr>
+        <tr>
+          <td>Q</td>
+          <td style="background-color: rgb(0, 0, 128);"></td>
+          <td>Navy</td>
+          <td>Secondary metabolites biosynthesis, transport, and catabolism</td>
+        </tr>
+        <tr>
+          <td colspan="4" style="padding-left: 30px;">
+            <em>Poorly characterized [grays]</em>
+          </td>
+        </tr>
+        <tr>
+          <td>R</td>
+          <td style="background-color: rgb(190, 190, 190);"></td>
+          <td>Gray</td>
+          <td>
+            General function prediction only (examples include "Predicted
+            thioesterase", "Predicted ATPase")
+          </td>
+        </tr>
+        <tr>
+          <td>S</td>
+          <td style="background-color: rgb(105, 105, 105);"></td>
+          <td>Dark gray</td>
+          <td>
+            Function unknown (examples include "Uncharacterized conserved
+            protein", "Predicted small secreted protein")
+          </td>
+        </tr>
+        <tr>
+          <td>Unknown</td>
+          <td style="background-color: rgb(255, 255, 255);"></td>
+          <td>White</td>
+          <td>
+            Not assigned COG letter because protein is not similar to any COG
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

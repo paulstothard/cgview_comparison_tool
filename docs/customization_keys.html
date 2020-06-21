@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="scripts/jquery.ad-gallery/jquery.ad-gallery.css"
+    />
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script
+      type="text/javascript"
+      src="scripts/jquery.ad-gallery/jquery.ad-gallery.js"
+    ></script>
+    <script type="text/javascript" src="scripts/docs.js"></script>
+    <link rel="stylesheet" href="styles/stylesheet.css" type="text/css" />
+    <title>CCT: Customization Keys</title>
+  </head>
+
+  <body>
+    <div id="banner">
+      <p id="banner-title">
+        <span class="acronym">C</span>GView
+        <span class="acronym">C</span>omparison
+        <span class="acronym">T</span>ool
+      </p>
+      <p id="banner-sub-title">
+        <a href="https://sites.ualberta.ca/~stothard/"
+          >Stothard Research Group</a
+        >
+      </p>
+    </div>
+
+    <ul id="menu">
+      <li>
+        <a href="index.html">Overview</a>
+      </li>
+      <li>
+        <a href="installation.html">Installation</a>
+      </li>
+      <li>
+        <a href="creating_maps.html">Creating Maps</a>
+      </li>
+      <li>
+        <a href="commands.html">Commands</a>
+      </li>
+      <li>
+        <a href="tutorials.html">Tutorials</a>
+      </li>
+      <li>
+        <a href="customization_keys.html" id="selected">Customization Keys</a>
+      </li>
+    </ul>
+
+    <div id="main">
+      <h1>Customization Keys</h1>
+
+      <p>
+        The following keys can be used with the '--custom' option, which can be
+        used with the
+        <a class="command" href="commands.html#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >
+        script and with the wrapper scripts
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >
+        and
+        <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+          >build_blast_atlas_all_vs_all.sh</a
+        >. The values used must be consistent with those given below. For
+        example, 'true' cannot be used when 'T' is expected. Colour values are
+        given as rgb strings such as 'rgb(0,0,0)'.
+      </p>
+
+      <table class="colored-rows" id="customization-keys">
+        <tr>
+          <th>Key</th>
+          <th>Description</th>
+          <th>Value</th>
+        </tr>
+
+        <tr>
+          <td>arrowheadLength</td>
+          <td>Length of arrowheads used for genes and ORFs</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>average</td>
+          <td>Plot base composition values as deviation from average</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>atColorNeg</td>
+          <td>Colour of AT content plot when low</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>atColorPos</td>
+          <td>Colour of AT content plot when high</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>at_content</td>
+          <td>Show AT content plot</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>atSkewColorNeg</td>
+          <td>Colour of AT skew plot when low</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>atSkewColorPos</td>
+          <td>Colour of AT skew plot when high</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>at_skew</td>
+          <td>Show AT skew plot</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>backboneColor</td>
+          <td>Colour of backbone circle</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>backboneRadius</td>
+          <td>Radius of backbone circle</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>backboneThickness</td>
+          <td>Thickness of backbone circle</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>backgroundColor</td>
+          <td>Colour of the background</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>blast_divider_ruler</td>
+          <td>
+            Draw thicker divider rings around every tenth BLAST result and use a
+            different colour (<em>blastRulerColor</em>). In addition, number the
+            BLAST entries in the BLAST legend. Note that
+            <em>draw_divider_rings</em> must be 'T' for the rings to be drawn
+          </td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>blastRulerColor</td>
+          <td>
+            Colour of BLAST ruler rings (see <em>blast_divider_ruler</em>)
+          </td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>borderColor</td>
+          <td>Colour of border around map</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>combined_orfs</td>
+          <td>Draw ORFs in two rings (forward and reverse) instead of six</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>details</td>
+          <td>Show legend giving accession and sequence length</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>draw_divider_rings</td>
+          <td>Draw thin rings between BLAST rings and other rings</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>featureOpacity</td>
+          <td>Opacity used when drawing features</td>
+          <td>Real between 0 and 1</td>
+        </tr>
+        <tr>
+          <td>featureOpacityOther</td>
+          <td>Opacity used when drawing features of type other</td>
+          <td>Real between 0 and 1</td>
+        </tr>
+        <tr>
+          <td>featureSlotSpacing</td>
+          <td>Spacing between rings</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>featureThickness</td>
+          <td>Thickness of feature rings</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>featureThicknessPlot</td>
+          <td>Thickness of plots like GC content</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>feature_labels</td>
+          <td>Label features from reference sequence GenBank file</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>gcColorNeg</td>
+          <td>Colour of GC content plot when low</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>gcColorPos</td>
+          <td>Colour of GC content plot when high</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>gc_content</td>
+          <td>Show GC content plot</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>gcSkewColorNeg</td>
+          <td>Colour of GC skew plot when low</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>gcSkewColorPos</td>
+          <td>Colour of GC skew plot when high</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>gc_skew</td>
+          <td>Show GC skew plot</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>gene_decoration</td>
+          <td>Whether to draw reference sequence features as arrows or arcs</td>
+          <td>arrow/arc</td>
+        </tr>
+        <tr>
+          <td>gene_labels</td>
+          <td>Label items read from 'features' or 'analysis' directories</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>global_label</td>
+          <td>
+            Allow labels on zoomed maps (auto) all maps (T) or no maps (F)
+          </td>
+          <td>auto/T/F</td>
+        </tr>
+        <tr>
+          <td>height</td>
+          <td>Height of the image in pixels</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>hit_labels</td>
+          <td>Label BLAST hits</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>labelFontSize</td>
+          <td>Size of font used for feature labels</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>labelPlacementQuality</td>
+          <td>Quality of label arrangement</td>
+          <td>good/better/best</td>
+        </tr>
+        <tr>
+          <td>labelLineLength</td>
+          <td>Starting length of lines running to feature labels</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>labelLineThickness</td>
+          <td>Thickness of lines running to feature labels</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>legend</td>
+          <td>Show legend for features</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>legendFontSize</td>
+          <td>Size of font used for legends</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>orf_labels</td>
+          <td>Label ORFs</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>maxLabelLength</td>
+          <td>Maximum number of letters shown in feature labels</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>maxLegendLength</td>
+          <td>Maximum number of letters shown in legends</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>maxTitleLength</td>
+          <td>Maximum number of letters shown in map title</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>minimumFeatureLength</td>
+          <td>Smallest glyph size used for features</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>moveInnerLabelsToOuter</td>
+          <td>
+            Move labels from inside of backbone to outside when labels clash
+          </td>
+          <td>true/false</td>
+        </tr>
+        <tr>
+          <td>orfColor</td>
+          <td>Colour used for ORFs</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>orfs</td>
+          <td>Draw open reading frames (ORFs)</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>orf_size</td>
+          <td>Number of codons required to be an ORF</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>otherColor</td>
+          <td>Colour used for other features</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>parse_reading_frame</td>
+          <td>
+            Subdivide each BLAST ring into six based on query reading frame
+          </td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>proteinColor</td>
+          <td>Colour used for CDS features</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>reading_frames</td>
+          <td>Draw start and stop codons</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>rRNAColor</td>
+          <td>Colour used for rRNA features</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>rulerFontColor</td>
+          <td>Colour of position number text</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>rulerFontSize</td>
+          <td>Size of font used for position numbers</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>rulerPadding</td>
+          <td>Space between innermost circle and position numbers</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>scale</td>
+          <td>Scale base composition plots so that all space is used</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>scale_blast</td>
+          <td>Draw BLAST hits with height proportional to percent identity</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>show_sequence_features</td>
+          <td>Draw features from reference sequence GenBank file</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>show_queries</td>
+          <td>Show positions of the BLAST queries</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>startColor</td>
+          <td>Colour used for start codons</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>starts</td>
+          <td>Codons counting as start codons</td>
+          <td>String like atg|ttg|att|gtg|ctg</td>
+        </tr>
+        <tr>
+          <td>step</td>
+          <td>Sliding window step for base composition plots</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>stopColor</td>
+          <td>Colour used for stop codons</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>stops</td>
+          <td>Codons counting as stop codons</td>
+          <td>String like taa|tag|tga</td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>Map title</td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>titleFontSize</td>
+          <td>Size of font used in title at bottom</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>tickColor</td>
+          <td>Colour of tickmarks</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>tickLength</td>
+          <td>Length of tickmarks</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>tickThickness</td>
+          <td>Thickness of tickmarks</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>tick_density</td>
+          <td>Density of tickmarks</td>
+          <td>Real between 0 and 1</td>
+        </tr>
+        <tr>
+          <td>tRNAColor</td>
+          <td>Colour used for tRNA features</td>
+          <td>Colour</td>
+        </tr>
+        <tr>
+          <td>useInnerLabels</td>
+          <td>Allow feature labels on inside of backbone circle</td>
+          <td>true/false</td>
+        </tr>
+        <tr>
+          <td>use_opacity</td>
+          <td>Draw BLAST hits with partial opacity</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>width</td>
+          <td>Width of the image in pixels</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>window</td>
+          <td>Sliding window size for base composition plots</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>_cct_blast_thickness</td>
+          <td>Thickness of BLAST rings when '-cct' option used</td>
+          <td>Real</td>
+        </tr>
+        <tr>
+          <td>_cct_blast_opacity</td>
+          <td>Opacity of BLAST rings when '-cct' option used</td>
+          <td>Real</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

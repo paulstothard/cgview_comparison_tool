@@ -1,0 +1,1574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles/stylesheet.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="scripts/jquery.ad-gallery/jquery.ad-gallery.css"
+    />
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script
+      type="text/javascript"
+      src="scripts/jquery.ad-gallery/jquery.ad-gallery.js"
+    ></script>
+    <script type="text/javascript" src="scripts/docs.js"></script>
+    <title>CCT: Tutorials</title>
+  </head>
+
+  <body>
+    <div id="banner">
+      <p id="banner-title">
+        <span class="acronym">C</span>GView
+        <span class="acronym">C</span>omparison
+        <span class="acronym">T</span>ool
+      </p>
+      <p id="banner-sub-title">
+        <a href="https://sites.ualberta.ca/~stothard/"
+          >Stothard Research Group</a
+        >
+      </p>
+    </div>
+
+    <ul id="menu">
+      <li>
+        <a href="index.html">Overview</a>
+      </li>
+      <li>
+        <a href="installation.html">Installation</a>
+      </li>
+      <li>
+        <a href="creating_maps.html">Creating Maps</a>
+      </li>
+      <li>
+        <a href="commands.html">Commands</a>
+      </li>
+      <li>
+        <a href="tutorials.html" id="selected">Tutorials</a>
+      </li>
+      <li>
+        <a href="customization_keys.html">Customization Keys</a>
+      </li>
+    </ul>
+
+    <div id="main">
+      <h1>Tutorials</h1>
+      <fieldset id="contents">
+        <legend>Contents</legend>
+        <ul>
+          <li>
+            <a href="#tutorial-1">Tutorial 1 - E. coli plasmid comparison</a>
+          </li>
+          <li>
+            <a href="#tutorial-2">Tutorial 2 - E. coli genome comparison</a>
+          </li>
+          <li>
+            <a href="#tutorial-3"
+              >Tutorial 3 - Porphyra purpurea chloroplast genome comparison</a
+            >
+          </li>
+          <li>
+            <a href="#tutorial-4"
+              >Tutorial 4 - Rattus norvegicus mitochondrial genome comparison</a
+            >
+          </li>
+          <li><a href="#tutorial-5">Tutorial 5 - Montage of maps</a></li>
+          <li>
+            <a href="#tutorial-6"
+              >Tutorial 6 - Generating a 400 Megapixel map with up to 2500
+              genomes</a
+            >
+          </li>
+          <li>
+            <a href="#tutorial-7"
+              >Tutorial 7 - Exploring additional CCT functionality</a
+            >
+          </li>
+        </ul>
+      </fieldset>
+
+      <h2>Tutorials</h2>
+      <p>
+        The following tutorials are meant to illustrate all the steps involved
+        in building complex maps for bacterial, chloroplast, and mitochondrial
+        genomes. Note that some of the commands can take several minutes or even
+        hours to complete &mdash; to stop a command that is running enter
+        Control-C.
+      </p>
+      <p>
+        <strong>Important</strong>: All the commands in each tutorial assume you
+        are in the same directory. For example, if you start tutorial 1 in a
+        directory called <em class="file">tutorial_1</em>, but change
+        directories to edit a configuration file or view an image, you must
+        return to the <em class="file">tutorial_1</em>
+        directory before issuing the next command in the tutorial.
+      </p>
+      <p>
+        <strong>File types and file extensions</strong>: The reference and
+        comparison sequence files used by the CCT commands must end with the
+        appropriate extension. For example, for
+        <a class="command" href="commands.html#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >, the sequence files can be FASTA (.fasta) or GenBank (.gbk), while for
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >
+        or
+        <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+          >build_blast_atlas_all_vs_all.sh</a
+        >, the sequence files must be GenBank (.gbk). The
+        <a href="creating_maps.html#blast-comparisons"
+          >BLAST comparison types and the 'query_source' and 'database_source'
+          settings</a
+        >
+        section, describes in detail the files types and file extensions used by
+        CCT.
+      </p>
+
+      <h2 id="tutorial-1">Tutorial 1 - E. coli plasmid comparison</h2>
+      <p>
+        The following tutorial involves comparing the Escherichia coli E24377A
+        plasmid pETEC_35 to other E. coli plasmids.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Download the pETEC_35 sequence:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_genome_by_accession'>fetch_genome_by_accession.sh</a> -a NC_009787 -o ./</pre>
+        </li>
+
+        <li>
+          <p>
+            Prepare a BLAST atlas project for pETEC_35:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -i NC_009787.gbk</pre>
+          <p>
+            This will produce a project directory named after the sequence file
+            name ('NC_009787' in this example). As an alternative, a blank BLAST
+            atlast project could have been created with the '-p' option and a
+            project name. In that case, the
+            <em class="file">NC_009787.gbk</em> file would have to be manually
+            copied to the <em class="file">reference_genome</em> directory.
+          </p>
+          <p>
+            For details on the BLAST atlas directory structure see
+            <a href="commands.html#blast_atlas_project_tree"
+              >Creating a New BLAST Atlas Project</a
+            >. The configuration files (<em class="file"
+              >project_settings_cds_vs_cds.conf</em
+            >
+            and <em class="file">project_settings_dna_vs_dna.conf</em>) within
+            the project tree can be edited to change the appearance of the maps
+            (see
+            <a href="creating_maps.html#customizing-maps"
+              >Customizing CCT maps</a
+            >).
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Download all E. coli plasmid sequences in GenBank format to the
+            <em class="file">NC_009787/comparison_genomes</em> directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_refseq_bacterial_genomes_by_name'>fetch_refseq_bacterial_genomes_by_name.sh</a> -n "Escherichia*" --max 1000000 \
+  -o NC_009787/comparison_genomes/</pre>
+          <p>
+            The '--max' option is used to retrieve sequences less than 1 Mb in
+            length since we are interested in plasmid sequences.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            To begin the map drawing process using the default configuration
+            enter the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            command again, providing the '-p' option and the path to the project
+            directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p NC_009787</pre>
+
+          <p>
+            These maps should take a few minutes to generate. Once the maps are
+            finished they will be located in the following directories:
+          </p>
+
+          <pre class="file-tree">
+<strong>NC_009787/maps_for_dna_vs_dna</strong>
+<strong>NC_009787/maps_for_cds_vs_cds</strong></pre>
+
+          <p>
+            On the Linux virtual machine the maps can be viewed by entering the
+            following command and then navigating to the above directories:
+          </p>
+
+          <pre class="code">geeqie</pre>
+        </li>
+        <li>
+          <p>
+            When using numerous comparison genomes it can become difficult to
+            determine which BLAST ring corresponds to which comparison. The
+            <em>blast_divider_ruler</em> customization key can be used to
+            highlight every tenth BLAST comparison ring and to number the BLAST
+            results in the legend (the BLAST legend appears in the bottom left
+            of the map). The entries in the BLAST legend are always given in the
+            same order as the BLAST rings (i.e. the first item in the BLAST
+            legend describes the outermost BLAST ring on the map). The numbering
+            and highlighting added using the
+            <em>blast_divider_ruler</em> customization key make it easier to
+            find the BLAST ring for a comparison of interest. The colour of the
+            highlighted divider rings can be changed using the
+            <em>blastRulerColor</em> customization key (the default colour is
+            orange). See
+            <a href="customization_keys.html">Customization Keys</a> for more
+            information on the keys and values that can be used with the
+            '--custom' option.
+          </p>
+          <p>
+            To redraw the maps use the following command (note that the existing
+            maps will be overwritten with the new map):
+          </p>
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p NC_009787 -x --custom "blast_divider_ruler=T blastRulerColor=rgb(50,205,50)"</pre>
+          <p>
+            The '-x' instructs the program to use the existing BLAST results in
+            the <em class="file">NC_009787</em> project directory, instead of
+            repeating the entire map creation process.
+          </p>
+        </li>
+      </ol>
+
+      <h3>Sample maps</h3>
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">Medium (1.6 MB)</p>
+          <a href="images/tut1/DNA_vs_DNA_medium.png"
+            ><img
+              src="images/tut1/300_DNA_vs_DNA_medium.png"
+              alt="DNA_vs_DNA_medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">X-large (10.3 MB)</p>
+          <a href="images/tut1/DNA_vs_DNA_x-large.png"
+            ><img
+              src="images/tut1/300_DNA_vs_DNA_x-large.png"
+              alt="DNA_vs_DNA_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA (with --custom)</p>
+          <p class="image-size">Medium (1.8 MB)</p>
+          <a href="images/tut1/DNA_vs_DNA_custom_medium.png"
+            ><img
+              src="images/tut1/300_DNA_vs_DNA_custom_medium.png"
+              alt="DNA_vs_DNA_custom"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-size">Medium (1.6 MB)</p>
+          <a href="images/tut1/CDS_vs_CDS_medium.png"
+            ><img
+              src="images/tut1/300_CDS_vs_CDS_medium.png"
+              alt="CDS_vs_CDS_medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS VS CDS</p>
+          <p class="image-size">X-large (10.7 MB)</p>
+          <a href="images/tut1/CDS_vs_CDS_x-large.png"
+            ><img
+              src="images/tut1/300_CDS_vs_CDS_x-large.png"
+              alt="CDS_vs_CDS_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS VS CDS (with --custom)</p>
+          <p class="image-size">Medium (1.8 MB)</p>
+          <a href="images/tut1/CDS_vs_CDS_custom_medium.png"
+            ><img
+              src="images/tut1/300_CDS_vs_CDS_custom_medium.png"
+              alt="CDS_vs_CDS_custom_medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <h2 id="tutorial-2">Tutorial 2 - E. coli genome comparison</h2>
+      <p>
+        The following tutorial involves comparing the genome of E. coli NRG857c
+        (O83:H1) to all other E. coli genomes.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Download the NRG857c chromosome sequence:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_genome_by_accession'>fetch_genome_by_accession.sh</a> -a CP001855 -o ./</pre>
+        </li>
+
+        <li>
+          <p>
+            Prepare a BLAST atlas project for NRG857c:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -i CP001855.gbk</pre>
+          <p>
+            This will produce a project directory named after the sequence file
+            name ('CP001855' in this example). For details on the BLAST atlas
+            directory structure see
+            <a href="commands.html#blast_atlas_project_tree"
+              >Creating a New BLAST Atlas Project</a
+            >. The configuration files (<em class="file"
+              >project_settings_cds_vs_cds.conf</em
+            >
+            and <em class="file">project_settings_dna_vs_dna.conf</em>) within
+            the project tree can be edited to change the appearance of the maps
+            (see
+            <a href="creating_maps.html#customizing-maps"
+              >Customizing CCT maps</a
+            >).
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Download all E. coli chromosome sequences in GenBank format to the
+            <em class="file">CP001855/comparison_genomes</em> directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_refseq_bacterial_genomes_by_name'>fetch_refseq_bacterial_genomes_by_name.sh</a> -n "Escherichia*" --min 1000000 \
+  -o CP001855/comparison_genomes/</pre>
+          <p>
+            The '--min' option is used to retrieve sequences greater than 1 Mb
+            in length. This prevents plasmids from being included in the
+            analysis:
+          </p>
+        </li>
+
+        <li>
+          <p>
+            To begin the map drawing process using the default configuration
+            enter the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            command again, providing the '-p' option and the path to the project
+            directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p CP001855</pre>
+
+          <p>
+            The map creation process can take several hours depending on the
+            number of sequences involved. Once the maps are finished they will
+            be located in the following directories:
+          </p>
+
+          <pre class="file-tree">
+<strong>CP001855/maps_for_dna_vs_dna</strong>
+<strong>CP001855/maps_for_cds_vs_cds</strong></pre>
+
+          <p>
+            On the Linux virtual machine the maps can be viewed by entering the
+            following command and then navigating to the above directories:
+          </p>
+
+          <pre class="code">geeqie</pre>
+        </li>
+
+        <li>
+          <p>
+            Examination of the maps reveals a few genome regions that are poorly
+            conserved (at approximately 4.45 Mb and 3.1 Mb for example). To
+            generate zoomed maps showing these regions in more detail, use the
+            following commands:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#create_zoomed_maps'>create_zoomed_maps.sh</a> -p CP001855 -c 4450000 -z 15
+<a class='command' href='commands.html#create_zoomed_maps'>create_zoomed_maps.sh</a> -p CP001855 -c 3100000 -z 15</pre>
+
+          <p>
+            The resulting maps are created alongside the existing maps, in these
+            directories:
+          </p>
+
+          <pre class="file-tree">
+<strong>CP001855/maps_for_dna_vs_dna</strong>
+<strong>CP001855/maps_for_cds_vs_cds</strong></pre>
+
+          <p>
+            The zoomed versions of the maps are given names to indicate the
+            genome region depicted and the zoom amount. For example, the
+            following map is centered on the 4450000 region and was created
+            using a zoom value of 15:
+          </p>
+
+          <pre class="file-tree">cds_vs_cds_large_4450000_15.png</pre>
+
+          <p>
+            The zoomed maps can be created quickly because the analysis results
+            used to generate the maps are not recalculated. Note that the
+            <a class="command" href="commands.html#create_zoomed_maps"
+              >create_zoomed_maps.sh</a
+            >
+            script supports a '--format' option that can be used to specify the
+            output image format (png, jpg, svg, or svgz).
+          </p>
+        </li>
+      </ol>
+
+      <h3>Sample maps</h3>
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">Medium (3.5 MB)</p>
+          <a href="images/tut2/DNA_vs_DNA_medium.png"
+            ><img
+              src="images/tut2/300_DNA_vs_DNA_medium.png"
+              alt="DNA_vs_DNA_medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">X-large (32.3 MB)</p>
+          <a href="images/tut2/DNA_vs_DNA_x-large.png"
+            ><img
+              src="images/tut2/300_DNA_vs_DNA_x-large.png"
+              alt="DNA_vs_DNA_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-scale">Zoomed 15X @3,100,000</p>
+          <p class="image-size">Medium (2 MB)</p>
+          <a href="images/tut2/DNA_vs_DNA_medium_3100000_15.png"
+            ><img
+              src="images/tut2/300_DNA_vs_DNA_medium_3100000_15.png"
+              alt="DNA_vs_DNA_medium_3100000_15"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-scale">Zoomed 15X @4,450,000</p>
+          <p class="image-size">Medium (1.6 MB)</p>
+          <a href="images/tut2/DNA_vs_DNA_medium_4450000_15.png"
+            ><img
+              src="images/tut2/300_DNA_vs_DNA_medium_4450000_15.png"
+              alt="DNA_vs_DNA_medium_4450000_15"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-size">Medium (7.6 MB)</p>
+          <a href="images/tut2/CDS_vs_CDS_medium.png"
+            ><img
+              src="images/tut2/300_CDS_vs_CDS_medium.png"
+              alt="CDS_vs_CDS_medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS VS CDS</p>
+          <p class="image-size">X-large (69.3 MB)</p>
+          <a href="images/tut2/CDS_vs_CDS_x-large.png"
+            ><img
+              src="images/tut2/300_CDS_vs_CDS_x-large.png"
+              alt="CDS_vs_CDS_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-scale">Zoomed 15X @3,100,000</p>
+          <p class="image-size">Medium (2.7 MB)</p>
+          <a href="images/tut2/CDS_vs_CDS_medium_3100000_15.png"
+            ><img
+              src="images/tut2/300_CDS_vs_CDS_medium_3100000_15.png"
+              alt="CDS_vs_CDS_medium_3100000_15"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-scale">Zoomed 15X @4,450,000</p>
+          <p class="image-size">Medium (2.2 MB)</p>
+          <a href="images/tut2/CDS_vs_CDS_medium_4450000_15.png"
+            ><img
+              src="images/tut2/300_CDS_vs_CDS_medium_4450000_15.png"
+              alt="CDS_vs_CDS_medium_4450000_15"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <h2 id="tutorial-3">
+        Tutorial 3 - Porphyra purpurea chloroplast genome comparison
+      </h2>
+      <p>
+        The following tutorial involves comparing the Porphyra purpurea
+        chloroplast genome to all RefSeq cholorplast genomes. Note that the
+        final map will show the BLAST results for up to a maximum of 100
+        genomes. When more than 100 input genomes are provided, only the 100
+        most similar genomes (as ascertained using BLAST) are displayed (unless
+        the '-b' option of the
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >
+        script is used to increase this value).
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Download the Porphyra purpurea chloroplast genome sequence:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_genome_by_accession'>fetch_genome_by_accession.sh</a> -a NC_000925 -o ./</pre>
+        </li>
+
+        <li>
+          <p>
+            Prepare a new BLAST atlas project for the Porphyra purpurea
+            chloroplast:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -i NC_000925.gbk</pre>
+          <p>
+            This will produce a project directory named after the sequence file
+            name ('NC_000925' in this example). For details on the BLAST atlas
+            directory structure see
+            <a href="commands.html#blast_atlas_project_tree"
+              >Creating a New BLAST Atlas Project</a
+            >. The configuration files (<em class="file"
+              >project_settings_cds_vs_cds.conf</em
+            >
+            and <em class="file">project_settings_dna_vs_dna.conf</em>) within
+            the project tree can be edited to change the appearance of the maps
+            (see
+            <a href="creating_maps.html#customizing-maps"
+              >Customizing CCT maps</a
+            >).
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Download all chloroplast genome sequences in GenBank format to the
+            <em class="file">NC_000925/comparison_genomes</em> directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_all_refseq_chloroplast_genomes'>fetch_all_refseq_chloroplast_genomes.sh</a> -o NC_000925/comparison_genomes/</pre>
+        </li>
+
+        <li>
+          <p>
+            To begin the map drawing process using the default configuration
+            enter the previous command again. In this example the '--custom'
+            option is used to fine-tune the appearance of the map, and the
+            '--map_size' option is used to specify that only 'x-large' maps
+            should be generated (see
+            <a href="customization_keys.html">Customization Keys</a> for more
+            information on the keys and values that can be used with the
+            '--custom' option):
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p NC_000925 --map_size x-large \
+  --custom 'labelFontSize=100 backboneRadius=3000'</pre>
+
+          <p>
+            The map creation process can take several hours depending on the
+            number of sequences involved. Once the maps are finished they will
+            be located in the following directories:
+          </p>
+
+          <pre class="file-tree">
+<strong>NC_000925/maps_for_dna_vs_dna</strong>
+<strong>NC_000925/maps_for_cds_vs_cds</strong></pre>
+
+          <p>
+            On the Linux virtual machine the maps can be viewed by entering the
+            following command and then navigating to the above directories:
+          </p>
+
+          <pre class="code">geeqie</pre>
+        </li>
+      </ol>
+
+      <h3>Sample maps</h3>
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">X-large (16 MB)</p>
+          <a href="images/tut3/DNA_vs_DNA_x-large.png"
+            ><img
+              src="images/tut3/300_DNA_vs_DNA_x-large.png"
+              alt="DNA_vs_DNA_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-size">X-large (17.6 MB)</p>
+          <a href="images/tut3/CDS_vs_CDS_x-large.png"
+            ><img
+              src="images/tut3/300_CDS_vs_CDS_x-large.png"
+              alt="CDS_vs_CDS_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <h2 id="tutorial-4">
+        Tutorial 4 - Rattus norvegicus mitochondrial genome comparison
+      </h2>
+      <p>
+        The following tutorial involves comparing the Rattus norvegicus
+        mitochondrial genome to all RefSeq mitochondrial genomes. Note that the
+        final map will show the BLAST results for up to a maximum of 100
+        genomes. When more than 100 input genomes are provided, only the 100
+        most similar genomes (as ascertained using BLAST) are displayed (unless
+        the '-b' option of the
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >
+        script is used to increase this value).
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Download the Rattus norvegicus mitochondrial genome sequence:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_genome_by_accession'>fetch_genome_by_accession.sh</a> -a AC_000022 -o ./</pre>
+        </li>
+
+        <li>
+          <p>
+            Prepare a new BLAST atlas project:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -i AC_000022.gbk</pre>
+          <p>
+            This will produce a project directory named after the sequence file
+            name ('AC_000022' in this example). For details on the BLAST atlas
+            directory structure see
+            <a href="commands.html#blast_atlas_project_tree"
+              >Creating a New BLAST Atlas Project</a
+            >. The configuration files (<em class="file"
+              >project_settings_cds_vs_cds.conf</em
+            >
+            and <em class="file">project_settings_dna_vs_dna.conf</em>) within
+            the project tree can be edited to change the appearance of the maps
+            (see
+            <a href="creating_maps.html#customizing-maps"
+              >Customizing CCT maps</a
+            >).
+          </p>
+        </li>
+
+        <li>
+          Download all mitochondrial genome sequences in GenBank format to the
+          <em class="file">AC_000022/comparison_genomes</em> directory:
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_all_refseq_mitochondrial_genomes'>fetch_all_refseq_mitochondrial_genomes.sh</a> -o AC_000022/comparison_genomes/</pre>
+        </li>
+
+        <li>
+          <p>
+            To begin the map drawing process using the default configuration
+            enter the
+            <a class="command" href="commands.html#build_blast_atlas"
+              >build_blast_atlas.sh</a
+            >
+            command again, providing the '-p' option and the path to the project
+            directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p AC_000022</pre>
+
+          <p>
+            The map creation process can take several hours depending on the
+            number of sequences involved. Once the maps are finished they will
+            be located in the following directories:
+          </p>
+
+          <pre class="file-tree">
+<strong>AC_000022/maps_for_dna_vs_dna</strong>
+<strong>AC_000022/maps_for_cds_vs_cds</strong></pre>
+
+          <p>
+            On the Linux virtual machine the maps can be viewed by entering the
+            following command and then navigating to the above directories:
+          </p>
+
+          <pre class="code">geeqie</pre>
+        </li>
+
+        <li>
+          <p>
+            Maps can often be modified to be more visually appealing, by editing
+            the XML file generated by CGView (the program used to draw the
+            maps). For example, to increase the size of the feature labels on
+            the x-large DNA vs DNA map, edit the
+            <em class="file"
+              >AC_000022/maps_for_dna_vs_dna/cgview_xml/dna_vs_dna_x-large.xml</em
+            >
+            file with the following change:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>labelFont="SansSerif, plain, 15"</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>labelFont="SansSerif, plain, 200"</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+
+          <p>
+            Make the following optional changes to the file, to make the final
+            map more visually appealing:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>rulerFont="SansSerif, plain, 60"</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>rulerFont="SansSerif, plain, 100"</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <br />
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>tickLength="20"</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>tickLength="40"</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <br />
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>tickDensity="0.0416666666666667"</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>tickDensity="0.08"</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+
+          <p>
+            Once these changes have been made, save the modified file.
+          </p>
+
+          <p>
+            More information on the
+            <a href="https://www.bioinformatics.org/cgview/xml_overview.html">
+              CGView XML format</a
+            >
+            is available on the
+            <a href="https://www.bioinformatics.org/cgview/">CGView website</a>.
+          </p>
+
+          <p>
+            Finally, to redraw the maps using the modified XML file, switch back
+            to the cgview_comparison_tool root directory and run the
+            <a class="command" href="commands.html#redraw_maps"
+              >redraw_maps.sh</a
+            >
+            script:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#redraw_maps'>redraw_maps.sh</a> -p AC_000022</pre>
+
+          <p>
+            The maps can be redrawn relatively quickly because the analyses used
+            to create the XML files are not repeated for redrawing. Note that
+            the
+            <a class="command" href="commands.html#redraw_maps"
+              >redraw_maps.sh</a
+            >
+            script supports a '--format' option that can be used to specify the
+            output image format (png, jpg, svg, or svgz).
+          </p>
+        </li>
+      </ol>
+
+      <h3>Sample maps</h3>
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">medium (3.4 MB)</p>
+          <a href="images/tut4/DNA_vs_DNA_medium.png"
+            ><img
+              src="images/tut4/300_DNA_vs_DNA_medium.png"
+              alt="DNA_vs_DNA_medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">large (18.2 MB)</p>
+          <a href="images/tut4/DNA_vs_DNA_large.png"
+            ><img
+              src="images/tut4/300_DNA_vs_DNA_large.png"
+              alt="DNA_vs_DNA_large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA</p>
+          <p class="image-size">X-large (22.8 MB)</p>
+          <a href="images/tut4/DNA_vs_DNA_x-large.png"
+            ><img
+              src="images/tut4/300_DNA_vs_DNA_x-large.png"
+              alt="DNA_vs_DNA_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-size">medium (3.5 MB)</p>
+          <a href="images/tut4/CDS_vs_CDS_medium.png"
+            ><img
+              src="images/tut4/300_CDS_vs_CDS_medium.png"
+              alt="CDS_vs_CDS_medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-size">large (18.9 MB)</p>
+          <a href="images/tut4/CDS_vs_CDS_large.png"
+            ><img
+              src="images/tut4/300_CDS_vs_CDS_large.png"
+              alt="CDS_vs_CDS_large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS</p>
+          <p class="image-size">X-large (23.5 MB)</p>
+          <a href="images/tut4/CDS_vs_CDS_x-large.png"
+            ><img
+              src="images/tut4/300_CDS_vs_CDS_x-large.png"
+              alt="CDS_vs_CDS_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA (modified XML file)</p>
+          <p class="image-size">X-large (23.4 MB)</p>
+          <a href="images/tut4/DNA_vs_DNA_x-large_altered.png"
+            ><img
+              src="images/tut4/300_DNA_vs_DNA_x-large_altered.png"
+              alt="DNA_vs_DNA_x-large_altered"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <h2 id="tutorial-5">Tutorial 5 - Montage of maps</h2>
+      <p>
+        The following tutorial involves generating a montage of maps comparing
+        several Bordetella sequences.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Create a new BLAST atlas all vs all project:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas_all_vs_all'>build_blast_atlas_all_vs_all.sh</a> -p montage_project</pre>
+          <p>
+            This will produce a project directory called
+            <em class="file">montage_project</em>. For details on the directory
+            structure see
+            <a href="commands.html#blast_atlas_all_vs_all_project_tree"
+              >Creating a New BLAST Atlas All vs All Project</a
+            >. The configuration file
+            <em class="file">project_settings_multi.conf</em> within the project
+            tree can be edited to change the appearance of the maps (see
+            <a href="creating_maps.html#customizing-maps"
+              >Customizing CCT maps</a
+            >).
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Download Bordetella chromosome sequences in GenBank format into the
+            <em class="file">montage_project/comparison_genomes</em> directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_refseq_bacterial_genomes_by_name'>fetch_refseq_bacterial_genomes_by_name.sh</a> \
+  -n "Bordetella*" --min 1000000 -o montage_project/comparison_genomes/</pre>
+          <p>
+            The '--min' option is used to retrieve sequences greater than 1 Mb
+            in length. This prevents plasmids from being included in the
+            analysis:
+          </p>
+        </li>
+
+        <li>
+          <p>
+            To begin the map drawing process using the default configuration
+            enter the
+            <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >
+            command again, providing the '-p' option and the path to the project
+            directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas_all_vs_all'>build_blast_atlas_all_vs_all.sh</a> -p montage_project</pre>
+
+          <p>
+            The creation of a montage map is very time consuming, as a separate
+            CCT map is first created for each sequence. The final montage image
+            is called 'montage.png' and is created in the
+            <em class="file">montage_project</em> directory.
+          </p>
+          <p>
+            Note that the individual maps comprising the montage can be found in
+            the various project directories located inside of the
+            <em class="file">montage_project/cct_projects</em>
+            directory.
+          </p>
+
+          <p>
+            On the Linux virtual machine the montage can be viewed by entering
+            the following command and then navigating to the
+            <em class="file">montage_project</em> directory:
+          </p>
+
+          <pre class="code">geeqie</pre>
+        </li>
+
+        <li>
+          <p>
+            By default the montage map shows the results of blastn comparisons.
+            To create a montage comparing the translations of CDS features
+            (using blastp), first delete the
+            <em class="file">montage_project/cct_projects</em> directory:
+          </p>
+
+          <pre class="code">rm -rf montage_project/cct_projects</pre>
+
+          <p>
+            Next edit the <em class="file">project_settings_multi.conf</em> file
+            in the <em class="file">montage_project</em> directory as follows:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>query_source = nucleotide</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>query_source = cds</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <br />
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>database_source = nucleotide</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>database_source = cds</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+
+          <p>
+            To visualize COG functional categories on the maps, make the
+            following additional change:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>cog_source = none</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>cog_source = cds</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+
+          <p>
+            Once these changes have been completed, run the
+            <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+              >build_blast_atlas_all_vs_all.sh</a
+            >
+            command again to complete the map.
+          </p>
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas_all_vs_all'>build_blast_atlas_all_vs_all.sh</a> -p montage_project</pre>
+        </li>
+      </ol>
+
+      <h3>Sample maps</h3>
+      <div class="image-row">
+        <div class="montage-block">
+          <p class="image-title">Montage - DNA (4.8 MB)</p>
+          <a href="images/tut5/montage.png"
+            ><img src="images/tut5/375_montage.png" alt="montage"
+          /></a>
+        </div>
+      </div>
+
+      <div class="image-row">
+        <div class="montage-block">
+          <p class="image-title">
+            Montage - CDS - after modifying
+            <em class="file">project_settings_multi.conf</em> (6.2 MB)
+          </p>
+          <a href="images/tut5/montage_altered.png"
+            ><img
+              src="images/tut5/375_montage_altered.png"
+              alt="montage_altered"
+          /></a>
+        </div>
+      </div>
+
+      <h2 id="tutorial-6">
+        Tutorial 6 - Generating a 400 Megapixel map with up to 2500 comparison
+        genomes
+      </h2>
+      <p>
+        The following tutorial involves using CCT to generate a 400 Megapixel
+        map comparing a mitochondrial genome to as many as 2500 other genomes.
+        This tutorial demonstrates the use of the '--custom', '-b', '--memory',
+        and '--map_size' options of the
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >
+        script. These options allow maps to be customized without editing the
+        CGView XML files directly (see
+        <a href="customization_keys.html">Customization Keys</a> for more
+        information on the keys and values that can be used with the '--custom'
+        option).
+      </p>
+      <p>
+        <strong>Note</strong>: if using the linux virtual machine, first
+        increase the amount of memory allocated to the virtual machine to 2.5
+        Gb.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Download the human mitochondrial genome sequence:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_genome_by_accession'>fetch_genome_by_accession.sh</a> -a NC_012920 -o ./</pre>
+        </li>
+
+        <li>
+          <p>
+            Prepare a new BLAST atlas project for the human mitochondrial genome
+            sequence:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -i NC_012920.gbk</pre>
+          <p>
+            This will produce a project directory named after the sequence file
+            name ('NC_012920' in this example). For details on the BLAST atlas
+            directory structure see
+            <a href="commands.html#blast_atlas_project_tree"
+              >Creating a New Blast Atlas Project</a
+            >. The configuration files (<em class="file"
+              >project_settings_cds_vs_cds.conf</em
+            >
+            and <em class="file">project_settings_dna_vs_dna.conf</em>) within
+            the project tree can be edited to change the appearance of the maps
+            (see
+            <a href="creating_maps.html#customizing-maps"
+              >Customizing CCT maps</a
+            >).
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Download all mitochondrial genome sequences in GenBank format:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_all_refseq_mitochondrial_genomes'>fetch_all_refseq_mitochondrial_genomes.sh</a> -o NC_012920/comparison_genomes/</pre>
+        </li>
+
+        <li>
+          <p>
+            Use the following command to begin the map creation process (note
+            that the map drawing step will fail with a
+            'java.lang.OutOfMemoryError' if your system has less than 2.5 Gb
+            memory available for this program. If you are using a Linux virtual
+            machine and obtain this error, try increasing the amount of memory
+            allocated to the virtual machine):
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#build_blast_atlas'>build_blast_atlas.sh</a> -p NC_012920 --memory 2500m --max_blast_comparisons 2500 \
+  --map_size x-large --custom 'width=20000 height=20000 backboneRadius=8000 \
+  featureThickness=120 rulerFontSize=100 rulerPadding=200 \
+  tickThickness=15 tickLength=40 draw_divider_rings=F \
+  _cct_blast_thickness=2.0'</pre>
+
+          <p>
+            Note that the legend indicating the contents of each BLAST ring will
+            not fit on the map. A list of the comparisons displayed on the map
+            can be obtained from the 'log.txt' files created in the following
+            directories:
+          </p>
+
+          <pre class="code">
+<strong>NC_012920/cct_projects/cds_vs_cds/</strong>
+<strong>NC_012920/cct_projects/dna_vs_dna/</strong></pre>
+        </li>
+      </ol>
+
+      <h3>Sample maps</h3>
+      <p>
+        These maps are very large and may crash your browser. Try downloading
+        them by right-clicking and choosing "Save link as...".
+      </p>
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">DNA vs DNA Full</p>
+          <p class="image-size">X-large (80 MB)</p>
+          <a href="images/tut6/DNA_vs_DNA_x-large.png"
+            ><img
+              src="images/tut6/300_DNA_vs_DNA_x-large.png"
+              alt="DNA_vs_DNA_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">CDS vs CDS Full</p>
+          <p class="image-size">X-large (170 MB)</p>
+          <a href="images/tut6/CDS_vs_CDS_x-large.png"
+            ><img
+              src="images/tut6/300_CDS_vs_CDS_x-large.png"
+              alt="CDS_vs_CDS_x-large"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+
+      <h2 id="tutorial-7">
+        Tutorial 7 - Exploring additional CCT functionality
+      </h2>
+      <p>
+        The following tutorial demonstrates several additional capabilities of
+        CCT:
+        <a href="creating_maps.html#blast-comparisons">custom BLAST databases</a
+        >,
+        <a href="creating_maps.html#label-subset">labelling a subset of genes</a
+        >,
+        <a href="creating_maps.html#additional-features"
+          >adding additional features</a
+        >,
+        <a href="creating_maps.html#additional-features"
+          >adding additional analysis results</a
+        >, and SVG output. In this tutorial protein sequences from a plasmid are
+        compared to a collection of xylanase sequences using BLAST. A sequence
+        region of interest is marked using a features file, and some
+        hypothetical analysis results are added using an analysis file. Two
+        genes are labelled using a
+        <em class="file">labels_to_show.txt</em> file. Lastly two maps are
+        generated, one in PNG format and one in SVG format.
+      </p>
+      <ol>
+        <li>
+          <p>Create a new CCT project called <em class="file">xylanase</em>:</p>
+
+          <pre class="code">
+<a class='command' href='commands.html#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p xylanase</pre>
+        </li>
+
+        <li>
+          <p>
+            Download the Clostridium acetobutylicum plasmid pSOL1 sequence to
+            the <em class="file">xylanase/reference_genome</em> directory:
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#fetch_genome_by_accession'>fetch_genome_by_accession.sh</a> -a NC_001988 -o xylanase/reference_genome</pre>
+        </li>
+
+        <li>
+          <p>
+            Create a multi-FASTA file containing known xylanase protein
+            sequences in the
+            <em class="file">xylanase/comparison_genomes</em> directory (see
+            <a href="creating_maps.html#blast-comparisons"
+              >BLAST comparison types</a
+            >
+            for more information on the types of searches that can be
+            performed):
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#ncbi_search'>ncbi_search.pl</a> -q 'xylanase[Protein Name]' \
+  -o xylanase/comparison_genomes/xylanase.faa -d protein -r fasta -v</pre>
+        </li>
+
+        <li>
+          <p>
+            Create a simple text file in the
+            <em class="file">xylanase/features</em> directory describing a
+            single genome region of interest (see
+            <a href="creating_maps.html#additional-features"
+              >adding additional features</a
+            >
+            for more information on feature files):
+          </p>
+
+          <pre class="code">
+echo "seqname,source,feature,start,end,score,strand,frame" \
+  &gt; xylanase/features/region_of_interest.gff
+
+echo "interesting region,.,other,119000,124000,.,-,." \
+  &gt;&gt; xylanase/features/region_of_interest.gff</pre
+          >
+
+          <p>
+            The above two commands should create a file containing the following
+            text (normally a text editor or spreadsheet program is used to
+            create features files):
+          </p>
+
+          <pre class="file-text">
+seqname,source,feature,start,end,score,strand,frame
+interesting region,.,other,119000,124000,.,-,.</pre
+          >
+        </li>
+
+        <li>
+          <p>
+            Create a simple text file in the
+            <em class="file">xylanase/analysis</em> directory describing some
+            sequence regions and analysis scores (see
+            <a href="creating_maps.html#additional-analysis-results"
+              >adding additional analysis results</a
+            >
+            for more information on analysis files):
+          </p>
+
+          <pre class="code">
+echo "seqname,source,feature,start,end,score,strand,frame" \
+  &gt; xylanase/analysis/analysis_1.gff
+
+echo ".,.,.,119000,121000,5,-,." &gt;&gt; xylanase/analysis/analysis_1.gff
+echo ".,.,.,121000,124000,10,-,." &gt;&gt; xylanase/analysis/analysis_1.gff
+echo ".,.,.,125000,128000,-10,-,." &gt;&gt; xylanase/analysis/analysis_1.gff</pre
+          >
+
+          <p>
+            The above commands should create a file containing the following
+            text (normally a text editor or spreadsheet program is used to
+            create analysis files):
+          </p>
+
+          <pre class="file-text">
+seqname,source,feature,start,end,score,strand,frame
+.,.,.,119000,121000,5,-,.
+.,.,.,121000,124000,10,-,.
+.,.,.,125000,128000,-10,-,.</pre
+          >
+        </li>
+
+        <li>
+          <p>
+            Create a file called <em class="file">labels_to_show.txt</em> in the
+            <em class="file">xylanase</em> directory describing which genes
+            should be labelled (see
+            <a href="creating_maps.html#label-subset"
+              >labelling a subset of genes</a
+            >
+            for more information on this file):
+          </p>
+
+          <pre class="code">
+echo "xynD, xylanase 1" &gt; xylanase/labels_to_show.txt
+echo "CA_P0116, xylanase 2" &gt;&gt; xylanase/labels_to_show.txt</pre
+          >
+
+          <p>
+            The above commands should create a file containing the following
+            text (normally a text editor or spreadsheet program is used to
+            create the <em class="file">labels_to_show.txt</em> file):
+          </p>
+
+          <pre class="file-text">
+xynD, xylanase 1
+CA_P0116, xylanase 2</pre
+          >
+        </li>
+
+        <li>
+          <p>
+            Edit the project's configuration file (<em class="file"
+              >xylanase/project_settings.conf</em
+            >) using vi or some other text editor. Make the following changes:
+          </p>
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>query_source = none</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>query_source = cds</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <br />
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>database_source = none</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>database_source = proteins</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <br />
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>draw_gc_content = T</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>draw_gc_content = F</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <br />
+
+          <div class="text-change">
+            <div class="text-change-from">
+              <p>Change:</p>
+              <pre>draw_gc_skew = T</pre>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div class="text-change-to">
+              <p>To:</p>
+              <pre>draw_gc_skew = F</pre>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </li>
+
+        <li>
+          <p>
+            Use the following command to draw the map (see
+            <a href="customization_keys.html">Customization Keys</a> for more
+            information on the keys and values that can be used with the
+            '--custom' option):
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p xylanase \
+  --custom 'featureOpacity=1 labelFontSize=50 title=test \
+  useInnerLabels=false featureThickness=60 backboneRadius=800 \
+  arrowheadLength=12'</pre>
+        </li>
+
+        <li>
+          <p>
+            To add an
+            <a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics"
+              >SVG</a
+            >
+            version of the map to the project use the
+            <a class="command" href="commands.html#redraw_maps"
+              >redraw_maps.sh</a
+            >
+            script (zoomed SVG maps can be generated using the
+            <a class="command" href="commands.html#create_zoomed_maps"
+              >create_zoomed_maps.sh</a
+            >
+            script):
+          </p>
+
+          <pre class="code">
+<a class='command' href='commands.html#redraw_maps'>redraw_maps.sh</a> -p xylanase --format svg</pre>
+        </li>
+      </ol>
+
+      <h3>Sample maps</h3>
+      <div class="image-row">
+        <div class="image-block">
+          <p class="image-title">Advanced CCT Map - PNG</p>
+          <p class="image-size">Medium (0.6 MB)</p>
+          <a href="images/tut7/medium.png"
+            ><img
+              src="images/tut7/300_medium.png"
+              alt="medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+
+        <div class="image-block">
+          <p class="image-title">Advanced CCT Map - SVG</p>
+          <p class="image-size">Medium (0.9 MB)</p>
+          <a href="images/tut7/medium.svg"
+            ><img
+              src="images/tut7/300_medium.png"
+              alt="medium"
+              width="250"
+              height="250"
+          /></a>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </body>
+</html>

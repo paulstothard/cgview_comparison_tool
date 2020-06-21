@@ -1,0 +1,429 @@
+body {
+  margin: 10px;
+  font-family: arial, sans-serif;
+}
+
+#banner {
+  border-radius: 10px 10px 0 0;
+  border: 3px solid rgb(200, 200, 225);
+  background: url("images/logo.png") left center no-repeat;
+  background-color: #f9fbf6;
+  padding: 10px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  min-width: 850px;
+}
+
+#banner-title {
+  margin: 0px 10px 0px 100px;
+  font-size: 48px;
+  font-weight: bold;
+  color: rgb(60, 60, 60);
+}
+
+#banner-title span.acronym {
+  color: rgb(100, 100, 150);
+}
+
+#banner-sub-title {
+  margin: 0px 10px 0px 102px;
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(60, 60, 60);
+}
+
+#banner-sub-title a:link,
+#banner-sub-title a:visited {
+  text-decoration: none;
+  color: rgb(60, 60, 60);
+}
+
+#banner-sub-title a:hover,
+#banner-sub-title a:active {
+  color: rgb(0, 150, 150);
+}
+
+ul#menu {
+  list-style-type: none;
+  margin: 0 0 5px 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+ul#menu li {
+  display: inline;
+}
+
+ul#menu a:link,
+ul#menu a:visited {
+  font-weight: bold;
+  color: rgb(0, 50, 50);
+  text-align: center;
+  text-decoration: none;
+  padding: 0 0 1px 0;
+  margin-right: 10px;
+}
+
+ul#menu a:hover,
+ul#menu a:active {
+  color: rgb(0, 150, 150);
+  border-bottom: 5px rgb(200, 200, 225) solid;
+}
+
+ul#menu a#selected {
+  color: rgb(100, 100, 200);
+  border-bottom: 5px rgb(200, 200, 225) solid;
+}
+
+div#main {
+  min-width: 850px;
+  border-radius: 0 0 10px 10px;
+  border: 3px solid rgb(200, 200, 225);
+  background: #f9fbf6;
+  padding: 10px;
+}
+
+div#main h1 {
+  font-weight: bold;
+  margin: 5px 0 20px 0;
+}
+
+div#main h2 {
+  border-top: 1px rgb(175, 175, 175) dashed;
+  padding-top: 5px;
+  margin-top: 30px;
+}
+
+div#main h3 {
+  font-style: italic;
+}
+
+div#main ol,
+div#main ul {
+  padding: 0 0 0 40px;
+}
+
+div#main p {
+  padding: 0 0 0 20px;
+  font-size: 16px;
+}
+
+div#main li p {
+  padding: 0 0 0 0px;
+}
+
+div#main pre {
+  margin: 0 0 0 20px;
+}
+
+div#main li pre {
+  margin: 0 0 0 0px;
+}
+
+a.command:link,
+a.command:visited {
+  color: rgb(50, 50, 150);
+  font-style: italic;
+  text-decoration: none;
+}
+
+a.command:hover,
+a.command:active {
+  color: rgb(150, 150, 150);
+}
+
+em.file {
+  font-family: monospace;
+  font-style: normal;
+}
+
+fieldset#contents {
+  border: 1px rgb(175, 175, 175) dashed;
+}
+
+fieldset#contents legend {
+  font-weight: bold;
+  font-style: italic;
+  color: gray;
+}
+
+fieldset#contents ul {
+  margin: 0;
+  padding: 0 0 0 20px;
+  color: gray;
+}
+
+fieldset#contents a:link,
+fieldset#contents a:visited {
+  color: rgb(0, 50, 50);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+fieldset#contents a:hover,
+fieldset#contents a:active {
+  color: rgb(0, 150, 150);
+}
+
+fieldset.boxed-instructions {
+  border: 1px rgb(100, 100, 100) dotted;
+  margin-bottom: 10px;
+}
+
+fieldset.boxed-instructions legend {
+  font-weight: bold;
+  font-style: italic;
+  color: rgb(100, 100, 100);
+}
+
+fieldset.documentation {
+  border: 1px rgb(100, 100, 100) dotted;
+  margin-bottom: 10px;
+}
+
+fieldset.documentation legend {
+  font-weight: bold;
+  font-style: italic;
+  color: rgb(100, 100, 100);
+}
+
+pre.documentation {
+  font-weight: bold;
+  color: rgb(40, 40, 40);
+  background-color: rgb(235, 235, 235);
+  border: solid 2px rgb(100, 100, 100);
+  padding: 10px;
+  /*font-family: "Courier New", Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;*/
+  font-size: 14px;
+}
+
+pre.documentation span.argument {
+  color: rgb(50, 50, 150);
+}
+
+/*Changing file text*/
+
+div.text-change-from p,
+div.text-change-to p {
+  margin: 0 0 2px 0;
+  font-size: smaller;
+  font-style: italic;
+}
+div.text-change-from,
+div.text-change-to {
+  float: left;
+  width: 300px;
+}
+div.text-change div.arrow {
+  float: left;
+  margin: 25px 30px 0 30px;
+  font-weight: bold;
+  height: 100%;
+}
+div.text-change-from {
+  clear: both;
+}
+/*div.text-change-to {margin-left: 50px;}*/
+div.text-change-from pre,
+div.text-change-to pre {
+  border-radius: 3px;
+  background: rgb(210, 210, 235);
+  font-weight: bold;
+  padding: 5px;
+  border: solid rgb(150, 150, 150) 2px;
+  color: rgb(50, 50, 50);
+}
+
+pre.code {
+  /*background: rgb(210, 210, 210);*/
+  background: rgb(76, 76, 76);
+  /*color: rgb(204, 204, 204);*/
+  color: rgb(255, 255, 204);
+  font-weight: bold;
+  padding: 5px;
+  border: solid rgb(50, 50, 50) 2px;
+}
+
+pre.code a.command:link,
+pre.code a.command:visited {
+  color: rgb(204, 204, 255);
+  font-style: italic;
+  text-decoration: none;
+}
+
+pre.code a.command:hover,
+pre.code a.command:active {
+  color: rgb(150, 150, 150);
+}
+
+pre.file-text {
+  background: rgb(210, 210, 235);
+  font-weight: bold;
+  padding: 5px;
+  border: solid rgb(150, 150, 150) 2px;
+  color: rgb(50, 50, 50);
+}
+
+pre.file-tree {
+  background: rgb(210, 210, 235);
+  padding: 5px;
+  border: solid rgb(150, 150, 150) 2px;
+  color: rgb(50, 50, 50);
+  font-family: "Courier New", Monaco, "Bitstream Vera Sans Mono",
+    "Lucida Console", Terminal, monospace;
+  font-size: 13px;
+}
+
+div#main p.file-tree-title {
+  margin: 0;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+dl.fields dt {
+  font-weight: bold;
+  clear: both;
+  float: left;
+  padding: 15px 20px 0 20px;
+}
+
+dl.fields dd {
+  padding: 15px 0 0 200px;
+}
+
+dl.options dt {
+  font-weight: bold;
+  clear: both;
+  float: left;
+  padding: 15px 0 0 20px;
+}
+
+dl.options dd {
+  padding: 15px 0 0 200px;
+}
+
+table.bordered {
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+
+table.bordered th {
+  border-bottom: 1px solid gray;
+}
+
+td,
+th {
+  padding: 3px 15px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.small-row-header td strong {
+  font-size: smaller;
+}
+
+table.small-row-header td {
+  vertical-align: middle;
+}
+
+.centered-image {
+  text-align: center;
+}
+
+div.image-row {
+  clear: both;
+  margin: 10px 0 0 20px;
+}
+
+div.image-block {
+  float: left;
+  width: 250px;
+  margin: 0 10px 20px 0;
+}
+
+div.montage-block {
+  float: left;
+  width: 750px;
+  margin: 0 10px 20px 0;
+}
+
+div.image-block img,
+div.montage-block img {
+  border: 2px solid rgb(100, 100, 150);
+}
+
+div#main div.image-block p,
+div#main div.montage-block p {
+  margin: 0;
+  padding: 0;
+}
+
+div.image-block p.image-title,
+div.montage-block p.image-title {
+  font-weight: bold;
+}
+
+div.image-block p.image-scale {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+div#main div.image-block p.image-size,
+div#main div.montage-block span.image-size {
+  font-style: italic;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+h1,
+h2,
+h3 {
+  clear: both;
+}
+
+div.clear {
+  clear: both;
+}
+
+table#customization-keys {
+  border-collapse: separate;
+  border-spacing: 0px 0px;
+}
+tr.odd-rows {
+  background-color: rgb(230, 240, 245);
+}
+
+/*Image Galleries*/
+#cct-gallery {
+  position: relative;
+}
+
+#cct-gallery {
+  width: 800px;
+  /*padding: 30px;*/
+  background: #d1def5;
+}
+
+#gallery-descriptions {
+  position: absolute;
+  top: 0;
+  left: 650px;
+  width: 150px;
+  height: 650px;
+  background: rgb(200, 200, 200);
+  z-index: 999;
+}
+
+#gallery-descriptions .ad-image-description .ad-description-title {
+  display: block;
+  padding-bottom: 5px;
+}
+
+#gallery-descriptions .ad-image-description {
+  font-size: 13px;
+  padding: 5px;
+}
+
+#cct-gallery .ad-thumbs img {
+  height: 58px;
+}
