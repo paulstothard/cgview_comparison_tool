@@ -34,16 +34,15 @@ usage:
 
 required arguments:
 
-  -i  Input file in FASTA, EMBL, or GenBank format.
-  -o  File of translations or coding sequences to create.
+-i - Input file in GenBank or EMBL format.
+-o - File of translations or coding sequences to create.
 
 optional arguments:
 
-  -dna  Whether DNA coding sequences should be returned instead of their
-  protein translations. [T/F]. Default is F.
+-dna - Whether DNA coding sequences should be returned instead of their protein
+translations. [T/F]. Default is F.
 
 example usage:
 
   perl get_cds.pl -i input.gbk -o output.fasta
-
 ```

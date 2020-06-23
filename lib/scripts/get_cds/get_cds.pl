@@ -22,19 +22,21 @@ GetOptions(
     'i=s'    => \$global{'input'},
     'o=s'    => \$global{'output'},
     'dna=s'  => \$global{'dna'},
-    'h|help' => \$global{help}
+    'h|help' => \$global{'help'}
 );
 
-if ( defined( $global{help} ) ) {
+if ( defined( $global{'help'} ) ) {
     _usage();
     exit(0);
 }
 
 if ( !( defined( $global{'input'} ) ) ) {
     _usage();
+    exit(1);
 }
 if ( !( defined( $global{'output'} ) ) ) {
     _usage();
+    exit(1);
 }
 
 if ( -e $global{'output'} ) {
@@ -275,13 +277,13 @@ usage:
 
 required arguments:
 
-  -i  Input file in FASTA, EMBL, or GenBank format.
-  -o  File of translations or coding sequences to create.
+-i - Input file in GenBank or EMBL format.
+-o - File of translations or coding sequences to create.
 
 optional arguments:
 
-  -dna  Whether DNA coding sequences should be returned instead of their
-  protein translations. [T/F]. Default is F.
+-dna - Whether DNA coding sequences should be returned instead of their protein
+translations. [T/F]. Default is F.
 
 example usage:
 
