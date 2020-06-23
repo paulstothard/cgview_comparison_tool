@@ -278,7 +278,7 @@ usage:
 required arguments:
 
 -i - Input file in GenBank or EMBL format.
--o - File of translations or coding sequences to create.
+-o - Output file in FASTA format of translations or coding sequences to create.
 
 optional arguments:
 
