@@ -1,0 +1,4 @@
+seqname	source	feature	start	end	score	strand	frame
+variant_1	.	other	14370	14370	.	+	.
+variant_2	.	other	17330	17330	.	+	.
+variant_3	.	other	1234567	1234570	.	+	.
