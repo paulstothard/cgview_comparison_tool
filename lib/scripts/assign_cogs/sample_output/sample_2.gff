@@ -1,0 +1,12 @@
+seqname	source	feature	start	end	score	strand	frame
+orf_11_start=527;end=2128;strand=1;rf=2	COG1051	F	1499	1660	0.34	+	2
+orf_17_start=891;end=1046;strand=1;rf=3	COG3525	G	915	1040	0.33	+	3
+orf_20_start=2052;end=2213;strand=1;rf=3	COG0380	G	2070	2177	0.39	+	3
+orf_24_start=2916;end=3083;strand=1;rf=3	COG1007	C	2994	3056	0.52	+	3
+orf_28_start=4923;end=5132;strand=1;rf=3	COG0249	L	4953	4994	0.57	+	3
+orf_31_start=5078;end=5218;strand=-1;rf=1	COG0147	EH	5087	5209	0.34	-	1
+orf_38_start=2405;end=3535;strand=-1;rf=1	COG0863	L	2444	3193	0.44	-	1
+orf_40_start=1952;end=2053;strand=-1;rf=1	COG1266	R	1979	2050	0.46	-	1
+orf_48_start=5194;end=5427;strand=-1;rf=2	COG1049	C	5311	5403	0.47	-	2
+orf_50_start=4879;end=5031;strand=-1;rf=2	COG0587	L	4933	5031	0.41	-	2
+orf_53_start=2167;end=2334;strand=-1;rf=2	COG5243	O	2185	2277	0.35	-	2

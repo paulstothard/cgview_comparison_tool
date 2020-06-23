@@ -1,0 +1,241 @@
+LOCUS       NC_013363               5686 bp    DNA     circular BCT 07-OCT-2009
+DEFINITION  Escherichia coli O26:H11 str. 11368 plasmid pO26_3, complete
+            sequence.
+ACCESSION   NC_013363
+VERSION     NC_013363.1  GI:260751828
+DBLINK      Project:41021
+KEYWORDS    .
+SOURCE      Escherichia coli O26:H11 str. 11368
+  ORGANISM  Escherichia coli O26:H11 str. 11368
+            Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacteriales;
+            Enterobacteriaceae; Escherichia.
+REFERENCE   1
+  AUTHORS   Ogura,Y., Ooka,T., Iguchi,A., Toh,H., Asadulghani,M., Oshima,K.,
+            Kodama,T., Abe,H., Nakayama,K., Kurokawa,K., Tobe,T., Hattori,M.
+            and Hayashi,T.
+  TITLE     Comparative genomics reveal the mechanism of the parallel evolution
+            of O157 and non-O157 enterohemorrhagic Escherichia coli
+  JOURNAL   Proc. Natl. Acad. Sci. U.S.A. 106 (42), 17939-17944 (2009)
+   PUBMED   19815525
+REFERENCE   2  (bases 1 to 5686)
+  CONSRTM   NCBI Genome Project
+  TITLE     Direct Submission
+  JOURNAL   Submitted (07-OCT-2009) National Center for Biotechnology
+            Information, NIH, Bethesda, MD 20894, USA
+REFERENCE   3  (bases 1 to 5686)
+  AUTHORS   Hattori,M., Toh,H., Oshima,K., Yamashita,A., Hayashi,T., Ogura,Y.
+            and Ooka,T.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (21-DEC-2008) Contact:Masahira Hattori University of
+            Tokyo, Graduate School of Frontier Sciences; 5-1-5 Kashiwanoha,
+            Kashiwa, Chiba 277-8562, Japan URL
+            :http://www.cb.k.u-tokyo.ac.jp/hattorilab/
+COMMENT     The reference sequence is identical to AP010956.
+            PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review.
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..5686
+                     /organism="Escherichia coli O26:H11 str. 11368"
+                     /mol_type="genomic DNA"
+                     /strain="11368"
+                     /serovar="O26:H11"
+                     /db_xref="taxon:573235"
+                     /plasmid="pO26_3"
+                     /note="enteropathogenic Escherichia coli"
+     gene            3..140
+                     /locus_tag="ECO26_p3-1"
+                     /db_xref="GeneID:8470643"
+     CDS             3..140
+                     /locus_tag="ECO26_p3-1"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="putative mobilization protein 1"
+                     /protein_id="YP_003232550.1"
+                     /db_xref="GI:260751829"
+                     /db_xref="GeneID:8470643"
+                     /translation="MSEVFTVIPETCEAAAVKLIGVVVKRFTDICLFICVQFVKFLQQ
+                     R"
+     gene            complement(6..197)
+                     /locus_tag="ECO26_p3-2"
+                     /db_xref="GeneID:8470638"
+     CDS             complement(6..197)
+                     /locus_tag="ECO26_p3-2"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="putative RNA I inhibition modulator protein Rom"
+                     /protein_id="YP_003232551.1"
+                     /db_xref="GI:260751830"
+                     /db_xref="GeneID:8470638"
+                     /translation="MTKQEKTALNMARFIRGQTLTLLEKLNELDADEQADICESLHDH
+                     ADELYRSCLARFGDDGENL"
+     gene            262..585
+                     /locus_tag="ECO26_p3-3"
+                     /db_xref="GeneID:8470639"
+     CDS             262..585
+                     /locus_tag="ECO26_p3-3"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="putative mobilization protein 2"
+                     /protein_id="YP_003232552.1"
+                     /db_xref="GI:260751831"
+                     /db_xref="GeneID:8470639"
+                     /translation="MLTIRVTDDEHARLLERCEGKQLAVWMRRVCLGEPVARSGKLPT
+                     LAPPLLRQLAAIGNNLNQTARKVNSGQWSSGDRVQVVAALMAIGDELRRLRLAVREQG
+                     TRDDS"
+     gene            575..2128
+                     /locus_tag="ECO26_p3-4"
+                     /db_xref="GeneID:8470640"
+     CDS             575..2128
+                     /locus_tag="ECO26_p3-4"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="mobilization protein MbeA"
+                     /protein_id="YP_003232553.1"
+                     /db_xref="GI:260751832"
+                     /db_xref="GeneID:8470640"
+                     /translation="MIVKFHARGKGGGSGPVDYLLGRERNREGATVLQGNPEEVRELI
+                     DATPFAKKYTSGVLSFAEKELPPGGREKVMASFERVLMPGLEKNQYSILWVEHQDKGR
+                     LELNFVIPNMELQSGKRLQPYYDRADRPRIDAWQTLVNHHYGLHDPNAPENRRILTLP
+                     DNLPKTKQALAESVTRGIDALYHVGEIKGRQDVIQALTEAGIEVVRVTRSSISIAGPN
+                     GGRNIKLKGAFYEQSFTDGRGVREKAERESRIYRENAEQRVQEARRVCQRGCDLKRDE
+                     NQRRYSPVHSLDREIAGKTPGRGERGDDAAQEGRVKAGREYGHDVTGDSLSPVYSEWR
+                     DALVSWREDTGEPGRNQEAGRDIAETEREDMGRGVCAGREQEIPCPSVREISGGDSLS
+                     GERVGTSEGVTQSDRAGNTFAERLRAAATGLYAAAERMGERLRGIAEDVFAYATGQRD
+                     AERAGHAVESAGAALERADRTLEPVIQRELEIREERLIQEREHVLSLERERQPEIQER
+                     TLDGPSLGW"
+     gene            complement(2405..3535)
+                     /locus_tag="ECO26_p3-5"
+                     /db_xref="GeneID:8470641"
+     CDS             complement(2405..3535)
+                     /locus_tag="ECO26_p3-5"
+                     /note="type II restriction modification system"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="putative DNA modification methylase"
+                     /protein_id="YP_003232554.1"
+                     /db_xref="GI:260751833"
+                     /db_xref="GeneID:8470641"
+                     /translation="MTVKNNYLNRGYLVTSTTQAKKIAKLHLEKLDLADKFSFGLPEV
+                     DDRYHVWRVPLVATGHRIGEIVINSKTSTIDYKKSSKSPFLIKKAMEVVHTPKKVKKE
+                     KKIISKSPLNNMLLQGNCAETLKKLPDESVNLVFTSPPYYNAKPEYSEYHTYDEYLSL
+                     LRSVIKECHRVLSEGRFFVINVSPVLIRRASRNEASKRIAVPFDLHRLFIEEGYEFID
+                     DIHWVKPEGAGWALGRGRRFAADRNPLQYKPVPVTEYILVYRKKTDKLIDWNIRNHHS
+                     KEDVFDSKIGDDYEKTNLWKINPSRNRKHPATFPYGLAERVIKYYSFKNDVILDPFAG
+                     SGTTAKAAIDLGRRFVMCEISKQYIDLIIEGTMLGGDLKIIN"
+     gene            3612..4679
+                     /locus_tag="ECO26_p3-6"
+                     /db_xref="GeneID:8470642"
+     CDS             3612..4679
+                     /locus_tag="ECO26_p3-6"
+                     /note="type II restriction modification system"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="putative restriction enzyme"
+                     /protein_id="YP_003232555.1"
+                     /db_xref="GI:260751834"
+                     /db_xref="GeneID:8470642"
+                     /translation="MNFKDKNCFPNELIALAKISKNDVLDKFGTDVFKKVVYDVLTGK
+                     NVREFTEILTRTRLLESNLSFFDFFVDKMKEGITPKQLYLYAKNALSNKSYVKSNQPV
+                     LEWMVMMTNKQTQNVLRDEHGDGFDRLALRTQEEILKIKNGYEDKIGEISIGGQKVSL
+                     EDFCYIILSLGSQTLTIRGSEKSLHGKYFEKLILGSLFTIMGFEYKEKIEEGLNAKCF
+                     TLSTRADDRESDATLVFNGKAIRVDIGFIGRGNTEISLDKVSRFRRMDDIGGVMHNIS
+                     TMVIVDVIGDRSRIVNMAEEIDGKVVAMSDPYWVAKVSSYISSKLNVDDLLEDKPQLK
+                     DIQSFISDALENVDLEKYIKL"
+ORIGIN      
+        1 atgtgtcaga ggttttcacc gtcatccccg aaacgtgcga ggcagctgcg gtaaagctca
+       61 tcggcgtggt cgtgaagcga ttcacagata tctgcctgtt catctgcgtc cagttcgtta
+      121 agtttctcca gcagcgttaa tgtctggcct ctgatgaaac gggccatgtt aagggcggtt
+      181 ttttcctgtt tagtcactga tgcctccgtg taagggggat ttctgttcat gggggtaatg
+      241 ataccgatga aacgcgagag gatgctcacg atacgggtta ctgatgatga acatgcccgg
+      301 ttactggaac gctgtgaggg taaacaactg gcggtatgga tgcggcgggt ctgcctgggt
+      361 gagccggttg cccgttccgg gaagctgccg acactggctc cgccgttact gcgtcagctg
+      421 gccgccatcg ggaataacct gaatcagaca gcgaggaagg tgaacagcgg acagtggtct
+      481 tccggtgacc gggttcaggt agtggccgca ctgatggcca tcggggatga gctgcgccgg
+      541 ctgcgtctgg ccgtcaggga acaggggacg cgggatgata gttaaatttc atgccagggg
+      601 aaaaggtggt ggcagtggtc cggttgatta cctgctggga agggagcgta accgggaagg
+      661 ggcaacggtg cttcagggta atccggaaga agtccgggaa ctcatcgatg ccacgccatt
+      721 tgcgaagaaa tacacgtcag gtgttctgtc gttcgcggag aaggagctgc cgccgggagg
+      781 acgtgaaaaa gtgatggcga gctttgagcg tgtactgatg cccggtctcg aaaaaaatca
+      841 gtacagcatc ctgtgggtgg agcaccagga caagggacgg cttgagctga attttgtcat
+      901 tccgaacatg gagctacaga gcggaaaacg cctccagccg tactacgacc gggcagacag
+      961 gccgagaatt gatgcctggc agacgctggt taatcaccat tacgggctgc atgaccccaa
+     1021 cgccccggag aaccgccgga tactgactct ccctgataac ctgccgaaaa cgaaacaggc
+     1081 gcttgcagag agcgtcacgc gcgggataga cgctctttat catgtcgggg agataaaagg
+     1141 ccgtcaggat gtgattcagg cgctcacgga ggcagggatt gaagtggtca gggtgacgcg
+     1201 aagcagtatc agcattgcag gcccgaacgg cgggaggaat atcaagctga aaggagcatt
+     1261 ttatgagcaa tcttttacag acgggcgcgg agttcgagaa aaagctgaaa gagagagccg
+     1321 aatctacaga gaaaatgctg aacaacgagt tcaggaggct cggcgagtct gtcagcgagg
+     1381 ctgtgacctc aaacgagacg aaaatcagag acgctatagc cctgttcaca gcctcgacag
+     1441 agaaatcgct ggaaaaacac cgggaagggg tgaaagaggc gatgatgcag cacaggaagg
+     1501 acgtgttaaa gctggcaggg aatacgggca tgatgttact ggggatagtc tttctcctgt
+     1561 ttacagcgag tggcgggacg ctctggtatc ttggagggag gatacaggcg aacctggaag
+     1621 aaatcaggaa gcaggaagag acattgcaga aactgaacgc gaagacatgg ggcgtggagt
+     1681 ttgtgcagga cgggaacagg aaattccttg tccttccgta cgggaaatca gcggaggtga
+     1741 ttccctttca ggggaaagag tgggtacatc tgaaggagtg acacagagtg acagagctgg
+     1801 aaacacattt gctgaacgcc ttagagcagc tgcaacagga ctatatgcag cggctgagcg
+     1861 aatgggagag cgccttcgtg gaattgcaga agatgttttc gcttacgcaa cgggacaacg
+     1921 cgatgctgaa cgagcgggtc atgcagttga gtcagcaggt gcagcacttg agcgagcaga
+     1981 cagaacgctt gagccagtta tacagcgaga actggagata agagaggaac ggctgataca
+     2041 ggagcgcgaa catgtgttat ccctggaacg ggagcgtcag ccggaaatac aggaacgcac
+     2101 gctggatggc ccttcgctgg gatggtgaaa ccatgaaaaa tggcaggtta agtggattaa
+     2161 gacaggctaa tgtggtctgt accatctggt tgcataggta ttcatgcggt taaaatttat
+     2221 caggcgcgat tgcggcagtt tttcgggggg tttgttgcca tttttacctg tctgctgctg
+     2281 tgatcgcgct gaacgcgttt tggcggtgcg tacaattaag ggattatggt aaattcgaca
+     2341 atgtggctga tgttgacgcg taaataagcc gccttaaggc ggcttttacc acagtaaagt
+     2401 ttgattaatt tatgattttt aaatcaccac ctagcatggt tccttctatg atcagatcaa
+     2461 tatactgctt tgatatctca cacatcacaa atcttctgcc taaatcaatt gctgcttttg
+     2521 ctgttgttcc cgatccagca aaaggatcta aaataacatc atttttgaaa gaatagtatt
+     2581 ttataactct ttctgccaga ccgtatggaa atgtagcagg atgttttctg ttacgagatg
+     2641 gatttatttt ccataggttt gtcttttcgt aatcgtcgcc gatttttgag tcaaaaacat
+     2701 cctctttgct atgatggttt cttatgttcc aatctattaa tttatcagtt ttttttctgt
+     2761 aaacaagaat gtactcagtt actggtactg gtttatattg caacggattg cggtcagctg
+     2821 cgaatcgacg gcctctacct aaagcccagc cagctccttc tggtttaacc caatgtatat
+     2881 catctatgaa ttcatagcct tcttctataa ataacctgtg caagtcaaaa ggaacagcta
+     2941 ttctttttga tgcttcattc cgtgacgccc ttcttattaa aacgggcgag acattgatga
+     3001 cgaaaaaacg accttcgctt aaaactctat ggcactcttt tattactgaa cgcaatagag
+     3061 agaggtattc atcatatgta tgatattcgg aatactctgg tttggcattg taatatggcg
+     3121 gtgatgtgaa tactaagttc actgattcat caggtaattt tttcaaggtc tccgcgcagt
+     3181 tgccttgtag taacatgtta tttaatggtg actttgatat gatttttttt tcttttttta
+     3241 ccttttttgg ggtatggaca acctccattg ctttcttaat aagaaatgga gacttcgaac
+     3301 ttttcttata atcaatagtt gacgtttttg aatttataac tatttcacca atcctgtggc
+     3361 ctgtcgctac taatggtaca cgccatacat ggtaccgatc atcgacttca ggtaacccaa
+     3421 aggaaaattt atcagctaag tctaatttct ctaggtgcaa ctttgctatt tttttcgcct
+     3481 gagtcgtaga ggttaccaaa taacctctgt ttaagtaatt gtttttaact gtcatttttc
+     3541 ctaactatcg atctgttacc atacaacctg ctatcttagc atctcatttt tactatgtcc
+     3601 atggtgagga tatgaatttc aaggataaaa attgtttccc taacgaactc atagcgttgg
+     3661 cgaaaatttc aaaaaatgat gttttagata agttcggaac ggatgttttt aaaaaggttg
+     3721 tttatgatgt tttaacaggt aaaaatgttc gcgaattcac tgaaatacta actcgtacta
+     3781 gattgttaga aagcaatctc tctttttttg acttttttgt ggataaaatg aaagaaggga
+     3841 taacgccaaa gcagctttat ctctatgcaa aaaatgcatt atcgaacaag tcttatgtta
+     3901 agtctaatca acctgttctc gagtggatgg ttatgatgac aaataaacag acccaaaatg
+     3961 ttttaagaga tgagcatggg gatggttttg atagacttgc tttaaggacg caagaagaaa
+     4021 tacttaaaat aaaaaacggg tatgaagata aaattggaga gatatctatt ggtgggcaaa
+     4081 aggtgtcttt agaagatttt tgctatatta ttttatctct tggttcgcaa actttaacta
+     4141 ttaggggatc tgagaaatct cttcatggta aatattttga aaagctaata ctcggttctt
+     4201 tatttacaat aatgggtttt gaatataaag aaaaaattga agaagggtta aatgctaaat
+     4261 gttttactct ttcaacaaga gctgatgaca gggagtctga tgctactctt gtttttaatg
+     4321 ggaaggcgat tagggttgac attggtttta ttggtagggg taacacagaa ataagtttgg
+     4381 ataaagtatc tagatttaga cgaatggatg atattggcgg agtgatgcat aatataagca
+     4441 caatggttat tgttgacgtt attggtgata gaagtagaat agttaatatg gctgaagaga
+     4501 ttgatggtaa agttgttgcg atgagtgatc cgtattgggt tgcaaaggtc tcttcctata
+     4561 ttagttcgaa actgaatgta gatgatcttt tagaggataa acctcaactt aaagacatac
+     4621 agtcttttat atctgatgca ttagagaatg tagatctgga aaaatacatt aaattataag
+     4681 agattgtaat ccttgactgc gtgcttatta aaagcataat ctctacataa agaaaaacca
+     4741 ccctggcagg tggtttttca aaggttagct aatcctggca gattatctaa ccaggtaatc
+     4801 tggcttaagc agagcgcaga ccaccaaaac ttgttcttct agtgtagcca gaatcaggct
+     4861 gatacttcaa gaactctgtt accaacttat aaatctcgct ctgctaaccc ggttaccaat
+     4921 ggctgctgcc agtggcgttt ttacgtgtct ttccgggttg gactcaagac gatagttacc
+     4981 ggataaggcg cagcggtcgg gctgaacggg gggttcgtgc acacagccca gcttggagcg
+     5041 aacgacctac accgagccga gataccaaca gcgtgagcta tgagaaagcg ccacgcttcc
+     5101 cgaagggaga aaggcggaga ggtatccggt aagcggcagg gtcggaacag gagagcgcac
+     5161 gagggagctt ccagggggaa acgcctggta tctttatagt cctgtcgggt ttcgccacct
+     5221 ctgacttgag cgtcgatttt tgtgatgctc gtcagggggg cggagcctat ggaaaaaacg
+     5281 ccagcggcgc ggcttttttt gccctttgtc tttttgctca catgttcttt ccggccttat
+     5341 cccctgattc tgtggataac cgtattgccg tttttgagca agcagactcc gctcgccgca
+     5401 gtcgaacgac cgagcgcagc gagtcagtga gcgaggaagc ggaaaagcgc ctggacgtgc
+     5461 attttctcct tacgcatctg tgcggcattt cacacccggc atggtgcact tttcatacaa
+     5521 tgcgccctga tgccgaataa gtaagccagt atacactccg ctatcgctac gtgactgggt
+     5581 cagggctgcg ccccgacacc cgctaaaacc cgctgacgcg tcctgacggg cttgtcggct
+     5641 cccggcatcc gctcacagac aagctgtgac cgtttccggg agctgc
+//

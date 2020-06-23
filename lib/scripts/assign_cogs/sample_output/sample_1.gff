@@ -1,0 +1,3 @@
+seqname	source	feature	start	end	score	strand	frame
+ECO26_p3-4;_start=575;end=2128;strand=1;rf=2	COG1051	F	1499	1660	0.34	+	2
+ECO26_p3-5;_start=2405;end=3535;strand=-1;rf=1	COG0863	L	2444	3193	0.44	-	1
