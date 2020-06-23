@@ -5,9 +5,9 @@ AUTH: Paul Stothard <stothard@ualberta.ca>
 DATE: June 22, 2020  
 VERS: 1.2  
 
-This script performs BLAST searches against a local database. Each hit and its descriptive title are written to a single tab-delimited output file. 
+This script performs BLAST searches against a local database. Each hit and its descriptive title are written to a single tab-delimited output file. The results are formatted for use with the `-blast` option of the `cgview_xml_builder.pl` script.
 
-This script requires `blastall` and `formatdb` from [legacy BLAST](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/). The path to the `blastall` program directory should be added to `PATH`. Alternatively, the path to `blastall` can be specified using the `-y` option. 
+This script requires `blastall` and `formatdb` from [legacy BLAST](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/). The path to the `blastall` and `formatdb` program directory should be added to `PATH`. Alternatively, the path to `blastall` can be specified using the `-y` option. 
 
 The database to be searched needs to first be formatted using the `formatdb` program, e.g.:
 

@@ -33,22 +33,25 @@ RETURN ORF TRANSLATIONS OR CODING SEQUENCES
 
 usage:
 
-  perl get_cds.pl -i <file> -o <file> -m <integer> [Options]
+  perl get_orfs.pl -i <file> -o <file> -m <integer> [Options]
 
 required arguments:
 
 -i - Input file in FASTA, RAW, EMBL, or GenBank format.
+
 -o - Output file in FASTA format of translations or coding sequences to create.
+
+-m - Minimum ORF size in codons.
 
 optional arguments:
 
 -dna - Whether DNA coding sequences should be returned instead of their protein
 translations. [T/F]. Default is F.
 
--starts - Start codons. Default is 'atg|ttg|att|gtg|ctg'. To allow ORFs to
-begin with any codon, use the value 'any'. [String].
+-starts - Start codons. [String]. Default is 'atg|ttg|att|gtg|ctg'. To allow ORFs to
+begin with any codon, use the value 'any'.
 
--stops - Stop codons. Default is 'taa|tag|tga'. [String].
+-stops - Stop codons. [String]. Default is 'taa|tag|tga'.
 
 -g - Genetic code for translating ORFs, using NCBI numbering. [Integer].
 Default is 1.

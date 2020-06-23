@@ -151,6 +151,7 @@ usage:
 required arguments:
 
 -i - Input file in FASTA, RAW, EMBL, or GenBank format.
+
 -o - Output file in FASTA format of sequence fragments.
 
 optional arguments:
