@@ -1,4 +1,4 @@
-#FILE: get\_cds.pl
+#FILE: get_cds.pl
 #AUTH: Paul Stothard <stothard@ualberta.ca>
 #DATE: June 22, 2020
 #VERS: 1.2
