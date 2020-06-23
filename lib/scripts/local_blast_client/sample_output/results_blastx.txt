@@ -1,0 +1,43 @@
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+#Results of automated BLAST query of performed on Monday June 22 23:15:35 2020.
+#Searches performed using local_blast_client.pl, written by Paul Stothard, stothard@ualberta.ca.
+#The following settings were specified:
+#BLAST_PATH=blastall
+#EXPECT=10
+#OUTPUTFILE=test_output/results_blastx.txt
+#INPUTFILE=test_input/test_input_dna.fasta
+#HSP_LABEL=F
+#PROGRAM=blastx
+#ERROR_RETRY=5
+#HITLIST_SIZE=5
+#DATABASE_GENETIC_CODE=1
+#ALIGN_TYPE=translated
+#MAX_BYTES_RESPONSE=5000000
+#DATABASE=test_output/formatted_databases/test_protein_database.fasta
+#INPUTTYPE=DNA
+#FILTER=T
+#WORD_SIZE=3
+#QUERY_GENETIC_CODE=1
+#The following attributes are separated by tabs:
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+query_id	match_id	match_description	%_identity	alignment_length	mismatches	gap_openings	q_start	q_end	s_start	s_end	evalue	bit_score
+fem-2_fragment_1	gene="fem-2"	-	97.45	196	5	0	1	588	201	396	1e-143	 398
+fem-2_fragment_1	gene="fem-2"	-	40.00	15	9	1	534	490	428	440	5.3	15.0
+fem-2_fragment_1	gene="fem-2"	-	41.67	12	7	0	428	393	329	340	7.0	14.6
+fem-2_fragment_1	some_other_protein	-	92.86	196	14	0	1	588	201	396	4e-134	 374
+fem-2_fragment_1	some_other_protein	-	40.00	15	9	1	534	490	428	440	5.3	15.0
+fem-2_fragment_1	some_other_protein	-	41.67	12	7	0	428	393	329	340	9.3	14.2
+fem-2_fragment_2	gene="fem-2"	-	100.00	116	0	0	1	348	281	396	3e-83	 240
+fem-2_fragment_2	gene="fem-2"	-	40.00	15	9	1	294	250	428	440	2.8	15.0
+fem-2_fragment_2	gene="fem-2"	-	41.67	12	7	0	188	153	329	340	3.8	14.6
+fem-2_fragment_2	gene="fem-2"	-	44.44	9	5	0	93	119	251	259	5.0	14.2
+fem-2_fragment_2	some_other_protein	-	94.83	116	6	0	1	348	281	396	3e-78	 227
+fem-2_fragment_2	some_other_protein	-	40.00	15	9	1	294	250	428	440	2.8	15.0
+fem-2_fragment_2	some_other_protein	-	41.67	12	7	0	188	153	329	340	5.0	14.2
+fem-2_fragment_3	gene="fem-2"	-	100.00	116	0	0	349	2	281	396	3e-83	 240
+fem-2_fragment_3	gene="fem-2"	-	40.00	15	9	1	56	100	428	440	2.8	15.0
+fem-2_fragment_3	gene="fem-2"	-	41.67	12	7	0	162	197	329	340	3.8	14.6
+fem-2_fragment_3	gene="fem-2"	-	44.44	9	5	0	257	231	251	259	5.0	14.2
+fem-2_fragment_3	some_other_protein	-	94.83	116	6	0	349	2	281	396	3e-78	 227
+fem-2_fragment_3	some_other_protein	-	40.00	15	9	1	56	100	428	440	2.8	15.0
+fem-2_fragment_3	some_other_protein	-	41.67	12	7	0	162	197	329	340	5.0	14.2

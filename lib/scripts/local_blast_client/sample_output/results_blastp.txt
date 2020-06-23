@@ -1,0 +1,27 @@
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+#Results of automated BLAST query of performed on Monday June 22 23:15:35 2020.
+#Searches performed using local_blast_client.pl, written by Paul Stothard, stothard@ualberta.ca.
+#The following settings were specified:
+#PROGRAM=blastp
+#HITLIST_SIZE=5
+#WORD_SIZE=3
+#HSP_LABEL=F
+#MAX_BYTES_RESPONSE=5000000
+#ERROR_RETRY=5
+#DATABASE_GENETIC_CODE=1
+#INPUTTYPE=protein
+#OUTPUTFILE=test_output/results_blastp.txt
+#QUERY_GENETIC_CODE=1
+#INPUTFILE=test_input/test_input_protein.fasta
+#FILTER=T
+#ALIGN_TYPE=protein
+#DATABASE=test_output/formatted_databases/test_protein_database.fasta
+#BLAST_PATH=blastall
+#EXPECT=1E-50
+#The following attributes are separated by tabs:
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+query_id	match_id	match_description	%_identity	alignment_length	mismatches	gap_openings	q_start	q_end	s_start	s_end	evalue	bit_score
+fem-2_fragment_1	gene="fem-2"	-	97.93	241	3	2	1	240	1	240	3e-180	 492
+fem-2_fragment_1	some_other_protein	-	90.46	241	21	2	1	240	1	240	3e-160	 442
+fem-2_fragment_2	gene="fem-2"	-	99.05	105	1	0	1	105	361	465	5e-75	 219
+fem-2_fragment_2	some_other_protein	-	97.14	105	3	0	1	105	361	465	9e-74	 216

@@ -1,0 +1,29 @@
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+#Results of automated BLAST query of performed on Monday June 22 23:15:34 2020.
+#Searches performed using local_blast_client.pl, written by Paul Stothard, stothard@ualberta.ca.
+#The following settings were specified:
+#PROGRAM=blastn
+#OUTPUTFILE=test_output/results_blastn.txt
+#INPUTFILE=test_input/test_input_dna.fasta
+#QUERY_GENETIC_CODE=1
+#HITLIST_SIZE=5
+#FILTER=T
+#INPUTTYPE=DNA
+#DATABASE_GENETIC_CODE=1
+#ERROR_RETRY=5
+#EXPECT=10
+#MAX_BYTES_RESPONSE=5000000
+#HSP_LABEL=F
+#WORD_SIZE=11
+#ALIGN_TYPE=nucleotide
+#BLAST_PATH=blastall
+#DATABASE=test_output/formatted_databases/test_dna_database.fasta
+#The following attributes are separated by tabs:
+#-------------------------------------------------------------------------------------------------------------------------------------------------
+query_id	match_id	match_description	%_identity	alignment_length	mismatches	gap_openings	q_start	q_end	s_start	s_end	evalue	bit_score
+fem-2_fragment_1	gi|6164828	-	99.32	590	2	2	1	589	601	1189	0.0	1122
+fem-2_fragment_1	some_other_gene	-	96.95	590	16	2	1	589	601	1189	0.0	1011
+fem-2_fragment_2	gi|6164828	-	100.00	349	0	0	1	349	841	1189	0.0	 692
+fem-2_fragment_2	some_other_gene	-	97.71	349	8	0	1	349	841	1189	0.0	 628
+fem-2_fragment_3	gi|6164828	-	100.00	349	0	0	1	349	1189	841	0.0	 692
+fem-2_fragment_3	some_other_gene	-	97.71	349	8	0	1	349	1189	841	0.0	 628
