@@ -5,7 +5,7 @@ AUTH: Paul Stothard <stothard@ualberta.ca>
 DATE: June 22, 2020  
 VERS: 1.2  
 
-This script accepts a sequence file as input and extracts the open reading frames (ORFs) greater than or equal to the specified size. The resulting ORFs can be returned as DNA sequences, or as protein sequences translated using the specified genetic code. The titles of the sequences include start, stop, strand, and reading frame information. The sequence numbering includes the stop codon (when encountered) but the translations do not include a stop codon character.
+This script accepts a sequence file as input and extracts the open reading frames (ORFs) greater than or equal to the specified size. The resulting ORFs can be returned as DNA sequences, or as protein sequences translated using the specified genetic code. The titles of the sequences include start, stop, strand, and reading frame information. The sequence numbering includes the stop codon (when encountered) but the translations do not include a stop codon character. If the input file consists of multiple sequence records they are merged into a single record and coordinates and reading frame are expressed relative to the single merged sequence.
 
 The start and stop codons used when identifying ORFs are specified using the 'starts' and 'stops' options. 
 
