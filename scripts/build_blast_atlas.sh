@@ -9,9 +9,9 @@ size=""
 start_at_map=""
 start_at_xml=""
 
-PROGNAME=`basename $0`
+PROGNAME=$(basename $0)
 
-function usage {
+function usage() {
     echo "
 USAGE:
    build_blast_atlas.sh -i FILE [-p DIR] [Options]
@@ -77,12 +77,12 @@ NOTE:
 "
 }
 
-function error_exit {
+function error_exit() {
     echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
     exit 1
 }
 
-function get_filename_without_extension {
+function get_filename_without_extension() {
     basefile=$(basename "$1")
     filename=${basefile%.*}
     echo $filename
@@ -90,37 +90,47 @@ function get_filename_without_extension {
 
 while [ "$1" != "" ]; do
     case $1 in
-        -i | --input )                 shift
-                                       input=$1
-                                       ;;
-        -p | --project )               shift
-                                       project=$1
-                                       ;;
-        -m | --memory )                shift
-                                       mem=$1
-                                       ;;
-        -c | --custom )                shift
-                                       custom=$1
-                                       ;;
-        -b | --max_blast_comparisons)  shift
-                                       comparison_genomes_to_display=$1
-                                       ;;
-        -z | --map_size )              shift
-                                       size=$1
-                                       ;;
-        -x | --start_at_xml )          start_at_xml="T"
-                                       ;;
-        -r | --start_at_map )          start_at_map="T"
-                                       ;;
-        -h | --help )                  usage
-                                       exit
-                                       ;;
-        * )                            usage
-                                       exit 1
+    -i | --input)
+        shift
+        input=$1
+        ;;
+    -p | --project)
+        shift
+        project=$1
+        ;;
+    -m | --memory)
+        shift
+        mem=$1
+        ;;
+    -c | --custom)
+        shift
+        custom=$1
+        ;;
+    -b | --max_blast_comparisons)
+        shift
+        comparison_genomes_to_display=$1
+        ;;
+    -z | --map_size)
+        shift
+        size=$1
+        ;;
+    -x | --start_at_xml)
+        start_at_xml="T"
+        ;;
+    -r | --start_at_map)
+        start_at_map="T"
+        ;;
+    -h | --help)
+        usage
+        exit
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
     esac
     shift
-  done
-
+done
 
 # The CCT_HOME variable must be set
 if [ -z $CCT_HOME ]; then
@@ -135,7 +145,7 @@ elif [ -n "$input" ]; then
     if [ ! -f "$input" ]; then
         error_exit "The input GenBank file '$input' does not exist"
     fi
-    project_dir=`get_filename_without_extension $input`
+    project_dir=$(get_filename_without_extension $input)
 else
     error_exit "Please use '-i' to specify an input sequence file in GenBank format, with .gbk extension or the '-p' option to specify the project directory. For a full list of options use '-h'."
 fi
@@ -150,12 +160,11 @@ else
     fi
 fi
 
-
 # CREATING A NEW PROJECT
 if $new_project; then
     echo "Creating new project in '$project_dir'"
 
-    if [ ! -d "$project_dir" ]; then mkdir "$project_dir" ; fi
+    if [ ! -d "$project_dir" ]; then mkdir "$project_dir"; fi
 
     mkdir "${project_dir}/cct_projects"
     mkdir "${project_dir}/reference_genome"
@@ -167,8 +176,7 @@ if $new_project; then
         cp "$input" "$project_dir"/reference_genome
     fi
 
-    for type in dna_vs_dna cds_vs_cds
-    do
+    for type in dna_vs_dna cds_vs_cds; do
         echo "Creating project for $type"
         cp "${cct_home}/conf/project_settings_${type}.conf" "${project_dir}/project_settings_${type}.conf"
         perl "${cct_home}/scripts/cgview_comparison_tool.pl" --project "${project_dir}/cct_projects/${type}" --settings "${project_dir}/project_settings_${type}.conf"
@@ -201,41 +209,11 @@ if $new_project; then
     exit
 fi
 
-
 # CREATE MAPS FOR AN EXISTING PROJECT
 if ! $new_project; then
 
-    #merge multi-contig GenBank files
-    files=($( find "${project_dir}/comparison_genomes" "${project_dir}/reference_genome" -maxdepth 1 -type f \( -name "*.gbk" -o -name "*.gb" \)))
-    for i in "${files[@]}"
-    do
-
-      #check each file for multiple contigs
-      set +e
-      seqs=$(grep -c '^LOCUS' "$i")
-      set -e
-
-      if [ "$seqs" -gt 1 ]; then
-
-        if ! [ -x "$(command -v merge-gbk-records)" ]; then
-          error_exit "Error: merge-gbk-records is not installed. Unable to merge sequences in multi-sequence file $i"
-        fi
-
-        echo "Merging $seqs sequence records in file '$i'."
-
-        command="merge-gbk-records -l 0 '$i' -o '${i}.new'"
-
-        eval $command
-
-        mv "$i" "${i}.bac"
-        mv "${i}.new" "$i"
-
-      fi
-    done
-
-    for type in dna_vs_dna cds_vs_cds
-    do
-      command="perl '${cct_home}/scripts/cgview_comparison_tool.pl' --project '${project_dir}/cct_projects/${type}' --config '${cct_home}/conf/global_settings.conf' --settings '${project_dir}/project_settings_${type}.conf' --map_prefix ${type}_ --sort_blast_tracks --max_blast_comparisons $comparison_genomes_to_display --cct"
+    for type in dna_vs_dna cds_vs_cds; do
+        command="perl '${cct_home}/scripts/cgview_comparison_tool.pl' --project '${project_dir}/cct_projects/${type}' --config '${cct_home}/conf/global_settings.conf' --settings '${project_dir}/project_settings_${type}.conf' --map_prefix ${type}_ --sort_blast_tracks --max_blast_comparisons $comparison_genomes_to_display --cct"
         if [ -n "$mem" ]; then
             command=$command" --memory $mem"
         fi
@@ -273,6 +251,3 @@ if ! $new_project; then
 
     done
 fi
-
-
-

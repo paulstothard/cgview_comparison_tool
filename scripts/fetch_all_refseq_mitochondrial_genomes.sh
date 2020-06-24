@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-PROGNAME=`basename $0`
+PROGNAME=$(basename $0)
 
-function usage {
+function usage() {
     echo "
 USAGE:
    fetch_all_refseq_mitochondrial_genomes.sh -o DIR 
@@ -23,27 +23,31 @@ EXAMPLE:
 "
 }
 
-function error_exit {
-        echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
-        exit 1
+function error_exit() {
+    echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+    exit 1
 }
 
-function remove_trailing_slash {
+function remove_trailing_slash() {
     string="$1"
-    new_string=`echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_'`
+    new_string=$(echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_')
     echo $new_string
 }
 
 while [ "$1" != "" ]; do
     case $1 in
-        -o | --output )      shift
-                             directory=$1
-                             ;;
-        -h | --help )        usage
-                             exit
-                             ;;
-        * )                  usage
-                             exit 1
+    -o | --output)
+        shift
+        directory=$1
+        ;;
+    -h | --help)
+        usage
+        exit
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
     esac
     shift
 done
@@ -58,15 +62,12 @@ if [ -z "$directory" ]; then
     error_exit "Please use '-o' to specify an output directory. Use '-h' for help."
 fi
 
-directory=`remove_trailing_slash "$directory"`
+directory=$(remove_trailing_slash "$directory")
 
 if [ ! -d "$directory" ]; then
     mkdir -p "$directory"
 fi
 
 perl "${cct_home}/scripts/ncbi_search.pl" -q "nucleotide genome[Filter] AND mitochondrion[Filter] AND refseq[Filter] NOT wgs[Filter]" -d nucleotide -o "$directory" -s -r gbwithparts -v
-
-# Old Way
-#wget -c -N -v -r -nd -t 45 -A.gbk "ftp://ftp.ncbi.nih.gov/genomes/MITOCHONDRIA/*" -P "$directory"
 
 echo "Downloaded sequences saved to ${directory}"

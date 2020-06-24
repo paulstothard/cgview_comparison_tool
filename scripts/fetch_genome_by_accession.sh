@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-PROGNAME=`basename $0`
+PROGNAME=$(basename $0)
 
-function usage {
+function usage() {
     echo "
 USAGE:
    fetch_genome_by_accession.sh -a STRING -o DIR 
@@ -25,30 +25,35 @@ EXAMPLE:
 "
 }
 
-function error_exit {
-        echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
-        exit 1
+function error_exit() {
+    echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
+    exit 1
 }
 
-function remove_trailing_slash {
+function remove_trailing_slash() {
     string="$1"
-    new_string=`echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_'`
+    new_string=$(echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_')
     echo $new_string
 }
 
 while [ "$1" != "" ]; do
     case $1 in
-        -a | --accession )      shift
-                                accession=$1
-                                ;;
-        -o | --output )      shift
-                                directory=$1
-                                ;;
-        -h | --help )           usage
-                                exit
-                                ;;
-        * )                     usage
-                                exit 1
+    -a | --accession)
+        shift
+        accession=$1
+        ;;
+    -o | --output)
+        shift
+        directory=$1
+        ;;
+    -h | --help)
+        usage
+        exit
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
     esac
     shift
 done
@@ -71,7 +76,7 @@ if [ -z $CCT_HOME ]; then
     error_exit "Please set the \$CCT_HOME environment variable to the path to the cgview_comparison_tool directory"
 fi
 
-directory=`remove_trailing_slash "$directory"`
+directory=$(remove_trailing_slash "$directory")
 
 if [ ! -d "$directory" ]; then
     mkdir -p "$directory"

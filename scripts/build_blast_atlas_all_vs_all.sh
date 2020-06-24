@@ -11,9 +11,9 @@ start_at_xml=""
 start_at_montage=""
 columns=4
 
-PROGNAME=`basename $0`
+PROGNAME=$(basename $0)
 
-function usage {
+function usage() {
     echo "
 USAGE:
    build_blast_atlas_all_vs_all.sh -p DIR [Options]
@@ -83,62 +83,68 @@ NOTES:
 "
 }
 
-function error_exit {
+function error_exit() {
     echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
     exit 1
 }
 
-function get_filename_without_extension {
+function get_filename_without_extension() {
     basefile=$(basename "$1")
     filename=${basefile%.*}
     echo $filename
 }
 
 # Check for ImageMagick
-if   ( ! command -v convert &>/dev/null ) || ( ! command -v montage &>/dev/null ); then
-  echo "
+if (! command -v convert &>/dev/null) || (! command -v montage &>/dev/null); then
+    echo "
   ImageMagick is required for the build_blast_atlas_all_vs_all.sh command.
-
-  For details see the CCT installation instructions in the 'docs' directory or
-  online:
-
-  http://stothard.afns.ualberta.ca/downloads/CCT/installation.html
-
 " >&2
-  exit 1
+    exit 1
 fi
 
 while [ "$1" != "" ]; do
     case $1 in
-        -p | --project )              shift
-                                      project_dir=$1
-                                      ;;
-        -m | --memory )               shift
-                                      mem=$1
-                                      ;;
-        -c | --custom )               shift
-                                      custom=$1
-                                      ;;
-        -b | --max_blast_comparisons) shift
-                                      comparison_genomes_to_display=$1
-                                      ;;
-        -z | --map_size )             shift
-                                      size=$1
-                                      ;;
-        -x | --start_at_xml )         start_at_xml="T"
-                                      ;;
-        -r | --start_at_map )         start_at_map="T"
-                                      ;;
-        -g | --start_at_montage )     start_at_montage="T"
-                                      ;;
-        -y | --columns )              shift
-                                      columns=$1
-                                      ;;
-        -h | --help )                 usage
-                                      exit
-                                      ;;
-        * )                           usage
-                                      exit 1
+    -p | --project)
+        shift
+        project_dir=$1
+        ;;
+    -m | --memory)
+        shift
+        mem=$1
+        ;;
+    -c | --custom)
+        shift
+        custom=$1
+        ;;
+    -b | --max_blast_comparisons)
+        shift
+        comparison_genomes_to_display=$1
+        ;;
+    -z | --map_size)
+        shift
+        size=$1
+        ;;
+    -x | --start_at_xml)
+        start_at_xml="T"
+        ;;
+    -r | --start_at_map)
+        start_at_map="T"
+        ;;
+    -g | --start_at_montage)
+        start_at_montage="T"
+        ;;
+    -y | --columns)
+        shift
+        columns=$1
+        ;;
+    -h | --help)
+        usage
+        exit
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
     esac
     shift
 done
@@ -153,7 +159,6 @@ if [ -z "$project_dir" ]; then
     error_exit "Please use '-p' to specify a project directory. Use '-h' for help."
 fi
 
-
 # Determine whether to create a new project or run an existing project
 if [ ! -d "$project_dir" ] || [ ! "$(ls -A "$project_dir")" ]; then
     new_project=true
@@ -161,12 +166,11 @@ else
     new_project=false
 fi
 
-
 # CREATING A NEW PROJECT
-if ( $new_project ) && [ -z "$start_at_montage" ]; then
+if ($new_project) && [ -z "$start_at_montage" ]; then
     echo "Creating new project in '$project_dir'"
 
-    if [ ! -d "$project_dir" ]; then mkdir "$project_dir" ; fi
+    if [ ! -d "$project_dir" ]; then mkdir "$project_dir"; fi
 
     mkdir "${project_dir}/comparison_genomes"
     mkdir "${project_dir}/cct_projects"
@@ -182,50 +186,18 @@ if ( $new_project ) && [ -z "$start_at_montage" ]; then
     exit
 fi
 
-
 # CREATE MAPS FOR AN EXISTING PROJECT
-if ( ! $new_project ) && [ -z "$start_at_montage" ]; then
+if (! $new_project) && [ -z "$start_at_montage" ]; then
     if [ ! -d "${project_dir}/cct_projects" ]; then
         mkdir "${project_dir}/cct_projects"
     fi
 
-    #merge multi-contig GenBank files
-    files=($( find "${project_dir}/comparison_genomes" -maxdepth 1 -type f \( -name "*.gbk" -o -name "*.gb" \)))
-    for i in "${files[@]}"
-    do
-
-      #check each file for multiple contigs
-      set +e
-      seqs=$(grep -c '^LOCUS' "$i")
-      set -e
-
-      if [ "$seqs" -gt 1 ]; then
-
-        if ! [ -x "$(command -v merge-gbk-records)" ]; then
-          error_exit "Error: merge-gbk-records is not installed. Unable to merge sequences in multi-sequence file $i"
-        fi
-
-        echo "Merging $seqs sequence records in file '$i'."
-
-        command="merge-gbk-records -l 0 '$i' -o '${i}.new'"
-
-        eval $command
-
-        mv "$i" "${i}.bac"
-        mv "${i}.new" "$i"
-
-      fi
-
-    done
-
-
     # Find all the gbk files, sort by accession and for each one create a new cgview_comparison_tool project
-    files=($( find "${project_dir}/comparison_genomes" -maxdepth 1 -type f \( -name "*.gbk" -o -name "*.gb" \) -print0 | perl -ne 'my @files = split(/\0/, $_); my @sorted = sort {$a =~ m/[AN]C_0*(\d+)/; $a_char = $1; $b =~ m/[AN]C_0*(\d+)/; $b_char = $1; return ($a_char <=> $b_char);} @files; foreach(@sorted) { print "$_\n";}'))
+    files=($(find "${project_dir}/comparison_genomes" -maxdepth 1 -type f \( -name "*.gbk" -o -name "*.gb" \) -print0 | perl -ne 'my @files = split(/\0/, $_); my @sorted = sort {$a =~ m/[AN]C_0*(\d+)/; $a_char = $1; $b =~ m/[AN]C_0*(\d+)/; $b_char = $1; return ($a_char <=> $b_char);} @files; foreach(@sorted) { print "$_\n";}'))
     length=${#files[@]}
-    for (( i=0; i<$length; i++ ));
-    do
+    for ((i = 0; i < $length; i++)); do
 
-        seqname=`get_filename_without_extension "${files[$i]}"`
+        seqname=$(get_filename_without_extension "${files[$i]}")
         after=$i+1
         after_length=$length-$after
         reference_genome=$(basename "${files[$i]}")
@@ -248,8 +220,7 @@ if ( ! $new_project ) && [ -z "$start_at_montage" ]; then
 
             # Create links to comparison genomes
             length_comparison=${#comparison_genomes[@]}
-            for (( j=0; j<$length_comparison; j++ ));
-            do
+            for ((j = 0; j < $length_comparison; j++)); do
                 filename_comparison=$(basename "${comparison_genomes[$j]}")
                 ln -s "../../../comparison_genomes/${filename_comparison}" "${project_dir}/cct_projects/${seqname}/comparison_genomes/${filename_comparison}"
             done
@@ -295,15 +266,14 @@ if ( ! $new_project ) && [ -z "$start_at_montage" ]; then
     done
 fi
 
-
 # COMBINE IMAGES USING IMAGEMAGICK
-if ( ! $new_project ) || [ -n "$start_at_montage" ]; then
+if (! $new_project) || [ -n "$start_at_montage" ]; then
     # This sorts the files by accession
-    png_files=($( find "$project_dir"/cct_projects -type f \( -name "*.png" \)  -print0 | perl -ne 'my @files = split(/\0/, $_); my @sorted = sort {$a =~ m/[A-Z][A-Z]_*0*(\d+)/; $a_char = $1; $b =~ m/[A-Z][A-Z]_*0*(\d+)/; $b_char = $1; return ($a_char <=> $b_char);} @files; foreach(@sorted) { print "$_\n";}'))
+    png_files=($(find "$project_dir"/cct_projects -type f \( -name "*.png" \) -print0 | perl -ne 'my @files = split(/\0/, $_); my @sorted = sort {$a =~ m/[A-Z][A-Z]_*0*(\d+)/; $a_char = $1; $b =~ m/[A-Z][A-Z]_*0*(\d+)/; $b_char = $1; return ($a_char <=> $b_char);} @files; foreach(@sorted) { print "$_\n";}'))
     png_length=${#png_files[@]}
     #for (( i=0; i<$png_length; i++ ));
-      #do
-      #convert "${png_files[$i]}" -resize 40% "${png_files[$i]}"
+    #do
+    #convert "${png_files[$i]}" -resize 40% "${png_files[$i]}"
     #done
     montage "${png_files[@]:0}" -resize 40% -tile ${columns}x -geometry 800x800\>+2+2 -background "#FFFFFF" "$project_dir"/montage.png
     echo "Montage drawn to $project_dir/montage.png"
