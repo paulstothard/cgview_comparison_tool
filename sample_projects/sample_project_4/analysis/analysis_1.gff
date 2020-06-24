@@ -1,0 +1,8 @@
+#this file contains values separated by tabs and score values outside the range 1 to -1
+seqname	source	feature	start	end	score	strand	frame
+Feature1	.	.	1	100	100	+	.
+Feature2	.	.	100	200	0	+	.
+Feature3	.	.	200	300	-100	+	.
+Feature4	.	.	1	100	100	-	.
+Feature5	.	.	100	200	0	-	.
+Feature6	.	.	200	300	-100	-	.

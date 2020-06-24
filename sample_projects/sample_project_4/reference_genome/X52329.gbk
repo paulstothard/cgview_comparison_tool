@@ -1,0 +1,85 @@
+LOCUS       X52329                  2961 bp    DNA     circular SYN 29-JAN-2002
+DEFINITION  pBluescript II KS(-) vector DNA, phagemid excised from lambda
+            ZAPII.
+ACCESSION   X52329
+VERSION     X52329.1  GI:58060
+KEYWORDS    artificial sequence; cloning vector; expression vector; vector.
+SOURCE      synthetic construct
+  ORGANISM  synthetic construct
+            other sequences; artificial sequences.
+REFERENCE   1
+  AUTHORS   Short,J.M., Fernandez,J.M., Sorge,J.A. and Huse,W.D.
+  TITLE     Lambda ZAP: a bacteriophage lambda expression vector with in vivo
+            excision properties
+  JOURNAL   Nucleic Acids Res. 16 (15), 7583-7600 (1988)
+   PUBMED   2970625
+REFERENCE   2
+  AUTHORS   Alting-Mees,M.A. and Short,J.M.
+  TITLE     pBluescript II: gene mapping vectors
+  JOURNAL   Nucleic Acids Res. 17 (22), 9494 (1989)
+   PUBMED   2555794
+REFERENCE   3  (bases 1 to 2961)
+  AUTHORS   Thomas,E.A.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (20-FEB-1990) Thomas E.A., Stratagene Clonin Systems,
+            11099 North Torney Pines Rd., La Jolla, CA 92037, USA
+FEATURES             Location/Qualifiers
+     source          1..2961
+                     /organism="synthetic construct"
+                     /mol_type="other DNA"
+                     /db_xref="taxon:32630"
+     misc_feature    1..2961
+                     /note="phagemid pBluescriptII KS(-)"
+ORIGIN      
+        1 ctgacgcgcc ctgtagcggc gcattaagcg cggcgggtgt ggtggttacg cgcagcgtga
+       61 ccgctacact tgccagcgcc ctagcgcccg ctcctttcgc tttcttccct tcctttctcg
+      121 ccacgttcgc cggctttccc cgtcaagctc taaatcgggg gctcccttta gggttccgat
+      181 ttagtgcttt acggcacctc gaccccaaaa aacttgatta gggtgatggt tcacgtagtg
+      241 ggccatcgcc ctgatagacg gtttttcgcc ctttgacgtt ggagtccacg ttctttaata
+      301 gtggactctt gttccaaact ggaacaacac tcaaccctat ctcggtctat tcttttgatt
+      361 tataagggat tttgccgatt tcggcctatt ggttaaaaaa tgagctgatt taacaaaaat
+      421 ttaacgcgaa ttttaacaaa atattaacgc ttacaatttc cattcgccat tcaggctgcg
+      481 caactgttgg gaagggcgat cggtgcgggc ctcttcgcta ttacgccagc tggcgaaagg
+      541 gggatgtgct gcaaggcgat taagttgggt aacgccaggg ttttcccagt cacgacgttg
+      601 taaaacgacg gccagtgagc gcgcgtaata cgactcacta tagggcgaat tggagctcca
+      661 ccgcggtggc ggccgctcta gaactagtgg atcccccggg ctgcaggaat tcgatatcaa
+      721 gcttatcgat accgtcgacc tcgagggggg gcccggtacc cagcttttgt tccctttagt
+      781 gagggttaat tgcgcgcttg gcgtaatcat ggtcatagct gtttcctgtg tgaaattgtt
+      841 atccgctcac aattccacac aacatacgag ccggaagcat aaagtgtaaa gcctggggtg
+      901 cctaatgagt gagctaactc acattaattg cgttgcgctc actgcccgct ttccagtcgg
+      961 gaaacctgtc gtgccagctg cattaatgaa tcggccaacg cgcggggaga ggcggtttgc
+     1021 gtattgggcg ctcttccgct tcctcgctca ctgactcgct gcgctcggtc gttcggctgc
+     1081 ggcgagcggt atcagctcac tcaaaggcgg taatacggtt atccacagaa tcaggggata
+     1141 acgcaggaaa gaacatgtga gcaaaaggcc agcaaaaggc caggaaccgt aaaaaggccg
+     1201 cgttgctggc gtttttccat aggctccgcc cccctgacga gcatcacaaa aatcgacgct
+     1261 caagtcagag gtggcgaaac ccgacaggac tataaagata ccaggcgttt ccccctggaa
+     1321 gctccctcgt gcgctctcct gttccgaccc tgccgcttac cggatacctg tccgcctttc
+     1381 tcccttcggg aagcgtggcg ctttctcata gctcacgctg taggtatctc agttcggtgt
+     1441 aggtcgttcg ctccaagctg ggctgtgtgc acgaaccccc cgttcagccc gaccgctgcg
+     1501 ccttatccgg taactatcgt cttgagtcca acccggtaag acacgactta tcgccactgg
+     1561 cagcagccac tggtaacagg attagcagag cgaggtatgt aggcggtgct acagagttct
+     1621 tgaagtggtg gcctaactac ggctacacta gaaggacagt atttggtatc tgcgctctgc
+     1681 tgaagccagt taccttcgga aaaagagttg gtagctcttg atccggcaaa caaaccaccg
+     1741 ctggtagcgg tggttttttt gtttgcaagc agcagattac gcgcagaaaa aaaggatctc
+     1801 aagaagatcc tttgatcttt tctacggggt ctgacgctca gtggaacgaa aactcacgtt
+     1861 aagggatttt ggtcatgaga ttatcaaaaa ggatcttcac ctagatcctt ttaaattaaa
+     1921 aatgaagttt taaatcaatc taaagtatat atgagtaaac ttggtctgac agttaccaat
+     1981 gcttaatcag tgaggcacct atctcagcga tctgtctatt tcgttcatcc atagttgcct
+     2041 gactccccgt cgtgtagata actacgatac gggagggctt accatctggc cccagtgctg
+     2101 caatgatacc gcgagaccca cgctcaccgg ctccagattt atcagcaata aaccagccag
+     2161 ccggaagggc cgagcgcaga agtggtcctg caactttatc cgcctccatc cagtctatta
+     2221 attgttgccg ggaagctaga gtaagtagtt cgccagttaa tagtttgcgc aacgttgttg
+     2281 ccattgctac aggcatcgtg gtgtcacgct cgtcgtttgg tatggcttca ttcagctccg
+     2341 gttcccaacg atcaaggcga gttacatgat cccccatgtt gtgcaaaaaa gcggttagct
+     2401 ccttcggtcc tccgatcgtt gtcagaagta agttggccgc agtgttatca ctcatggtta
+     2461 tggcagcact gcataattct cttactgtca tgccatccgt aagatgcttt tctgtgactg
+     2521 gtgagtactc aaccaagtca ttctgagaat agtgtatgcg gcgaccgagt tgctcttgcc
+     2581 cggcgtcaat acgggataat accgcgccac atagcagaac tttaaaagtg ctcatcattg
+     2641 gaaaacgttc ttcggggcga aaactctcaa ggatcttacc gctgttgaga tccagttcga
+     2701 tgtaacccac tcgtgcaccc aactgatctt cagcatcttt tactttcacc agcgtttctg
+     2761 ggtgagcaaa aacaggaagg caaaatgccg caaaaaaggg aataagggcg acacggaaat
+     2821 gttgaatact catactcttc ctttttcaat attattgaag catttatcag ggttattgtc
+     2881 tcatgagcgg atacatattt gaatgtattt agaaaaataa acaaataggg gttccgcgca
+     2941 catttccccg aaaagtgcca c
+//
+

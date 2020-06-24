@@ -1,0 +1,3 @@
+#this file contains values separated by commas
+seqname, source, feature, start, end, score, strand, frame
+source, GenBank, ., 1, 2961, ., +, .

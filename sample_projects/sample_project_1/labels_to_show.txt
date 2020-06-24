@@ -1,0 +1,3 @@
+AYWB_pIII02	Test label 1
+AYWB_pIII03	Test label 2
+AYWB_pIII06	Test label 3
