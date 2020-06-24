@@ -509,7 +509,7 @@ indicate which hit it belongs to. [T/F]. Default is F.
 
 example usage:
 
-  perl local_blast_client.pl -i my_seqs.fasta -o blast_results.txt -b blastn \
+  perl local_blast_client.pl -i my_seqs.fasta -o blast_results.txt -b blastn \\
   -d sequences.fasta
 BLOCK
 }
