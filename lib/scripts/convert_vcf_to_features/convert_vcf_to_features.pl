@@ -151,7 +151,7 @@ a different suffix.
 
 example usage:
 
-  perl convert_vcf_to_features.pl -i input.vcf -o output.tab
+  perl convert_vcf_to_features.pl -i input.vcf -o output.gff
 BLOCK
 }
 

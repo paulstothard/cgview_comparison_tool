@@ -723,22 +723,34 @@ perl convert_vcf_to_features.pl -i variants.vcf -o variants.gff</pre
 
       <h3>Documentation</h3>
       <pre class="documentation">
-USAGE:
-   perl convert_vcf_to_features.pl -i INFILE -o OUTFILE
+convert_vcf_to_features.pl - convert VCF file to tab-delimited file for
+the CGView Comparison Tool.
 
-DESCRIPTION:
-   This script converts a VCF (Variant Call Format) file into a feature file
-   (GFF). The resulting GFF file can be used by the CGView Comparison tool.
-   Simply place the GFF file in the 'features' directory of a CCT project. 
+DISPLAY HELP AND EXIT:
 
-REQUIRED ARGUMENTS:
-   -i, --input FILE
-      Input VCF file (tab-delimited)
-   -o, --output FILE
-      Name to call the output file
+usage:
 
-EXAMPLE: 
-   perl convert_vcf_to_features.pl -i input.vcf -o output.gff</pre
+  perl convert_vcf_to_features.pl -help
+
+CONVERT VCF TO TAB-DELIMITED
+
+usage:
+
+  perl convert_vcf_to_features.pl -i &lt;file&gt; -o &lt;file&gt;
+
+required arguments:
+
+-i - Input file in VCF format.
+
+-o - Output file in tab-delimited format for CGView Comparison Tool. This name
+will have the chromosome name as read from the VCF file added to the end,
+before the file extension if one is present. If multiple chromosomes are
+present in the VCF file then multiple output files will be generated, each with
+a different suffix.
+
+example usage:
+
+  perl convert_vcf_to_features.pl -i input.vcf -o output.gff</pre
       >
 
       <h2 id="create_zoomed_maps">create_zoomed_maps.sh</h2>
@@ -1031,40 +1043,48 @@ EXAMPLE:
 
       <h3>Documentation</h3>
       <pre class="documentation">
-USAGE:
-   perl ncbi_search.pl -q STRING -o FILE -d STRING -r STRING [Options]
+ncbi_search.pl - search NCBI databases.
 
-DESCRIPTION:
-   Uses NCBI's eSearch to download collections of sequences.
+DISPLAY HELP AND EXIT:
 
-REQUIRED ARGUMENTS:
-   -q, --query [STRING]
-      Raw query text.
-   -o, --output [FILE]
-      Output file to create. If the split option is given, this should be a
-      directory, where the returned records will be written. If the directory
-      does not exist it will be created. 
-   -d, --database [STRING]
-      Name of the NCBI database to search, such as 'nucleotide', 'protein',
-      or 'gene'.
-   -r, --return_type [STRING]
-      The type of information requested. For sequences 'fasta' is often used.
-      The accepted formats vary depending on the database being queried.
-   -s, --split
-      Return each record as a separate file where the file name will will be
-      the accesssion id of the record. This option only works if the
-      return_type is 'gb' or 'gbwithparts'.
-   -m, --max_records [INTEGER]
-      The maximum number of records to return (default is to return all matches
-      satisfying the query).
-   -v, --verbose
-      Provide progress messages.
-   -h, --help
-      Show this message.
+usage:
 
-EXAMPLE:
-   perl ncbi_search.pl -q 'dysphagia AND homo sapiens[ORGN]' \\
-     -o results.txt -d pubmed -r uilist -m 100</pre
+  perl ncbi_search.pl -help
+
+PERFORM NCBI SEARCH
+
+usage:
+
+  perl ncbi_search.pl -q &lt;string&gt; -o &lt;file&gt; -d &lt;string&gt; [Options]
+
+required arguments:
+
+-q - Entrez query text.
+
+-o - Output file to create. If the -s option is used this is the output
+directory to create.
+
+-d - Name of the NCBI database to search, such as 'nuccore', 'protein', or
+'gene'.
+
+optional arguments:
+
+-r - Type of information to download. For sequences, 'fasta' is typically
+specified. The accepted formats depend on the database being queried. The
+default is to specify no format.
+  
+-m - The maximum number of records to download. Default is to download all
+records.
+  
+-s - Save each record as a separate file. This option is only supported for -r
+values of 'gb' and 'gbwithparts'.
+
+-v - Provide progress messages.
+
+example usage:
+
+  perl ncbi_search.pl -q 'NC_045512[Accession]' -o NC_045512.gbk -d nuccore \
+  -r gbwithparts</pre
       >
 
       <h2 id="redraw_maps">redraw_maps.sh</h2>
