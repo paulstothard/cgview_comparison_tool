@@ -1,0 +1,143 @@
+LOCUS       NC_009934               2133 bp    DNA     circular CON 25-AUG-2019
+DEFINITION  Acaryochloris marina MBIC11017 plasmid pREB9, complete sequence.
+ACCESSION   NC_009934
+VERSION     NC_009934.1
+DBLINK      BioProject: PRJNA224116
+            BioSample: SAMN02604308
+            Assembly: GCF_000018105.1
+KEYWORDS    RefSeq.
+SOURCE      Acaryochloris marina MBIC11017
+  ORGANISM  Acaryochloris marina MBIC11017
+            Bacteria; Cyanobacteria; Synechococcales; Acaryochloridaceae;
+            Acaryochloris.
+REFERENCE   1  (bases 1 to 2133)
+  AUTHORS   Swingley,W.D., Chen,M., Cheung,P.C., Conrad,A.L., Dejesa,L.C.,
+            Hao,J., Honchak,B.M., Karbach,L.E., Kurdoglu,A., Lahiri,S.,
+            Mastrian,S.D., Miyashita,H., Page,L., Ramakrishna,P., Satoh,S.,
+            Sattley,W.M., Shimada,Y., Taylor,H.L., Tomo,T., Tsuchiya,T.,
+            Wang,Z.T., Raymond,J., Mimuro,M., Blankenship,R.E. and
+            Touchman,J.W.
+  TITLE     Niche adaptation and genome expansion in the chlorophyll
+            d-producing cyanobacterium Acaryochloris marina
+  JOURNAL   Proc. Natl. Acad. Sci. U.S.A. 105 (6), 2005-2010 (2008)
+   PUBMED   18252824
+REFERENCE   2  (bases 1 to 2133)
+  AUTHORS   Touchman,J.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (25-SEP-2007) Translational Genomics Research Institute,
+            13208 E Shea Blvd, Scottsdale, AZ 85004, USA
+COMMENT     REFSEQ INFORMATION: The reference sequence was derived from
+            CP000846.
+            Source bacteria from Marine Biotechnology Institute Culture
+            Collection, Marine Biotechnology Institute, 3-75-1 Heita, Kamaishi,
+            Iwate 026-0001, Japan.
+            The annotation was added by the NCBI Prokaryotic Genome Annotation
+            Pipeline (PGAP). Information about PGAP can be found here:
+            https://www.ncbi.nlm.nih.gov/genome/annotation_prok/
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider               :: NCBI RefSeq
+            Annotation Date                   :: 08/25/2019 21:22:49
+            Annotation Pipeline               :: NCBI Prokaryotic Genome
+                                                 Annotation Pipeline (PGAP)
+            Annotation Method                 :: Best-placed reference protein
+                                                 set; GeneMarkS-2+
+            Annotation Software revision      :: 4.9
+            Features Annotated                :: Gene; CDS; rRNA; tRNA; ncRNA;
+                                                 repeat_region
+            Genes (total)                     :: 7,579
+            CDSs (total)                      :: 7,495
+            Genes (coding)                    :: 7,046
+            CDSs (with protein)               :: 7,046
+            Genes (RNA)                       :: 84
+            rRNAs                             :: 2, 2, 2 (5S, 16S, 23S)
+            complete rRNAs                    :: 2, 2, 2 (5S, 16S, 23S)
+            tRNAs                             :: 74
+            ncRNAs                            :: 4
+            Pseudo Genes (total)              :: 449
+            CDSs (without protein)            :: 449
+            Pseudo Genes (ambiguous residues) :: 0 of 449
+            Pseudo Genes (frameshifted)       :: 129 of 449
+            Pseudo Genes (incomplete)         :: 307 of 449
+            Pseudo Genes (internal stop)      :: 111 of 449
+            Pseudo Genes (multiple problems)  :: 88 of 449
+            CRISPR Arrays                     :: 1
+            ##Genome-Annotation-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..2133
+                     /organism="Acaryochloris marina MBIC11017"
+                     /mol_type="genomic DNA"
+                     /strain="MBIC11017"
+                     /type_material="type strain of Acaryochloris marina"
+                     /db_xref="taxon:329726"
+                     /plasmid="pREB9"
+                     /note="type strain of Acaryochloris marina"
+     gene            complement(279..608)
+                     /locus_tag="AM1_RS39520"
+                     /old_locus_tag="AM1_I0002"
+     CDS             complement(279..608)
+                     /locus_tag="AM1_RS39520"
+                     /old_locus_tag="AM1_I0002"
+                     /inference="COORDINATES: protein motif:HMM:PF14295.4"
+                     /note="Derived by automated computational analysis using
+                     gene prediction method: Protein Homology."
+                     /codon_start=1
+                     /transl_table=11
+                     /product="PAN domain-containing protein"
+                     /protein_id="WP_012168531.1"
+                     /translation="MKKLVLLFFLSIAILAGSVTISHAQTFGPVFLVEYNTDRQGGDI
+                     RSGFPVGNVGQCMNECASSSQCRAFTFVDVNQQPPNYNNNRPLCWLKRSVPGKRRNSG
+                     MITGVRQ"
+     gene            complement(1103..2100)
+                     /locus_tag="AM1_RS40700"
+                     /pseudo
+     CDS             complement(1103..2100)
+                     /locus_tag="AM1_RS40700"
+                     /inference="COORDINATES: similar to AA
+                     sequence:RefSeq:WP_076611269.1"
+                     /note="frameshifted; Derived by automated computational
+                     analysis using gene prediction method: Protein Homology."
+                     /pseudo
+                     /codon_start=1
+                     /transl_table=11
+                     /product="IS1-like element ISAcma36 family transposase"
+ORIGIN      
+        1 gctagatcct gctaacagac cagtgcctga ttgctggatg aggtttcttg tatttggcaa
+       61 gattgaaata ggatgcgaat agcagcataa aattgattac taaatgctgc tattcgcact
+      121 acttttagaa agctattgaa aataagtgtt tcagcaactg gagtaaaaag tgatttaacg
+      181 agtgtaccaa agaaaagctg cttcagactg agcttcttaa ttgagaagtt agatgtaaaa
+      241 aaaatacatc catgcactac tcaaatagga attaaatatt actgtctaac tccagtgatc
+      301 attccagaat ttcttctttt acctggtaca gaccttttta gccagcaaag agggcgatta
+      361 ttattatagt tgggaggttg ctggttaaca tcaacaaatg taaaggctct acattgagaa
+      421 gaactagcac actcattcat acactgaccg acattaccca caggaaatcc tgaacggata
+      481 tctccaccct gacgatctgt attatattcc acaaggaaaa caggcccaaa agtttgtgca
+      541 tgagatatgg tcacagaacc ggcaagtatt gcaatactta gaaaaaaaag taaaactaat
+      601 tttttcatga ttgtttttct ccaaggtaga tcgtttttag cattaatatt ctgaaatgca
+      661 aatatttcca gatttatagt gttacaaaac ctatttatag ttatctagta attaaaactt
+      721 atgccaaagt tcatagtttt aaaagttcat tgttttaaat tagagttttt aagcgtaaca
+      781 ccatttattt gctgaaatta aaggcttaat tttgaagatt ggctgattta cagagcttta
+      841 agaagactga cataggctgt tttactaggt aattggtata aggtgtctaa gaacctcggt
+      901 actttgatgt cttatctttt accttttcct tgtttatgca tttatttata ttttgtaact
+      961 ttttaatagg tatgaagtgg gatgcaatgc cctataaaaa accccgaaaa caggagagtc
+     1021 acgggggatt aagaaggttg ataaattctt gggtttgctt tgaggtgcga tcgtgggttg
+     1081 gatgagtgcg ggcactggtc tactaacagg gcacatacct aaacccttta ttggtgagga
+     1141 gttctaaagt actcagtggg cgagaacaaa atcccatctc catggctggt gtggtctgct
+     1201 tactgagtcc ccaatggggt ctaacccagt tatgaatcag gcgttgtacg tctagcactc
+     1261 gctgtaaccc caaccgcttc ttagcgtaga gattctgccg ccttcgataa gcactacatc
+     1321 gtctcctcaa ggcagcattg tgagcctcat tatgattggc atggatctca gaccttggac
+     1381 tgatagcggt aaagggatgc tctgttttca cccactctac tcgccgattc ccctgagacc
+     1441 ctttaacttt catcacgact tctaaccctt ctcgccaaac cttgcgatgc ccatagtcag
+     1501 gatgacactc atcacctttg agatagacac tggcaagctg ccaaagttct tgtccataac
+     1561 gcctttcacc atcggtaaac catcgaatcc catcacaggc tttcacccac tcccaagctg
+     1621 agtaaacgcc atttgcaaaa agttgtgcat ccttgaggcc agctagtgct gtcaaccaat
+     1681 agcggctttc gcgttcaagg aagtggatgg tccagccctg ggactggctg ggggggaaga
+     1741 tttttgccta cacgagtgta tacttcatcc ccttctaccg tcacatcaga ggctgctggt
+     1801 gcgggggggt gaccagttct gtgcttggtc tgctaggcgt ttttcccaac gcataatggt
+     1861 ggtatgagat ttaccaaagg tacgacctgc tgaacggacc cccattcctt cggtgcgagc
+     1921 tttgatggca tagctcacca ctgaactagc ggtgcgtaaa cgagccattg gggtgcctgt
+     1981 gcgttcgttg aaacgacgat tgcaatcctt acactgatat cgctggacta atgtcccatc
+     2041 ttgcagacta tcaaagccac gcttaaggat cttctcactt tgacagtatg ggcattccat
+     2101 tgatctacat caggttccgt cgaaggcatt ata
+//
+
