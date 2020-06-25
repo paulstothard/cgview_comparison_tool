@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 #FILE: convert_vcf_to_features.pl
 #AUTH: Jason Grant <jason.grant@ualberta.ca>
 #DATE: June 22, 2020
