@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 if [ ! -d ./cog_db ]; then
-    mkdir ./cog_db
+  mkdir ./cog_db
 fi
 
 if [ -f ./cog_db/.complete ]; then
