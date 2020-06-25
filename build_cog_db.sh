@@ -1,4 +1,5 @@
 #!/bin/bash -e
+./check_env.sh
 
 if [ ! -d ./cog_db ]; then
   mkdir ./cog_db
