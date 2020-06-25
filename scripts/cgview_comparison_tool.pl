@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 #FILE: cgview_comparison_tool.pl
 #AUTH: Paul Stothard (stothard@ualberta.ca)
 #DATE: March 5, 2010
@@ -2053,7 +2054,7 @@ sub print_usage {
     print <<BLOCK;
 
 USAGE:
-   cgview_comparison_tool.pl -p DIR [options]
+   perl cgview_comparison_tool.pl -p DIR [options]
 
 DESCRIPTION:
    Run this command once to generate a project directory. After the project is
