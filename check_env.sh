@@ -32,8 +32,8 @@ for j in Util::Configurator Util::LogManager; do
     perl -e "use $j" &>/dev/null
     if [ $? -ne 0 ]; then
         echo "
-  Could not find the CGView Comparison Tool Perl module '$j'. Have you added the
-  cgview_comparison_tool/lib/perl_modules directory to PERL5LIB?
+  Could not find the CGView Comparison Tool Perl module '$j'. Have you added
+  the cgview_comparison_tool/lib/perl_modules directory to PERL5LIB?
   
   For example, add the following to your ~/.bashrc or ~/.bash_profile file:
 
