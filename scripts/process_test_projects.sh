@@ -32,7 +32,7 @@ if [ ! -d "${CCT_HOME}"/test_output ]; then
   mkdir "${CCT_HOME}"/test_output
 fi
 
-TEST_PROJECTS=($(find "${CCT_HOME}"/test_projects -name "test_*" -type d -depth 1))
+TEST_PROJECTS=($(find "${CCT_HOME}/test_projects" -mindepth 1 -maxdepth 1 -name 'test_*' -type d))
 for project in "${TEST_PROJECTS[@]}"; do
   p=$(basename "$project")
   echo "Processing project '$p'"
