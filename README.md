@@ -59,7 +59,7 @@ When using the CCT Docker image to run commands described in the [CCT documentat
 CCT="docker run --rm -v $(pwd):/dir -w /dir pstothard/cgview_comparison_tool"
 ```
 
-Then the commands in the CCT documentation can be run by preceeding them with the environment variable, for example:
+Then the commands in the CCT documentation can be run by preceding them with the environment variable, for example:
 
 ```bash
 $CCT fetch_genome_by_accession.sh -a NC_009787 -o ./
