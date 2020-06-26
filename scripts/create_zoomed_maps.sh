@@ -132,6 +132,6 @@ for ((i = 0; i < $length; i++)); do
     echo "Generating zoomed map from the file '$xml_file'."
     file_no_extension=$(get_filename_without_extension "$xml_file")
     path_to_maps=$(get_path_to_maps "$xml_file")
-    java -jar -Xmx"${mem}" "$cct_home"/bin/cgview.jar -i "$xml_file" -c $center -z $zoom -o "$path_to_maps"/"${file_no_extension}_${center}_${zoom}"."$format" -f "$format"
+    java -jar -Xmx"${mem}" "$cct_home"/bin/cgview/cgview.jar -i "$xml_file" -c $center -z $zoom -o "$path_to_maps"/"${file_no_extension}_${center}_${zoom}"."$format" -f "$format"
     echo "New map drawn to $path_to_maps/${file_no_extension}_${center}_${zoom}.${format}"
 done
