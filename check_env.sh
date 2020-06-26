@@ -8,7 +8,7 @@ function end_test() {
 }
 
 # Check that the CCT_HOME variable is set
-if [ -z $CCT_HOME ] || [ ! -f ${CCT_HOME}/check_env.sh ]; then
+if [ -z "$CCT_HOME" ] || [ ! -f "${CCT_HOME}/check_env.sh" ]; then
     echo "
   Please set the \$CCT_HOME environment variable to the full path to the
   cgview_comparison_tool directory.
