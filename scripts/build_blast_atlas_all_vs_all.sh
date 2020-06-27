@@ -235,7 +235,7 @@ if (! $new_project) && [ -z "$start_at_montage" ]; then
         fi
 
         if [ -n "$custom" ]; then
-            command=$command" --custom '${custom}'"
+            command=$command" --custom ${custom}"
         fi
 
         if [ -n "$size" ]; then

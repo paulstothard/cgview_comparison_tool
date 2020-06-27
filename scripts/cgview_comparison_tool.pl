@@ -1671,10 +1671,22 @@ sub _buildCgviewXml {
             if (   ( defined( $options->{custom} ) )
                 && ( scalar( @{ $options->{custom} } ) > 0 ) )
             {
-                $command =
-                    $command
-                  . ' -custom '
-                  . _quote_rgb( join( ' ', @{ $options->{custom} } ) );
+                #2020-06-26
+                #add quotes around values
+                my @quoted = ();
+                foreach my $item ( @{ $options->{custom} } ) {
+                    if ( $item =~ m/([^=]+)=([^=]+)/ ) {
+                        my $with_quotes = "'$1=$2'";
+                        push( @quoted, $with_quotes );
+                    }
+                    else {
+                        throw Error::Simple(
+"The following 'custom' key-value could not be parsed: "
+                              . $item
+                              . "." );
+                    }
+                }
+                $command = $command . ' -custom ' . join( ' ', @quoted );
                 print $command . "\n";
             }
 
@@ -1804,12 +1816,6 @@ sub _removeExtension {
     my $file = shift;
     $file =~ s/\..*$//;
     return $file;
-}
-
-sub _quote_rgb {
-    my $string = shift;
-    $string =~ s/(rgb.+?\))/\'$1\'/g;
-    return $string;
 }
 
 sub _getBlastCoverageRevised {
