@@ -19,17 +19,16 @@ Pull the Docker image:
 docker pull pstothard/cgview_comparison_tool
 ```
 
-Run the Docker image and use `fetch_genome_by_accession.sh` to download a sequence in GenBank format:
-
-```bash
-docker run --rm -v $(pwd):/dir -w /dir pstothard/cgview_comparison_tool \
-fetch_genome_by_accession.sh -a AC_000022 -o ./
-```
-
-Use `build_blast_atlas.sh` to create a BLAST Atlas project for the sequence that was downloaded (to simplify this and subsequent commands, `$CCT` is used to store the first part of the command, which runs the Docker image):
+Run the Docker image and use `fetch_genome_by_accession.sh` to download a sequence in GenBank format (to simplify this and subsequent commands, `$CCT` is used to store the first part of the command, which runs the Docker image):
 
 ```bash
 CCT="docker run --rm -v $(pwd):/dir -w /dir pstothard/cgview_comparison_tool"
+$CCT fetch_genome_by_accession.sh -a AC_000022 -o ./
+```
+
+Use `build_blast_atlas.sh` to create a BLAST Atlas project for the sequence that was downloaded:
+
+```bash
 $CCT build_blast_atlas.sh -i AC_000022.gbk
 ```
 
