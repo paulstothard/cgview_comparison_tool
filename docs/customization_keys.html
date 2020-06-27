@@ -73,6 +73,33 @@
         given as rgb strings such as 'rgb(0,0,0)'.
       </p>
 
+      <p>
+        When using the the '--custom' option with
+        <a class="command" href="commands.html#cgview_comparison_tool"
+          >cgview_comparison_tool.pl</a
+        >, use quotes around values that contain spaces, as in this example:
+      </p>
+
+      <pre class="code">
+<a class='command' href='commands.html#cgview_comparison_tool'>cgview_comparison_tool.pl</a> -p xylanase --custom featureOpacity=1 labelFontSize=50 title='some title'</pre>
+
+      <p>
+        When using the the '--custom' option with
+        <a class="command" href="commands.html#build_blast_atlas"
+          >build_blast_atlas.sh</a
+        >
+        or
+        <a class="command" href="commands.html#build_blast_atlas_all_vs_all"
+          >build_blast_atlas_all_vs_all.sh</a
+        >, use double quotes around the text passed to '--custom' and use single
+        quotes around values containing spaces, as in this example:
+      </p>
+
+      <pre class="code">
+  <a class="command" href="commands.html#build_blast_atlas"
+  >build_blast_atlas.sh</a
+> -p AC_000022 -x --custom "title='Rattus rat' global_label=T legend=F use_opacity=F backboneRadius=4200"</pre>
+
       <table class="colored-rows" id="customization-keys">
         <tr>
           <th>Key</th>
@@ -391,6 +418,14 @@
         <tr>
           <td>scale_blast</td>
           <td>Draw BLAST hits with height proportional to percent identity</td>
+          <td>T/F</td>
+        </tr>
+        <tr>
+          <td>show_contigs</td>
+          <td>
+            Stagger divider rings to show the boundaries of contigs in sequences
+            consisting of multiple contigs
+          </td>
           <td>T/F</td>
         </tr>
         <tr>
