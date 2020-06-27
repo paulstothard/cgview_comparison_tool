@@ -39,7 +39,7 @@ for project in "${TEST_PROJECTS[@]}"; do
   cp -R "$project" "${CCT_HOME}"/test_output
   for j in project_settings.conf; do
     echo "Processing project '$p' using configuration '$j'"
-    command="perl '${CCT_HOME}/scripts/cgview_comparison_tool.pl' -c '"${CCT_HOME}"/conf/global_settings.conf' -p '"${CCT_HOME}"/test_output/$p' -s '"${CCT_HOME}"/test_output/$p/$j' -f '${p}_${j}_'"
+    command="perl '${CCT_HOME}/scripts/cgview_comparison_tool.pl' -g '"${CCT_HOME}"/conf/global_settings.conf' -p '"${CCT_HOME}"/test_output/$p' -s '"${CCT_HOME}"/test_output/$p/$j' -f '${p}_${j}_'"
     eval $command
   done
 done
