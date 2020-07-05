@@ -43,5 +43,4 @@ ENV CCT_HOME /cgview_comparison_tool
 ENV PATH "${CCT_HOME}/scripts:${PATH}"
 ENV PERL5LIB "$PERL5LIB:${CCT_HOME}/lib/perl_modules"
 
-RUN ls -lR bin
 RUN ["/bin/bash", "-c", "process_test_projects.sh"]
