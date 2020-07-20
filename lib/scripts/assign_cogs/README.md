@@ -41,7 +41,7 @@ usage:
 
   perl assign_cogs.pl -help
 
-ASSIGN COGS
+ASSIGN COGS:
 
 usage:
 

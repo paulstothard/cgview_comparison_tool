@@ -29,7 +29,7 @@ usage:
 
   perl ncbi_search.pl -help
 
-PERFORM NCBI SEARCH
+PERFORM NCBI SEARCH:
 
 usage:
 

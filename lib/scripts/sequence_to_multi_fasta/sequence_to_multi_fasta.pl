@@ -142,7 +142,7 @@ usage:
 
   perl sequence_to_multi_fasta.pl -help
 
-SPLIT DNA SEQUENCE
+SPLIT DNA SEQUENCE:
 
 usage:
 

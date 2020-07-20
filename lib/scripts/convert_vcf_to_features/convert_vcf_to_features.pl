@@ -134,7 +134,7 @@ usage:
 
   perl convert_vcf_to_features.pl -help
 
-CONVERT VCF TO TAB-DELIMITED
+CONVERT VCF TO TAB-DELIMITED:
 
 usage:
 

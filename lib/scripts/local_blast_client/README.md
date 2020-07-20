@@ -30,7 +30,7 @@ usage:
 
   perl local_blast_client.pl -help
 
-PERFORM LOCAL BLAST SEARCH
+PERFORM LOCAL BLAST SEARCH:
 
 usage:
 
