@@ -23,6 +23,7 @@ RUN cpanm CPAN::Meta \
  Bio::SeqIO \
  Bio::SeqUtils \
  Bio::Tools::CodonTable \
+ Error \
  File::Temp \
  LWP::Protocol::https \
  Tie::IxHash
@@ -39,8 +40,8 @@ COPY lib ./lib
 COPY scripts ./scripts
 COPY test_projects ./test_projects
 
-ENV CCT_HOME /cgview_comparison_tool
-ENV PATH "${CCT_HOME}/scripts:${PATH}"
+ENV CCT_HOME "/cgview_comparison_tool"
+ENV PATH "$PATH:${CCT_HOME}/scripts"
 ENV PERL5LIB "$PERL5LIB:${CCT_HOME}/lib/perl_modules"
 
 RUN ["/bin/bash", "-c", "process_test_projects.sh"]
