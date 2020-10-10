@@ -7,6 +7,16 @@ function end_test() {
     exit 1
 }
 
+# Check for required software
+for j in java perl blastall formatdb convert montage; do
+    if ! command -v $j &>/dev/null; then
+        echo "
+  '$j' is required but not installed." >&2
+
+        end_test
+    fi
+done
+
 # Check that the CCT_HOME variable is set
 if [ -z "$CCT_HOME" ]; then
     echo "
@@ -66,16 +76,6 @@ if ! command -v cgview_comparison_tool.pl &>/dev/null; then
 
     end_test
 fi
-
-# Check for required software
-for j in java blastall formatdb convert montage; do
-    if ! command -v $j &>/dev/null; then
-        echo "
-  '$j' is required but not installed." >&2
-
-        end_test
-    fi
-done
 
 # Check for perl modules
 set +e
