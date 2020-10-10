@@ -103,19 +103,20 @@ CCT requires the following programs:
 
 CCT requires the following Perl modules:
 
-* Tie::IxHash
 * Bio::SeqIO
 * Bio::SeqUtils
-* File::Temp
 * Bio::Tools::CodonTable
+* Error
+* File::Temp
 * LWP::Protocol::https
+* Tie::IxHash
 
 Set the following environment variables (by editing `~/.bashrc` or `~/.bash_profile`, for example):
 
 ```bash
-export CCT_HOME='/path/to/cgview_comparison_tool'
-export PATH=$PATH:${CCT_HOME}/scripts
-export PERL5LIB=${CCT_HOME}/lib/perl_modules
+export CCT_HOME="/path/to/cgview_comparison_tool"
+export PATH="$PATH:${CCT_HOME}/scripts"
+export PERL5LIB="$PERL5LIB:${CCT_HOME}/lib/perl_modules"
 ```
 
 Test your setup:
