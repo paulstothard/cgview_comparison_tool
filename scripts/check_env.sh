@@ -17,6 +17,19 @@ for j in java perl blastall formatdb convert montage; do
     fi
 done
 
+# Check for perl modules
+set +e
+for j in Bio::SeqIO Bio::SeqUtils Bio::Tools::CodonTable Error File::Temp LWP::Protocol::https Tie::IxHash; do
+    perl -e "use $j" &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo "
+  The '$j' Perl module is required but not installed." >&2
+
+        end_test
+    fi
+done
+set -e
+
 # Check that the CCT_HOME variable is set
 if [ -z "$CCT_HOME" ]; then
     echo "
@@ -76,18 +89,5 @@ if ! command -v cgview_comparison_tool.pl &>/dev/null; then
 
     end_test
 fi
-
-# Check for perl modules
-set +e
-for j in Tie::IxHash Bio::SeqIO Bio::SeqUtils File::Temp Bio::Tools::CodonTable LWP::Protocol::https; do
-    perl -e "use $j" &>/dev/null
-    if [ $? -ne 0 ]; then
-        echo "
-  The '$j' Perl module is required but not installed." >&2
-
-        end_test
-    fi
-done
-set -e
 
 echo "'Check environment' test passed"
