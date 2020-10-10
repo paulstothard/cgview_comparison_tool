@@ -95,11 +95,12 @@ git clone git@github.com:paulstothard/cgview_comparison_tool.git
 
 CCT requires the following programs:
 
-* [java](https://openjdk.java.net)
 * [blastall](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/)
-* [formatdb](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/)
 * [convert](https://imagemagick.org/)
+* [formatdb](https://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/)
+* [java](https://openjdk.java.net)
 * [montage](https://imagemagick.org/)
+* [perl](https://www.perl.org)
 
 CCT requires the following Perl modules:
 
