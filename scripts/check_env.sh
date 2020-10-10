@@ -8,7 +8,7 @@ function end_test() {
 }
 
 # Check for required software
-for j in java perl blastall formatdb convert montage; do
+for j in blastall convert formatdb java montage perl; do
     if ! command -v $j &>/dev/null; then
         echo "
   '$j' is required but not installed." >&2
