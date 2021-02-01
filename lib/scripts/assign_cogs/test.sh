@@ -6,29 +6,17 @@ if [ ! -d test_output ]; then
     mkdir test_output
 fi
 
-if [ ! -d db ]; then
-    mkdir db
-fi
-
-if [ -f db/myva ]; then
-    cp db/myva test_output
-fi
-
-if [ -f db/myva.gz ]; then
-    cp db/myva.gz test_output
+if [ ! -f test_output/myva ]; then
+    cp -f db/myva.gz test_output
     gunzip test_output/myva.gz
 fi
 
-if [ -f db/whog ]; then
-    cp db/whog test_output
-fi
-
-if [ -f db/whog.gz ]; then
-    cp db/whog.gz test_output
+if [ ! -f test_output/whog ]; then
+    cp -f db/whog.gz test_output
     gunzip test_output/whog.gz
 fi
 
-formatdb -p T -i test_output/myva -o T
+FORMATDB -p T -i test_output/myva -o T
 
 rm formatdb.log
 
