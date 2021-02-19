@@ -25,13 +25,13 @@ Run the Docker image and use `fetch_genome_by_accession.sh` to download a sequen
 docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a AC_000022 -o ./
 ```
 
-Use `build_blast_atlas.sh` to create a BLAST Atlas project for the sequence that was downloaded:
+Use `build_blast_atlas.sh` to create a BLAST atlas project for the sequence that was downloaded:
 
 ```bash
 docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool build_blast_atlas.sh -i AC_000022.gbk
 ```
 
-Download some sequences to be used as "comparison genomes" in the BLAST Atlas project:
+Download some sequences to be used as "comparison genomes" in the BLAST atlas project:
 
 ```bash
 docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_046914 -o ./AC_000022/comparison_genomes
