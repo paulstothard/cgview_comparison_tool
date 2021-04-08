@@ -107,13 +107,19 @@ export PERL5LIB="$PERL5LIB:${CCT_HOME}/lib/perl_modules"
 Test your setup:
 
 ```bash
-check_env.sh
+./scripts/check_env.sh
+```
+
+Prepare the COG database:
+
+```bash
+./scripts/build_cog_db.sh
 ```
 
 Build some test maps:
 
 ```bash
-process_test_projects.sh
+./scripts/process_test_projects.sh
 ```
 
 Refer to the [CCT documentation](https://paulstothard.github.io/cgview_comparison_tool/index.html) for information on how to use CCT. The [tutorials](https://paulstothard.github.io/cgview_comparison_tool/tutorials.html) are a good starting point.
