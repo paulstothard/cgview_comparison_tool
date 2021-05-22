@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-PROGNAME=$(basename $0)
+PROGNAME=$(basename "$0")
 
 function usage() {
     echo "usage: remove_short_seqs.sh [[-i input] [-l length] | [-h]]"
@@ -37,13 +37,13 @@ function error_exit() {
 function remove_trailing_slash() {
     string="$1"
     new_string=$(echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_')
-    echo $new_string
+    echo "$new_string"
 }
 
 function get_sequence_length() {
     file="$1"
     seq_length=$(head -n 1 "$file" | perl -nl -e 'm/(\d+)\sbp/;' -e 'print $1')
-    echo $seq_length
+    echo "$seq_length"
 }
 
 while [ "$1" != "" ]; do
@@ -68,11 +68,11 @@ while [ "$1" != "" ]; do
     shift
 done
 
-if [ -z $input ]; then
+if [ -z "$input" ]; then
     error_exit "Please use '-i' to specify an input directory of GenBank files with .gbk extensions. Use '-h' for help."
 fi
 
-if [ -z $min_length ]; then
+if [ -z "$min_length" ]; then
     error_exit "Please use '-l' to specify a minimum sequence length to keep. Use '-h' for help."
 fi
 
@@ -80,22 +80,17 @@ cct_home=$CCT_HOME
 
 input=$(remove_trailing_slash "$input")
 
-# save and change IFS to avoid problems with filesnames with spaces
-OLDIFS=$IFS
-IFS=$'\n'
-
 #find all GenBank files in the directory
+IFS=$'\n'
 files=($(find "$input" -maxdepth 1 -type f -name "*.gbk"))
-
-# restore IFS
-IFS=$OLDIFS
+unset IFS
 
 length=${#files[@]}
-for ((i = 0; i < $length; i++)); do
+for ((i = 0; i < length; i++)); do
     gbk_file=${files[$i]}
     seq_length=$(get_sequence_length "$gbk_file")
 
-    if [ -z $seq_length ]; then
+    if [ -z "$seq_length" ]; then
         error_exit "Unable to determine length of sequence '$gbk_file'"
     fi
 

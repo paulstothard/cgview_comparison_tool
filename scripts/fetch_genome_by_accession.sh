@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-PROGNAME=$(basename $0)
+PROGNAME=$(basename "$0")
 
 function usage() {
     echo "
@@ -33,7 +33,7 @@ function error_exit() {
 function remove_trailing_slash() {
     string="$1"
     new_string=$(echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_')
-    echo $new_string
+    echo "$new_string"
 }
 
 while [ "$1" != "" ]; do
@@ -59,20 +59,20 @@ while [ "$1" != "" ]; do
 done
 
 # The CCT_HOME variable must be set
-if [ -z $CCT_HOME ]; then
+if [ -z "$CCT_HOME" ]; then
     error_exit "Please set the \$CCT_HOME environment variable to the path to the cgview_comparison_tool directory."
 fi
 cct_home=$CCT_HOME
 
-if [ -z $accession ]; then
+if [ -z "$accession" ]; then
     error_exit "Please use '-a' to specify the accession number of the genome to download. Use '-h' for help."
 fi
 
-if [ -z $directory ]; then
+if [ -z "$directory" ]; then
     error_exit "Please use '-o' to specify an output directory. Use '-h' for help."
 fi
 
-if [ -z $CCT_HOME ]; then
+if [ -z "$CCT_HOME" ]; then
     error_exit "Please set the \$CCT_HOME environment variable to the path to the cgview_comparison_tool directory"
 fi
 
@@ -82,6 +82,6 @@ if [ ! -d "$directory" ]; then
     mkdir -p "$directory"
 fi
 
-perl "$cct_home"/lib/scripts/ncbi_search/ncbi_search.pl -q "$accession"[ACCESSION] -d nucleotide -o "$directory"/"$accession".gbk -r gbwithparts -m 1 -v
+perl "$cct_home/lib/scripts/ncbi_search/ncbi_search.pl" -q "$accession"'[ACCESSION]' -d nucleotide -o "$directory/$accession.gbk" -r gbwithparts -m 1 -v
 
 echo "The record has been saved to ${directory}/${accession}.gbk"

@@ -39,7 +39,7 @@ if [ -z "$CCT_HOME" ]; then
   For example, add the following to your ~/.bashrc
   or ~/.bash_profile file:
 
-    export CCT_HOME="/path/to/cgview_comparison_tool"
+    export CCT_HOME=\"/path/to/cgview_comparison_tool\"
 
   After saving reload your ~/.bashrc or ~/.bash_profile file:
 
@@ -60,7 +60,7 @@ for j in Util::Configurator Util::LogManager; do
   
   For example, add the following to your ~/.bashrc or ~/.bash_profile file:
 
-    export PERL5LIB="\$PERL5LIB":"${CCT_HOME}"/lib/perl_modules
+    export PERL5LIB=\"\$PERL5LIB\":\"${CCT_HOME}\"/lib/perl_modules
 
   After saving reload your ~/.bashrc or ~/.bash_profile file:
 
@@ -80,7 +80,7 @@ if ! command -v cgview_comparison_tool.pl &>/dev/null; then
   
   For example, add the following to your ~/.bashrc or ~/.bash_profile file:
 
-    export PATH="\$PATH":"${CCT_HOME}"/scripts
+    export PATH=\"\$PATH\":\"${CCT_HOME}\"/scripts
 
   After saving reload your ~/.bashrc or ~/.bash_profile file:
 

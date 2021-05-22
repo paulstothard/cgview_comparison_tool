@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-PROGNAME=$(basename $0)
+PROGNAME=$(basename "$0")
 
 function usage() {
     echo "
@@ -31,7 +31,7 @@ function error_exit() {
 function remove_trailing_slash() {
     string="$1"
     new_string=$(echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_')
-    echo $new_string
+    echo "$new_string"
 }
 
 while [ "$1" != "" ]; do
@@ -53,7 +53,7 @@ while [ "$1" != "" ]; do
 done
 
 # The CCT_HOME variable must be set
-if [ -z $CCT_HOME ]; then
+if [ -z "$CCT_HOME" ]; then
     error_exit "Please set the \$CCT_HOME environment variable to the path to the cgview_comparison_tool directory."
 fi
 cct_home=$CCT_HOME

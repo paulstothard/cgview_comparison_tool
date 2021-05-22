@@ -9,7 +9,7 @@ size=""
 start_at_map=""
 start_at_xml=""
 
-PROGNAME=$(basename $0)
+PROGNAME=$(basename "$0")
 
 function usage() {
     echo "
@@ -85,7 +85,7 @@ function error_exit() {
 function get_filename_without_extension() {
     basefile=$(basename "$1")
     filename=${basefile%.*}
-    echo $filename
+    echo "$filename"
 }
 
 while [ "$1" != "" ]; do
@@ -133,7 +133,7 @@ while [ "$1" != "" ]; do
 done
 
 # The CCT_HOME variable must be set
-if [ -z $CCT_HOME ]; then
+if [ -z "$CCT_HOME" ]; then
     error_exit "Please set the \$CCT_HOME environment variable to the path to the cgview_comparison_tool directory."
 fi
 cct_home=$CCT_HOME
@@ -145,7 +145,7 @@ elif [ -n "$input" ]; then
     if [ ! -f "$input" ]; then
         error_exit "The input GenBank file '$input' does not exist"
     fi
-    project_dir=$(get_filename_without_extension $input)
+    project_dir=$(get_filename_without_extension "$input")
 else
     error_exit "Please use '-i' to specify an input sequence file in GenBank format, with .gbk extension or the '-p' option to specify the project directory. For a full list of options use '-h'."
 fi
@@ -227,7 +227,7 @@ if ! $new_project; then
         fi
 
         if [ -n "$start_at_map" ]; then
-            if [ -d "${project_dir}/maps_for_${type}/cgview_xml/" ] && [ "$(ls -A ${project_dir}/maps_for_${type}/cgview_xml/)" ]; then
+            if [ -d "${project_dir}/maps_for_${type}/cgview_xml/" ] && [ "$(ls -A "${project_dir}/maps_for_${type}/cgview_xml/")" ]; then
                 echo "Redrawing maps for map type $type using existing XML."
                 eval "$command --start_at_map"
                 echo "Maps drawn to ${project_dir}/maps_for_${type}"
@@ -235,7 +235,7 @@ if ! $new_project; then
                 error_exit "The --start_at_map option was provided but there are no XML files present."
             fi
         elif [ -n "$start_at_xml" ]; then
-            if [ -d "${project_dir}/cct_projects/${type}/blast/blast_results_local/" ] && [ "$(ls -A $project_dir/cct_projects/$type/blast/blast_results_local/)" ]; then
+            if [ -d "${project_dir}/cct_projects/${type}/blast/blast_results_local/" ] && [ "$(ls -A "$project_dir/cct_projects/$type/blast/blast_results_local/")" ]; then
                 echo "Redrawing maps for map type $type using existing BLAST results."
                 eval "$command --start_at_xml"
                 echo "Maps drawn to ${project_dir}/maps_for_${type}"
@@ -245,7 +245,7 @@ if ! $new_project; then
         else
             # Redraw from start
             echo "Creating maps for map type $type in ${project_dir}/maps_for_${type}"
-            eval $command
+            eval "$command"
             echo "Maps drawn to ${project_dir}/maps_for_${type}"
         fi
 

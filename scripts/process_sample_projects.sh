@@ -16,7 +16,7 @@ if [ -z "$CCT_HOME" ]; then
   For example, add the following to your ~/.bashrc
   or ~/.bash_profile file:
 
-    export CCT_HOME="/path/to/cgview_comparison_tool"
+    export CCT_HOME=\"/path/to/cgview_comparison_tool\"
 
   After saving reload your ~/.bashrc or ~/.bash_profile file:
 
@@ -32,16 +32,18 @@ if [ ! -d "${CCT_HOME}"/test_output ]; then
   mkdir "${CCT_HOME}"/test_output
 fi
 
+IFS=$'\n'
 SAMPLE_PROJECTS=($(find "${CCT_HOME}/sample_projects" -mindepth 1 -maxdepth 1 -name 'sample_project_*' -type d))
+unset IFS
 for project in "${SAMPLE_PROJECTS[@]}"; do
   p=$(basename "$project")
   echo "Processing project '$p'"
   cp -R "$project" "${CCT_HOME}"/test_output
   for j in project_settings_a.conf project_settings_b.conf project_settings_c.conf; do
     echo "Processing project '$p' using configuration '$j'"
-    command="perl '${CCT_HOME}/scripts/cgview_comparison_tool.pl' -g '"${CCT_HOME}"/conf/global_settings.conf' -p '"${CCT_HOME}"/test_output/$p' -s '"${CCT_HOME}"/test_output/$p/$j' -f '${p}_${j}_'"
-    eval $command
+    command="perl ${CCT_HOME}/scripts/cgview_comparison_tool.pl -g ${CCT_HOME}/conf/global_settings.conf -p ${CCT_HOME}/test_output/$p -s ${CCT_HOME}/test_output/$p/$j -f ${p}_${j}_"
+    eval "$command"
   done
 done
 
-echo "Sample project output written to "${CCT_HOME}"/test_output"
+echo "Sample project output written to '${CCT_HOME}/test_output'"

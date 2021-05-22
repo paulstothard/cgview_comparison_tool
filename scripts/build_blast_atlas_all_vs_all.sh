@@ -11,7 +11,7 @@ start_at_xml=""
 start_at_montage=""
 columns=4
 
-PROGNAME=$(basename $0)
+PROGNAME=$(basename "$0")
 
 function usage() {
     echo "
@@ -91,7 +91,7 @@ function error_exit() {
 function get_filename_without_extension() {
     basefile=$(basename "$1")
     filename=${basefile%.*}
-    echo $filename
+    echo "$filename"
 }
 
 # Check for ImageMagick
@@ -193,23 +193,22 @@ if (! $new_project) && [ -z "$start_at_montage" ]; then
     fi
 
     # Find all the gbk files, sort by accession and for each one create a new cgview_comparison_tool project
+    IFS=$'\n'
     files=($(find "${project_dir}/comparison_genomes" -maxdepth 1 -type f \( -name "*.gbk" -o -name "*.gb" \) -print0 | perl -ne 'my @files = split(/\0/, $_); my @sorted = sort {$a =~ m/[AN]C_0*(\d+)/; $a_char = $1; $b =~ m/[AN]C_0*(\d+)/; $b_char = $1; return ($a_char <=> $b_char);} @files; foreach(@sorted) { print "$_\n";}'))
+    unset IFS
+
     length=${#files[@]}
-    for ((i = 0; i < $length; i++)); do
+    for ((i = 0; i < length; i++)); do
 
         seqname=$(get_filename_without_extension "${files[$i]}")
-        after=$i+1
-        after_length=$length-$after
+
         reference_genome=$(basename "${files[$i]}")
 
-        #the following leaves out the reference genome
-        #comparison_genomes=( ${files[@]:0:$i} ${files[@]:$after:$after_length} )
-
-        comparison_genomes=(${files[@]:0:$length})
+        comparison_genomes=("${files[@]:0:$length}")
 
         echo "Generating project for $reference_genome as the reference genome."
         echo "The comparison genomes are:"
-        echo ${comparison_genomes[@]}
+        echo "${comparison_genomes[@]}"
 
         # Create project and links
         if [ ! -d "${project_dir}/cct_projects/${seqname}" ]; then
@@ -220,7 +219,7 @@ if (! $new_project) && [ -z "$start_at_montage" ]; then
 
             # Create links to comparison genomes
             length_comparison=${#comparison_genomes[@]}
-            for ((j = 0; j < $length_comparison; j++)); do
+            for ((j = 0; j < length_comparison; j++)); do
                 filename_comparison=$(basename "${comparison_genomes[$j]}")
                 ln -s "../../../comparison_genomes/${filename_comparison}" "${project_dir}/cct_projects/${seqname}/comparison_genomes/${filename_comparison}"
             done
@@ -243,7 +242,7 @@ if (! $new_project) && [ -z "$start_at_montage" ]; then
         fi
 
         if [ -n "$start_at_map" ]; then
-            if [ -d "${project_dir}/cct_projects/${seqname}/maps/cgview_xml/" ] && [ "$(ls -A ${project_dir}/cct_projects/${seqname}/maps/cgview_xml/)" ]; then
+            if [ -d "${project_dir}/cct_projects/${seqname}/maps/cgview_xml/" ] && [ "$(ls -A "${project_dir}/cct_projects/${seqname}/maps/cgview_xml/")" ]; then
                 #xml present, draw from xml
                 echo "Redrawing maps for map $seqname using existing XML."
                 eval "$command --start_at_map"
@@ -251,7 +250,7 @@ if (! $new_project) && [ -z "$start_at_montage" ]; then
                 error_exit "The --start_at_map option was provided but there are no XML files present."
             fi
         elif [ -n "$start_at_xml" ]; then
-            if [ -d "$project_dir/cct_projects/$seqname/blast/blast_results_local/" ] && [ "$(ls -A $project_dir/cct_projects/$seqname/blast/blast_results_local/)" ]; then
+            if [ -d "$project_dir/cct_projects/$seqname/blast/blast_results_local/" ] && [ "$(ls -A "$project_dir/cct_projects/$seqname/blast/blast_results_local/")" ]; then
                 #blast results present, build xml and draw
                 echo "Redrawing maps for map $seqname using existing BLAST results."
                 eval "$command --start_at_xml"
@@ -261,7 +260,7 @@ if (! $new_project) && [ -z "$start_at_montage" ]; then
         else
             # Redraw from start
             echo "Creating maps for map $seqname in $project_dir/cct_projects/$seqname/maps"
-            eval $command
+            eval "$command"
         fi
     done
 fi
@@ -269,12 +268,14 @@ fi
 # COMBINE IMAGES USING IMAGEMAGICK
 if (! $new_project) || [ -n "$start_at_montage" ]; then
     # This sorts the files by accession
+    IFS=$'\n'
     png_files=($(find "$project_dir"/cct_projects -type f \( -name "*.png" \) -print0 | perl -ne 'my @files = split(/\0/, $_); my @sorted = sort {$a =~ m/[A-Z][A-Z]_*0*(\d+)/; $a_char = $1; $b =~ m/[A-Z][A-Z]_*0*(\d+)/; $b_char = $1; return ($a_char <=> $b_char);} @files; foreach(@sorted) { print "$_\n";}'))
+    unset IFS
     png_length=${#png_files[@]}
     #for (( i=0; i<$png_length; i++ ));
     #do
     #convert "${png_files[$i]}" -resize 40% "${png_files[$i]}"
     #done
-    montage "${png_files[@]:0}" -resize 40% -tile ${columns}x -geometry 800x800\>+2+2 -background "#FFFFFF" "$project_dir"/montage.png
+    montage "${png_files[@]:0}" -resize 40% -tile "${columns}"x -geometry 800x800\>+2+2 -background "#FFFFFF" "$project_dir"/montage.png
     echo "Montage drawn to $project_dir/montage.png"
 fi

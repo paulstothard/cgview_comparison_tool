@@ -16,7 +16,7 @@ if [ -z "$CCT_HOME" ]; then
   For example, add the following to your ~/.bashrc
   or ~/.bash_profile file:
 
-    export CCT_HOME="/path/to/cgview_comparison_tool"
+    export CCT_HOME=\"/path/to/cgview_comparison_tool\"
 
   After saving reload your ~/.bashrc or ~/.bash_profile file:
 
@@ -34,7 +34,7 @@ fi
 
 if [ -f "${CCT_HOME}"/cog_db/.complete ]; then
   echo "COG BLAST database already created"
-  echo "Remove '"${CCT_HOME}"/cog_db/.complete' to create again"
+  echo "Remove '${CCT_HOME}/cog_db/.complete' to create again"
   exit 0
 fi
 

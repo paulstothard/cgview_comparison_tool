@@ -3,7 +3,7 @@
 format=png
 mem=1500m
 
-PROGNAME=$(basename $0)
+PROGNAME=$(basename "$0")
 
 function usage() {
     echo "
@@ -43,19 +43,19 @@ function error_exit() {
 function get_filename_without_extension() {
     basefile=$(basename "$1")
     filename=${basefile%.*}
-    echo $filename
+    echo "$filename"
 }
 
 function get_path_to_maps() {
     file="$1"
     filename=$(echo "$file" | perl -nl -e 'm/(.+)\/cgview_xml\/[^\/]+$/;' -e 'print $1')
-    echo $filename
+    echo "$filename"
 }
 
 function remove_trailing_slash() {
     string="$1"
     new_string=$(echo "$string" | perl -nl -e 's/\/+$//;' -e 'print $_')
-    echo $new_string
+    echo "$new_string"
 }
 
 while [ "$1" != "" ]; do
@@ -116,22 +116,11 @@ fi
 
 project=$(remove_trailing_slash "$project")
 
-# save and change IFS to avoid problems with filesnames with spaces
-OLDIFS=$IFS
-IFS=$'\n'
-
 #find all XML files in the project
-files=($(find -L "$project" -type f -name "*.xml"))
-
-# restore IFS
-IFS=$OLDIFS
-
-length=${#files[@]}
-for ((i = 0; i < $length; i++)); do
-    xml_file=${files[$i]}
+find "$project" -name "*.xml" -type f | while IFS= read -r xml_file; do
     echo "Generating zoomed map from the file '$xml_file'."
     file_no_extension=$(get_filename_without_extension "$xml_file")
     path_to_maps=$(get_path_to_maps "$xml_file")
-    java -jar -Xmx"${mem}" "$cct_home"/bin/cgview/cgview.jar -i "$xml_file" -c $center -z $zoom -o "$path_to_maps"/"${file_no_extension}_${center}_${zoom}"."$format" -f "$format"
+    java -jar -Xmx"${mem}" "$cct_home"/bin/cgview/cgview.jar -i "$xml_file" -c "$center" -z "$zoom" -o "$path_to_maps/${file_no_extension}_${center}_${zoom}.$format" -f "$format"
     echo "New map drawn to $path_to_maps/${file_no_extension}_${center}_${zoom}.${format}"
 done

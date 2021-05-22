@@ -36,15 +36,16 @@ rm -rf test_output/formatted_databases
 #compare new output to sample output
 new_output=test_output
 old_output=sample_output
+IFS=$'\n'
 new_files=($( find $new_output -type f -print0 | perl -ne 'my @files = split(/\0/, $_); foreach(@files) { if (!($_ =~ m/\.svn/)) {print "$_\n";}}'))
+unset IFS
 for (( i=0; i<${#new_files[@]}; i++ ));
 do
-    old_file=${old_output}`echo "${new_files[$i]}" | perl -nl -e 's/^[^\/]+//;' -e 'print $_'`
+    old_file=${old_output}$(echo "${new_files[$i]}" | perl -nl -e 's/^[^\/]+//;' -e 'print $_')
     echo "Comparing ${old_file} to ${new_files[$i]}"
     set +e
-    diff -u $old_file ${new_files[$i]}
-    if [ $? -eq 0 ]; then
-	echo "No differences found"
+    if diff -u "$old_file" "${new_files[$i]}"; then
+	  echo "No differences found"
     fi
     set -e
 done
