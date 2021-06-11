@@ -22,30 +22,30 @@ docker pull pstothard/cgview_comparison_tool
 Run the Docker image and use `fetch_genome_by_accession.sh` to download a sequence in GenBank format:
 
 ```bash
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a AC_000022 -o ./
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a AC_000022 -o ./
 ```
 
 Use `build_blast_atlas.sh` to create a BLAST atlas project for the sequence that was downloaded:
 
 ```bash
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool build_blast_atlas.sh -i AC_000022.gbk
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool build_blast_atlas.sh -i AC_000022.gbk
 ```
 
 Download some sequences to be used as "comparison genomes" in the BLAST atlas project:
 
 ```bash
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_046914 -o ./AC_000022/comparison_genomes
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_047196 -o ./AC_000022/comparison_genomes
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_047457 -o ./AC_000022/comparison_genomes
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a AC_000022 -o ./AC_000022/comparison_genomes
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_001326 -o ./AC_000022/comparison_genomes
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_043914 -o ./AC_000022/comparison_genomes
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_046914 -o ./AC_000022/comparison_genomes
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_047196 -o ./AC_000022/comparison_genomes
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_047457 -o ./AC_000022/comparison_genomes
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a AC_000022 -o ./AC_000022/comparison_genomes
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_001326 -o ./AC_000022/comparison_genomes
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_043914 -o ./AC_000022/comparison_genomes
 ```
 
 Generate the CGView maps:
 
 ```bash
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool build_blast_atlas.sh -p AC_000022 -z medium
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool build_blast_atlas.sh -p AC_000022 -z medium
 ```
 
 Once complete, the maps can be found in the `AC_000022/maps_for_cds_vs_cds` and `AC_000022/maps_for_dna_vs_dna` directories on the host system.
@@ -55,13 +55,13 @@ There are multiple ways to alter the appearance and contents of a map generated 
 For example, the following command uses the [--custom option](https://paulstothard.github.io/cgview_comparison_tool/customization_keys.html) to change several aspects of the map:
 
 ```bash
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool build_blast_atlas.sh -p AC_000022 -x -z medium --custom "title='Example map' global_label=T legend=F use_opacity=F backboneRadius=900 labelFontSize=60 borderColor=white width=3000 height=3000"
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool build_blast_atlas.sh -p AC_000022 -x -z medium --custom "title='Example map' global_label=T legend=F use_opacity=F backboneRadius=900 labelFontSize=60 borderColor=white width=3000 height=3000"
 ```
 
 This command redraws the maps in SVG format:
 
 ```bash
-docker run --rm -v "$(pwd)":/dir -w /dir pstothard/cgview_comparison_tool redraw_maps.sh -p AC_000022 -f svg
+docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool redraw_maps.sh -p AC_000022 -f svg
 ```
 
 The SVG maps are added to the `AC_000022/maps_for_cds_vs_cds` and `AC_000022/maps_for_dna_vs_dna` directories. Below are the maps generated for the CDS vs CDS comparisons and the DNA vs DNA comparisons, respectively.
