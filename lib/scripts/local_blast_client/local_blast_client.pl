@@ -201,14 +201,14 @@ while ( my $sequenceEntry = <SEQFILE> ) {
         = "$settings{BLAST_PATH} -p $settings{PROGRAM} -d $settings{DATABASE} -e $settings{EXPECT} -i $filename -b $settings{HITLIST_SIZE} -v $settings{HITLIST_SIZE} -m $format_type -W $settings{WORD_SIZE} -F $settings{FILTER}";
 
     if ($settings{PROGRAM} eq 'blastx') {
-        $blast_command .= "-Q $settings{QUERY_GENETIC_CODE}";
+        $blast_command .= " -Q $settings{QUERY_GENETIC_CODE}";
     }
     elsif ($settings{PROGRAM} eq 'tblastn') {
-        $blast_command .= "-D $settings{DATABASE_GENETIC_CODE}";
+        $blast_command .= " -D $settings{DATABASE_GENETIC_CODE}";
     }
     elsif ($settings{PROGRAM} eq 'tblastx') {
-        $blast_command .= "-Q $settings{QUERY_GENETIC_CODE}";
-        $blast_command .= "-D $settings{DATABASE_GENETIC_CODE}";
+        $blast_command .= " -Q $settings{QUERY_GENETIC_CODE}";
+        $blast_command .= " -D $settings{DATABASE_GENETIC_CODE}";
     }
 
     print
