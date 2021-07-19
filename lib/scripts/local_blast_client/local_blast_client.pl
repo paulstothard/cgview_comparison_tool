@@ -198,7 +198,18 @@ while ( my $sequenceEntry = <SEQFILE> ) {
 #-b can be used to specify the number of hits to return when using -m 9. Each hit may consist of one or more HSPs.
 #-b and -v must be set to specify the number of hits to return when using -m 7. Each hit may consist of one or more HSPs.
     my $blast_command
-        = "$settings{BLAST_PATH} -p $settings{PROGRAM} -d $settings{DATABASE} -e $settings{EXPECT} -i $filename -b $settings{HITLIST_SIZE} -v $settings{HITLIST_SIZE} -m $format_type -Q $settings{QUERY_GENETIC_CODE} -D $settings{DATABASE_GENETIC_CODE} -W $settings{WORD_SIZE} -F $settings{FILTER}";
+        = "$settings{BLAST_PATH} -p $settings{PROGRAM} -d $settings{DATABASE} -e $settings{EXPECT} -i $filename -b $settings{HITLIST_SIZE} -v $settings{HITLIST_SIZE} -m $format_type -W $settings{WORD_SIZE} -F $settings{FILTER}";
+
+    if ($settings{PROGRAM} eq 'blastx') {
+        $blast_command .= "-Q $settings{QUERY_GENETIC_CODE}";
+    }
+    elsif ($settings{PROGRAM} eq 'tblastn') {
+        $blast_command .= "-D $settings{DATABASE_GENETIC_CODE}";
+    }
+    elsif ($settings{PROGRAM} eq 'tblastx') {
+        $blast_command .= "-Q $settings{QUERY_GENETIC_CODE}";
+        $blast_command .= "-D $settings{DATABASE_GENETIC_CODE}";
+    }
 
     print
         "Performing BLAST search for sequence number $seqCount ($sequenceTitle).\n";
