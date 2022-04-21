@@ -174,6 +174,8 @@ sub _writeCDS {
             );
             next;
         }
+        
+        #this line should be moved to within the 'if ( $global{'dna'} =~ m/t/i ) {' block below
         $dna =~ s/[^A-Z]//ig;
 
         $global->{cdsCount}++;
