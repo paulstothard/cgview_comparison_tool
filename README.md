@@ -1,6 +1,7 @@
 <img src="sample1.png" alt="drawing" width="200"/>
 
 # CGView Comparison Tool (CCT)
+
 The CGView Comparison Tool (CCT) is a package for visually comparing bacterial, plasmid, chloroplast, and mitochondrial sequences. The comparisons are conducted using BLAST, and the BLAST results are presented in the form of graphical maps that can also show sequence features, gene and protein names, COG category assignments, and sequence composition characteristics. CCT can generate maps in a variety of sizes, including 400 Megapixel maps suitable for posters. Comparisons can be conducted within a particular species or genus, or all available genomes can be used. The entire map creation process, from downloading sequences to redrawing zoomed maps, can be completed easily using scripts included with CCT. User-defined features or analysis results can be included on maps, and maps can be extensively customized.
 
 Sample CCT maps can be viewed [here](https://paulstothard.github.io/cgview_comparison_tool/index.html).
@@ -10,6 +11,10 @@ CCT was written and is maintained by Paul Stothard <stothard@ualberta.ca> and Ja
 ## CCT citation
 
 [Grant JR, Arantes AS, Stothard P (2012) Comparing thousands of circular genomes using the CGView Comparison Tool. BMC Genomics 13:202.](https://pubmed.ncbi.nlm.nih.gov/22621371/)
+
+## Use CCT online
+
+[Proksee](https://proksee.ca) uses a [JavaScript version of CGView](https://github.com/stothard-group/cgview-js) to create interactive, web-based maps. Proksee is suitable for generating maps comparing up to five genomes.
 
 ## Using the CCT Docker image
 
