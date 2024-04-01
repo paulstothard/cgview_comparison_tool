@@ -5,3 +5,4 @@ cog_db
 docker/*
 !docker/Dockerfile
 !docker/README.md
+*.code-workspace
