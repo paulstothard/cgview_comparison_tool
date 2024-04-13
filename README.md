@@ -43,7 +43,6 @@ docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgvi
 docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_047196 -o ./AC_000022/comparison_genomes
 docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_047457 -o ./AC_000022/comparison_genomes
 docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a AC_000022 -o ./AC_000022/comparison_genomes
-docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_001326 -o ./AC_000022/comparison_genomes
 docker run --rm -v "$(pwd)":/dir -u "$(id -u)":"$(id -g)" -w /dir pstothard/cgview_comparison_tool fetch_genome_by_accession.sh -a NC_043914 -o ./AC_000022/comparison_genomes
 ```
 
